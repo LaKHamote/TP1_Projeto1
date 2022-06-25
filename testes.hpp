@@ -15,7 +15,7 @@ class TUCity {
         City *city;
         void setUp();
     public:
-        string testar(string);   
+        void testar(string);   
         bool run();
         
 };
