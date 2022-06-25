@@ -1,12 +1,10 @@
-// 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
 #ifndef DOMINIOS_H_INCLUDED
 #define DOMINIOS_H_INCLUDED
-
-using namespace std;
 
 #include <string>
 #include <stdexcept>
 
+using namespace std;
 
 class City {
     private:

@@ -2,13 +2,11 @@
 
 #include <iostream>
 #include <string>
-// #include <vector>
 
-void City::validar(string city){
+void City::validar(string city) {
     for (const auto &item : allowedCitys) {
         if (item == city) { return; }
     }
-    string teste = "Lucas";
     throw invalid_argument("Invalid City");
 };
 
@@ -22,5 +20,3 @@ void City::showAllowedCitys() {
         cout << value << "; ";
     cout << endl;
 }
-
-
