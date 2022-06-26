@@ -18,7 +18,6 @@ class TUCity {
         void failureScenario();
         void tearDown();
     public:
-        void simpleTest(string);
         const static int success = 1;
         const static int failure = 0;
         bool run();
@@ -26,7 +25,27 @@ class TUCity {
 
 const string TUCity::validValue = "Londres";
 const string TUCity::invalidValue = "Wakanda";
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+class TUDate {
+    private:
+        const static string validValue;
+        const static string invalidValue;
+        Date *date;
+        bool response;
+        void setUp();
+        void successScenario();
+        void failureScenario();
+        void tearDown();
+    public:
+        const static int success = 1;
+        const static int failure = 0;
+        bool run();
+};
+
+const string TUDate::validValue = "15/Fev";
+const string TUDate::invalidValue = "40/Mar";
 
 
 

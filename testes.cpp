@@ -10,9 +10,8 @@ void TUCity::setUp() {
     response = success;
 }
 
-
 void TUCity::successScenario() {
-    try{
+    try {
         city->setCity(validValue);
         if (city->getCity() != validValue)
             response = failure;
@@ -23,7 +22,7 @@ void TUCity::successScenario() {
 }
 
 void TUCity::failureScenario() {
-    try{
+    try {
         city->setCity(invalidValue);
         response = failure;
     }
@@ -44,19 +43,52 @@ bool TUCity::run() {
     tearDown();
     return response;
 }
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void TUCity::simpleTest(string city) {
-    this->city = new City();
-    try{
-        this->city->setCity(city);
-        this->city->getCity();
-        printf("Success\n"); 
+
+void TUDate::setUp() {
+    date = new Date();
+    response = success;
+}
+
+void TUDate::successScenario() {
+    try {
+        date->setDate(validValue);
+        if (date->getDate() != validValue)
+            response = failure;
     }
-    catch (invalid_argument error) {
-        cout << error.what() << endl;
-        printf("Only the following citys are allowed:\n");
-        City::showAllowedCitys();
+    catch(invalid_argument error) {
+        response = failure;
+    }
+    catch(out_of_range error) {
+        response = failure;
     }
 }
 
+void TUDate::failureScenario() {
+    try {
+        date->setDate(invalidValue);
+        response = failure;
+    }
+    catch(invalid_argument error) {
+        if (date->getDate() == invalidValue)
+            response = failure;
+    }
+    catch(out_of_range error) {
+        if (date->getDate() == invalidValue)
+            response = failure;
+    }
+}
+
+void TUDate::tearDown() {
+    delete date;
+}
+
+bool TUDate::run() {
+    setUp();
+    failureScenario();
+    successScenario();
+    tearDown();
+    return response;
+}
 
