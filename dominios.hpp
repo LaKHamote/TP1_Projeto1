@@ -53,5 +53,19 @@ inline string Date::getDate() const {
 
 const string Date::allowedMonths[12] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Email {
+    private:
+        string email = "";
+        void validate(string);
+    public:
+        bool setEmail(string);
+        string getEmail() const {
+            return email;
+        }
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif

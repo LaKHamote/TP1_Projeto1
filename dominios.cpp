@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <regex>
 
 void City::validar(string city) {
     for (const auto &item : allowedCitys) {
@@ -48,5 +49,26 @@ void Date::setDate(string date) {
     this->date = date;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void Email::validate(string email) {
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    if (!regex_match(email, pattern)) {
+        throw invalid_argument("Invalid e-mail format");
+    }
+}
+
+bool Email::setEmail(string email) {
+    try {
+        validate(email);
+    }
+    catch (const invalid_argument& error) {
+        cout << error.what() << '\n';
+        return false;
+    }
+    this->email = email;
+    return true;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
