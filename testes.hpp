@@ -20,7 +20,7 @@ class UTCity {
     public:
         const static int success = 1;
         const static int failure = 0;
-        bool run();
+        int run();
 };
 
 const string UTCity::validValue = "Londres";
@@ -41,7 +41,7 @@ class UTDate {
     public:
         const static int success = 1;
         const static int failure = 0;
-        bool run();
+        int run();
 };
 
 const string UTDate::validValue = "15/Fev";

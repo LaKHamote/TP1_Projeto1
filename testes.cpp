@@ -35,7 +35,7 @@ void UTCity::tearDown() {
     delete city;
 }
 
-bool UTCity::run() {
+int UTCity::run() {
     setUp();
     failureScenario();
     successScenario();
@@ -83,7 +83,7 @@ void UTDate::tearDown() {
     delete date;
 }
 
-bool UTDate::run() {
+int UTDate::run() {
     setUp();
     failureScenario();
     successScenario();
