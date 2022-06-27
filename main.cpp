@@ -43,22 +43,15 @@ int main() {
     Date *date;
     date = new Date();
     try {
-        date->setDate("30/Fev");
+        date->setDate("32/Fev");
         date->getDate();
         printf("Perfection\n");
     }
     catch (invalid_argument error) {
         cout << error.what() << endl;
     }
-    catch (out_of_range error) {
-        cout << error.what() << endl;
-    }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
-
-
-    const regex pattern("(0[1-9]|[12][0-9]|3[01])/(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)");
-    cout << regex_match("30/Fev", pattern) << endl;
 
 
 

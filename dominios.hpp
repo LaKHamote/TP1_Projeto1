@@ -39,9 +39,6 @@ const string City::allowedCitys[19] = {"Antalya", "Bangkok", "Delhi", "Dubai", "
 
 class Date {
     private:
-        const static string allowedMonths[12];
-        const static int lowRangeDays = 1;
-        const static int highRangeDays = 31;
         string date;
         void validate(string);
     public:
@@ -57,8 +54,6 @@ inline void Date::setDate(string date) {
     validate(date);
     this->date = date;
 }
-
-const string Date::allowedMonths[12] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

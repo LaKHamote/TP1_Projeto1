@@ -16,25 +16,8 @@ void City::validate(string city) {
 
 void Date::validate(string date) {
     const regex pattern("(0[1-9]|[12][0-9]|3[01])/(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)");
-    string day_aux;
-    string month;
-    int day; // 10/Jan
-    bool flag = false;
-    for (auto const& value : date)
-        if (value != '/' && not flag)
-            day_aux += value;
-        else
-            if (flag)
-                month += value;
-            else 
-                flag = true;
-    day = stoi(day_aux);
-
-    if (!(lowRangeDays <= day && day <= highRangeDays))
-        throw out_of_range("Invalid Day");
-    for (const auto &item : allowedMonths) 
-        if (item == month) { return; }
-    throw invalid_argument("Invalid Month");
+    if (!regex_match(date, pattern))
+        throw invalid_argument("Invalid Date Format");
 };
 
 
@@ -43,7 +26,7 @@ void Date::validate(string date) {
 void Email::validate(string email) {
     const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
     if (!regex_match(email, pattern)) {
-        throw invalid_argument("Invalid e-mail format");
+        throw invalid_argument("Invalid e-mail Format");
     }
 }
 
