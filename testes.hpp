@@ -47,7 +47,23 @@ class UTDate {
 const string UTDate::validValue = "15/Fev";
 const string UTDate::invalidValue = "40/Mar";
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+class UTEmail {
+    private:
+        const static string validValue;
+        const static string invalidValue;
+        Email *email;
+        bool response;
+        void setUp();
+        void successScenario();
+        void failureScenario();
+        void tearDown();
+    public:
+        const static int success = 1;
+        const static int failure = 0;
+        int run();
+};
 
 #endif
