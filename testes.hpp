@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class TUCity {
+class UTCity {
     private:
         const static string validValue;
         const static string invalidValue;
@@ -23,12 +23,12 @@ class TUCity {
         bool run();
 };
 
-const string TUCity::validValue = "Londres";
-const string TUCity::invalidValue = "Wakanda";
+const string UTCity::validValue = "Londres";
+const string UTCity::invalidValue = "Wakanda";
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-class TUDate {
+class UTDate {
     private:
         const static string validValue;
         const static string invalidValue;
@@ -44,8 +44,8 @@ class TUDate {
         bool run();
 };
 
-const string TUDate::validValue = "15/Fev";
-const string TUDate::invalidValue = "40/Mar";
+const string UTDate::validValue = "15/Fev";
+const string UTDate::invalidValue = "40/Mar";
 
 
 

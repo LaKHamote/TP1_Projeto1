@@ -4,50 +4,39 @@
 #include <string>
 #include <regex>
 
-void City::validar(string city) {
+void City::validate(string city) {
     for (const auto &item : allowedCitys) {
         if (item == city) { return; }
     }
     throw invalid_argument("Invalid City");
 };
 
-void City::setCity(string city) {
-    validar(city);
-    this->city = city;
-}
-
-
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-void Date::validar(string date) {
+void Date::validate(string date) {
+    const regex pattern("(0[1-9]|[12][0-9]|3[01])/(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)");
     string day_aux;
-    month = "";
+    string month;
+    int day; // 10/Jan
     bool flag = false;
-    for(auto const& value : date)
+    for (auto const& value : date)
         if (value != '/' && not flag)
             day_aux += value;
         else
             if (flag)
                 month += value;
-            else
+            else 
                 flag = true;
     day = stoi(day_aux);
 
-    if (not (lowRangeDays <= day && day <= highRangeDays) )
+    if (!(lowRangeDays <= day && day <= highRangeDays))
         throw out_of_range("Invalid Day");
-
-    for (const auto &item : allowedMonths) {
+    for (const auto &item : allowedMonths) 
         if (item == month) { return; }
-    }
     throw invalid_argument("Invalid Month");
 };
 
-void Date::setDate(string date) {
-    validar(date);
-    this->date = date;
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

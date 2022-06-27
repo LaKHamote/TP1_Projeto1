@@ -1,16 +1,15 @@
 #include "testes.hpp"
 #include "dominios.hpp"
 
-#include <iostream>
 
 using namespace std;
 
-void TUCity::setUp() {
+void UTCity::setUp() {
     city = new City();
     response = success;
 }
 
-void TUCity::successScenario() {
+void UTCity::successScenario() {
     try {
         city->setCity(validValue);
         if (city->getCity() != validValue)
@@ -21,7 +20,7 @@ void TUCity::successScenario() {
     }
 }
 
-void TUCity::failureScenario() {
+void UTCity::failureScenario() {
     try {
         city->setCity(invalidValue);
         response = failure;
@@ -32,11 +31,11 @@ void TUCity::failureScenario() {
     }
 }
 
-void TUCity::tearDown() {
+void UTCity::tearDown() {
     delete city;
 }
 
-bool TUCity::run() {
+bool UTCity::run() {
     setUp();
     failureScenario();
     successScenario();
@@ -46,12 +45,12 @@ bool TUCity::run() {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-void TUDate::setUp() {
+void UTDate::setUp() {
     date = new Date();
     response = success;
 }
 
-void TUDate::successScenario() {
+void UTDate::successScenario() {
     try {
         date->setDate(validValue);
         if (date->getDate() != validValue)
@@ -65,7 +64,7 @@ void TUDate::successScenario() {
     }
 }
 
-void TUDate::failureScenario() {
+void UTDate::failureScenario() {
     try {
         date->setDate(invalidValue);
         response = failure;
@@ -80,11 +79,11 @@ void TUDate::failureScenario() {
     }
 }
 
-void TUDate::tearDown() {
+void UTDate::tearDown() {
     delete date;
 }
 
-bool TUDate::run() {
+bool UTDate::run() {
     setUp();
     failureScenario();
     successScenario();

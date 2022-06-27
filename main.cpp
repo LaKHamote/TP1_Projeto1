@@ -1,5 +1,6 @@
 #include "testes.cpp"
 #include "dominios.cpp"
+#include <regex>
 
 #include <iostream>
 
@@ -7,13 +8,14 @@ using namespace std;
 
 // CIC0197UNB
 
+
 int main() {
 
-    TUCity testCityA;
-    switch(testCityA.run()) {
-        case TUCity::success: cout << "Success - City" << endl;
+    UTCity testCityA;
+    switch (testCityA.run()) {
+        case UTCity::success: cout << "Success - City" << endl;
                                 break;
-        case TUCity::failure: cout << "Failure - City" << endl;
+        case UTCity::failure: cout << "Failure - City" << endl;
                                 break;
     }
     City *city;
@@ -31,11 +33,11 @@ int main() {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
 
-    TUDate testDateA;
-    switch(testDateA.run()) {
-        case TUDate::success: cout << "Success - Date" << endl;
+    UTDate testDateA;
+    switch (testDateA.run()) {
+        case UTDate::success: cout << "Success - Date" << endl;
                                 break;
-        case TUDate::failure: cout << "Failure - Date" << endl;
+        case UTDate::failure: cout << "Failure - Date" << endl;
                                 break;
     }
     Date *date;
@@ -53,6 +55,11 @@ int main() {
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
+
+
+    const regex pattern("(0[1-9]|[12][0-9]|3[01])/(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)");
+    cout << regex_match("30/Fev", pattern) << endl;
+
 
 
 
