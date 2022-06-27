@@ -49,11 +49,10 @@ const string UTDate::invalidValue = "40/Mar";
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
 class UTEmail {
     private:
-        const static string validValue;
-        const static string invalidValue;
+        const string validValue   = "torvalds@linux-foundation.org";
+        const string invalidValue = "This is an invalid email format.";
         Email *email;
         bool response;
         void setUp();
@@ -65,5 +64,10 @@ class UTEmail {
         const static int failure = 0;
         int run();
 };
+
+// const string UTEmail::validValue = ;
+// const string UTEmail::invalidValue = ;
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif

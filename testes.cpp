@@ -42,8 +42,8 @@ int UTCity::run() {
     tearDown();
     return response;
 }
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTDate::setUp() {
     date = new Date();
@@ -91,3 +91,48 @@ int UTDate::run() {
     return response;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void UTEmail::setUp() {
+    email = new Email();
+    response = success;
+}
+
+void UTEmail::successScenario() {
+    try {
+        email->setEmail(validValue);
+        if (email->getEmail() != validValue)
+            response = failure;
+    }
+    catch(invalid_argument error) {
+        response = failure;
+    }
+    catch(out_of_range error) {
+        response = failure;
+    }
+}
+
+void UTEmail::failureScenario() {
+    try {
+        email->setEmail(invalidValue);
+        response = failure;
+    }
+    catch(invalid_argument error) {
+        if (email->getEmail() == invalidValue)
+            response = failure;
+    }
+}
+
+void UTEmail::tearDown() {
+    delete email;
+}
+
+int UTEmail::run() {
+    setUp();
+    failureScenario();
+    successScenario();
+    tearDown();
+    return response;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -53,19 +53,26 @@ int main() {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
 
+    UTEmail testEmailA;
+    switch (testDateA.run()) {
+        case UTDate::success: cout << "Success - Email" << endl;
+            break;
+        case UTDate::failure: cout << "Failure - Email" << endl;
+            break;
+    }
+    Email *email;
+    email = new Email();
+    try {
+        email->setEmail("rms@gnu.org");
+        email->getEmail();
+        printf("Perfection\n");
+    }
+    catch (invalid_argument error) {
+        cout << error.what() << endl;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    printf("--------------------------\n");
 
     return 0;
-};
+}

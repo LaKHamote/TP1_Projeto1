@@ -30,16 +30,9 @@ void Email::validate(string email) {
     }
 }
 
-bool Email::setEmail(string email) {
-    try {
-        validate(email);
-    }
-    catch (const invalid_argument& error) {
-        cout << error.what() << '\n';
-        return false;
-    }
+void Email::setEmail(string email) {
+    validate(email);
     this->email = email;
-    return true;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

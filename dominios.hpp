@@ -62,7 +62,7 @@ class Email {
         string email;
         void validate(string);
     public:
-        bool setEmail(string);
+        void setEmail(string);
         string getEmail() const {
             return email;
         }
