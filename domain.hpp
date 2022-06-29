@@ -1,5 +1,5 @@
-#ifndef DOMINIOS_H_INCLUDED
-#define DOMINIOS_H_INCLUDED
+#ifndef domainHppIncluded
+#define domainHppIncluded
 
 #include <iostream>
 #include <string>

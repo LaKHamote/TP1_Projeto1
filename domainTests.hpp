@@ -1,7 +1,7 @@
-#ifndef TESTES_H_INCLUDED
-#define TESTES_H_INCLUDED
+#ifndef testHppIncluded
+#define testHppIncluded
 
-#include "dominios.hpp"
+#include "domain.hpp"
 
 #include <string>
 

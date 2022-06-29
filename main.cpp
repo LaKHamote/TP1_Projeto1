@@ -1,7 +1,7 @@
-#include "testes.cpp"
-#include "dominios.cpp"
-#include <regex>
+#include "domainTests.hpp"
+#include "domain.hpp"
 
+#include <regex>
 #include <iostream>
 
 using namespace std;
@@ -43,7 +43,7 @@ int main() {
     Date *date;
     date = new Date();
     try {
-        date->setDate("32/Fev");
+        date->setDate("10/Fev");
         date->getDate();
         printf("Perfection\n");
     }

@@ -1,5 +1,5 @@
-#include "testes.hpp"
-#include "dominios.hpp"
+#include "domainTests.hpp"
+#include "domain.hpp"
 
 
 using namespace std;
