@@ -73,6 +73,28 @@ int main() {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
+    
+    UTCode testCodeA;
+    switch (testCodeA.run()) {
+        case UTCode::sucess: cout << "Success - Code" << endl;
+            break;
+        case UTCode::failure: cout << "Failure - Code" << endl;
+            break;
+    }
+    Code *code;
+    code = new Code();
+    try {
+        string test = {"79927398713"};
+        code->setCode(test);
+        code->getCode();
+        printf("Perfection\n");
+    }
+    catch (invalid_argument error) {
+        cout << error.what() << endl;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    printf("--------------------------\n");
 
     return 0;
 }
