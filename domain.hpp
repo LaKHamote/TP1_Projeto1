@@ -79,4 +79,21 @@ class Email {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class Code {
+    private:
+        static const char MAXIMUM = '9';
+        static const char MINIMUM = '0';
+        static const int LENGHT = 11;
+        string code;
+        void validate(string);
+        bool luhn(string);
+    public:
+        void setCode(string);
+        inline string getCode() const;
+};
+
+inline string Code::getCode() const{
+    return code;
+}
+
 #endif
