@@ -7,6 +7,15 @@
 
 using namespace std;
 
+/**
+ * Portrayal of city.
+ * 
+ * Format rules:
+ * 
+ * - City is valid if among the following: 
+ *          Antalya, Bangkok, Delhi, Dubai, Hong Kong, Londres, Macau, Mumbai, Paris, Rio de Janeiro,
+ *          São Paulo, Seul, Istambul, Kuala Lumpur, Nova Iorque, Osaka, Phuket, Shenzhen, Tóquio.
+ */
 class City {
     private:
         const static string allowedCitys[19];
