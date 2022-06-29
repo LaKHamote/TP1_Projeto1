@@ -37,3 +37,45 @@ void Email::setEmail(string email) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+bool Code::luhn(string code){
+    int i, sum = 0, codeInt[LENGHT];
+    bool valid = false;
+
+    for (i = 0;i < LENGHT;i++)
+        codeInt[i] = (int) code[i] - 48; // tabela ASCII
+
+    for (i = LENGHT - 2;i >= 0;i -= 2){
+        codeInt[i] *= 2;
+        if (codeInt[i] > 9)
+            codeInt[i] -= 9;
+    }
+    for (i = 0;i < LENGHT;i++)
+        sum += codeInt[i];
+
+    if (sum % 10 == 0)
+        valid = true;
+
+    return valid;
+}
+
+void Code::validate(string code){
+    int i;
+
+    if (code.size() > LENGHT)
+        throw invalid_argument("Invalid code Format");
+    for (i = 0;i < LENGHT;i++)
+        if (!(code[i] >= MINIMUM && code[i] <= MAXIMUM))
+            throw invalid_argument("Invalid code Format");
+    if (!(luhn(code)))
+        throw invalid_argument("Invalid code Format");
+    return;
+}
+
+void Code::setCode(string code){
+    validate(code);
+    this->code = code;
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
