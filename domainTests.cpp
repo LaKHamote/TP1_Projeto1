@@ -136,3 +136,45 @@ int UTEmail::run() {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void UTCode::setUp(){
+    code = new Code();
+    state = sucess;
+}
+
+void UTCode::tearDown(){
+    delete code;
+}
+
+void UTCode::sucessScenario(){
+    try{
+        code->setCode(VALID);
+        if (code->getCode() != VALID)
+            state = failure;
+    }
+    catch(invalid_argument error){
+        state = failure;
+    }
+}
+
+void UTCode::failureScenario(){
+    try{
+        code->setCode(INVALID);
+        state = failure;
+    }
+    catch(invalid_argument error){
+        if (code->getCode() == INVALID)
+            state = failure;
+    }
+}
+
+int UTCode::run(){
+    setUp();
+    sucessScenario();
+    failureScenario();
+    tearDown();
+    return state;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
