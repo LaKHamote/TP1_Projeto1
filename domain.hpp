@@ -98,5 +98,22 @@ inline string Code::getCode() const{
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class Country {
+    private:
+        static const int LENGHT = 12;
+        const string valids[LENGHT] = {"Estados Unidos", "Brasil", "China", "Coreia do Sul", "Emirados", "França", "India", "Japao", "Malasia", "Reino Unido", "Tailandia", "Turquia"};
+        string country;
+        void validate(string);
+    public:
+        void setCountry(string);
+        string getCountry() const;
+};
+
+inline string Country::getCountry() const{
+    return country;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 #endif
