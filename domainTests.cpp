@@ -178,3 +178,44 @@ int UTCode::run(){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void UTCountry::setUp(){
+    country = new Country();
+    state = sucess;
+}
+
+void UTCountry::tearDown(){
+    delete country;
+}
+
+void UTCountry::sucessScenario(){
+    try{
+        country->setCountry(VALID);
+        if (country->getCountry() != VALID)
+            state = failure;
+    }
+    catch(invalid_argument error){
+        state = failure;
+    }
+}
+
+void UTCountry::failureScenario(){
+    try{
+        country->setCountry(INVALID);
+        state = failure;
+    }
+    catch(invalid_argument error){
+        if (country->getCountry() == INVALID)
+            state = failure;
+    }
+}
+
+int UTCountry::run(){
+    setUp();
+    sucessScenario();
+    failureScenario();
+    tearDown();
+    return state;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
