@@ -71,21 +71,41 @@ class UTEmail {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCode {
-private:
-    static const int LENGHT = 11;
-    const string VALID = {"79927398713"};   // Definição de constante para evitar número mágico.
-    const string INVALID = {"79927398712"};   // Definição de constante para evitar número mágico.
-    Code *code;                         // Referência para unidade em teste.
-    int state;                             // Estado do teste.
-    void setUp();                           // Método para criar unidade em teste.
-    void tearDown();                        // Método para destruir unidade em teste.
-    void sucessScenario();            // Cenário de teste.
-    void failureScenario();              // Cenário de teste.
+    private:
+        static const int LENGHT = 11;
+        const string VALID = {"79927398713"};   
+        const string INVALID = {"79927398712"};   
+        Code *code;                         
+        int state;                             
+        void setUp();                           
+        void tearDown();                        
+        void sucessScenario();            
+        void failureScenario();              
 
-public:
-    const static int sucess  =  0;          // Definição de constante para reportar resultado de teste.
-    const static int failure = -1;          // Definição de constante para reportar resultado de teste.
-    int run();                              // Método para executar teste.
+    public:
+        const static int sucess  =  0;          
+        const static int failure = -1;          
+        int run();                              
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class UTCountry {
+    private:
+        static const int LENGHT = 12;
+        const string VALID = {"Turquia"};   // Definição de constante para evitar número mágico.
+        const string INVALID = {"Inglaterra"};   // Definição de constante para evitar número mágico.
+        Country *country;                         // Referência para unidade em teste.
+        int state;                             // Estado do teste.
+        void setUp();                           // Método para criar unidade em teste.
+        void tearDown();                        // Método para destruir unidade em teste.
+        void sucessScenario();            // Cenário de teste.
+        void failureScenario();              // Cenário de teste.
+
+    public:
+        const static int sucess  =  0;          // Definição de constante para reportar resultado de teste.
+        const static int failure = -1;          // Definição de constante para reportar resultado de teste.
+        int run();                              // Método para executar teste.
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
