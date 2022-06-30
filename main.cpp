@@ -95,6 +95,28 @@ int main() {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
+    
+    UTCountry testCountryA;
+    switch (testCountryA.run()) {
+        case UTCountry::sucess: cout << "Success - Country" << endl;
+            break;
+        case UTCountry::failure: cout << "Failure - Country" << endl;
+            break;
+    }
+    Country *country;
+    country = new Country();
+    try {
+        string test = {"Brasil"};
+        country->setCountry(test);
+        country->getCountry();
+        printf("Perfection\n");
+    }
+    catch (invalid_argument error) {
+        cout << error.what() << endl;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    printf("--------------------------\n");
 
     return 0;
 }
