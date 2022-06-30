@@ -76,6 +76,24 @@ void Code::setCode(string code){
     this->code = code;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void Country::validate(string country){
+    int i;
+    bool validCountry = false;
+
+    for (i = 0;i < LENGHT;i++)
+        if (valids[i] == country)
+            validCountry = true;
+
+    if (!(validCountry))
+        throw invalid_argument("Invalid country Format");
+}
+
+void Country::setCountry(string country){
+    validate(country);
+    this->country = country;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
