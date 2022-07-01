@@ -9,8 +9,8 @@ using namespace std;
 
 class UTCity {
     private:
-        const static string validValue;
-        const static string invalidValue;
+        const string validValue = "Londres";
+        const string invalidValue = "Wakanda";
         City *city;
         bool response;
         void setUp();
@@ -23,15 +23,12 @@ class UTCity {
         int run();
 };
 
-const string UTCity::validValue = "Londres";
-const string UTCity::invalidValue = "Wakanda";
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 class UTDate {
     private:
-        const static string validValue;
-        const static string invalidValue;
+        const string validValue = "15/Fev";
+        const string invalidValue = "40/Mar";
         Date *date;
         bool response;
         void setUp();
@@ -43,9 +40,6 @@ class UTDate {
         const static int failure = 0;
         int run();
 };
-
-const string UTDate::validValue = "15/Fev";
-const string UTDate::invalidValue = "40/Mar";
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

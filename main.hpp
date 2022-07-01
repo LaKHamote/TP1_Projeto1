@@ -1,2 +1,2 @@
-#include "domainTests.cpp"
-#include "domain.cpp"
+#include "domainTests.hpp"
+#include "domain.hpp"
