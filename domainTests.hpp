@@ -65,8 +65,8 @@ class UTEmail {
         int run();
 };
 
-// const string UTEmail::validValue = ;
-// const string UTEmail::invalidValue = ;
+// const string UTEmail::validValue = "torvalds@linux-foundation.org";
+// const string UTEmail::invalidValue = "This is an invalid email format.";
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

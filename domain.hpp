@@ -8,6 +8,27 @@
 using namespace std;
 
 /**
+ * Parent Class
+ */
+class Domain {
+    protected:
+        string value;
+        virtual void validate(string) {};
+    public:
+        void setValue(string);
+        string getValue() const;
+};
+
+inline string Domain::getValue() const {
+    return value;
+}
+
+inline void Domain::setValue(string value) {
+    validate(value);
+    this->value = value;
+}
+
+/**
  * Portrayal of city.
  * 
  * Format rules:
@@ -16,102 +37,45 @@ using namespace std;
  *          Antalya, Bangkok, Delhi, Dubai, Hong Kong, Londres, Macau, Mumbai, Paris, Rio de Janeiro,
  *          São Paulo, Seul, Istambul, Kuala Lumpur, Nova Iorque, Osaka, Phuket, Shenzhen, Tóquio.
  */
-class City {
+class City:public Domain {
     private:
-        const static string allowedCitys[19];
-        string city;
+        const string allowedCitys[19] = {"Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro", "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
         void validate(string);
-    public:
-        static void showAllowedCitys();
-        void setCity(string);
-        string getCity() const;
-};
-
-inline string City::getCity() const {
-    return city;
-}
-
-inline void City::setCity(string city) {
-    validate(city);
-    this->city = city;
-}
-
-inline void City::showAllowedCitys() {
-    for (auto const& value : allowedCitys)
-        cout << value << "; "; 
-    cout << endl;
-}
-
-const string City::allowedCitys[19] = {"Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro",
-                                        "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-class Date {
-    private:
-        string date;
-        void validate(string);
-    public:
-        void setDate(string);
-        string getDate() const;
-};
-
-inline string Date::getDate() const {
-    return date;
-}
-
-inline void Date::setDate(string date) {
-    validate(date);
-    this->date = date;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-class Email {
-    private:
-        string email;
-        void validate(string);
-    public:
-        void setEmail(string);
-        string getEmail() const {
-            return email;
-        }
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class Code {
+class Date:public Domain {
+    private:
+        void validate(string);
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Email:public Domain {
+    private:
+        void validate(string);
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Code:public Domain {
     private:
         static const char MAXIMUM = '9';
         static const char MINIMUM = '0';
         static const int LENGHT = 11;
-        string code;
-        void validate(string);
         bool luhn(string);
-    public:
-        void setCode(string);
-        inline string getCode() const;
+        void validate(string);
 };
-
-inline string Code::getCode() const{
-    return code;
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class Country {
+class Country:public Domain {
     private:
         static const int LENGHT = 12;
         const string valids[LENGHT] = {"Estados Unidos", "Brasil", "China", "Coreia do Sul", "Emirados", "França", "India", "Japao", "Malasia", "Reino Unido", "Tailandia", "Turquia"};
-        string country;
         void validate(string);
-    public:
-        void setCountry(string);
-        string getCountry() const;
 };
-
-inline string Country::getCountry() const{
-    return country;
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

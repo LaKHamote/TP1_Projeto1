@@ -4,9 +4,9 @@
 #include <string>
 #include <regex>
 
-void City::validate(string city) {
+void City::validate(string value) {
     for (const auto &item : allowedCitys) {
-        if (item == city) { return; }
+        if (item == value) { return; }
     }
     throw invalid_argument("Invalid City");
 };
@@ -28,11 +28,6 @@ void Email::validate(string email) {
     if (!regex_match(email, pattern)) {
         throw invalid_argument("Invalid e-mail Format");
     }
-}
-
-void Email::setEmail(string email) {
-    validate(email);
-    this->email = email;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,11 +66,6 @@ void Code::validate(string code){
     return;
 }
 
-void Code::setCode(string code){
-    validate(code);
-    this->code = code;
-}
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void Country::validate(string country){
@@ -88,11 +78,6 @@ void Country::validate(string country){
 
     if (!(validCountry))
         throw invalid_argument("Invalid country Format");
-}
-
-void Country::setCountry(string country){
-    validate(country);
-    this->country = country;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
