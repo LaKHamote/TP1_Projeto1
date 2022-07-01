@@ -1,5 +1,4 @@
-all: 
-	rm -rf ./bin/*.o ./bin/*.exe
+all:
 	+$(MAKE) -C bin
 
 clean:
