@@ -60,5 +60,26 @@ int main() {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     printf("--------------------------\n");
 
+    UTName testNameA;
+    switch (testNameA.run()) {
+        case UTDate::success: cout << "Success - Name" << endl;
+            break;
+        case UTDate::failure: cout << "Failure - Name" << endl;
+            break;
+    }
+    Name *name;
+    name = new Name();
+    try {
+        name->setName("rms@gnu.org");
+        name->getName();
+        printf("Perfection\n");
+    }
+    catch (invalid_argument error) {
+        cout << error.what() << endl;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    printf("--------------------------\n");
+
     return 0;
 }

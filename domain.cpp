@@ -82,3 +82,35 @@ void Country::validate(string country){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void Name::validate(string name) {
+    if (name.length() > 30) {
+        throw invalid_argument("Name has too many characters!");
+    }
+    if (name[name.length() - 1] == ' ') {
+        throw invalid_argument("Name can't end with a whitespace.");
+    }
+    const regex pattern1("[ ]{2,}");
+    if (regex_search(name, pattern1)) {
+        throw invalid_argument("Name can't have multiple whitespaces!");
+    }
+    string aux;
+    stringstream ss(name);
+    while (ss >> aux) {
+        if ((int)aux[0] < 64 || (int)aux[0] > 90) {
+            throw invalid_argument("Invalid name format!");
+        }
+        for (int i = 1; i < aux.length(); i++) {
+            if ((int)aux[i] < 97 || (int)aux[i] > 122) {
+                throw invalid_argument("Invalid name format!");
+            }
+        }
+    }
+}
+
+void Name::setName(string name) {
+    validate(name);
+    this->name = name;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

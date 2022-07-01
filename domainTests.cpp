@@ -219,3 +219,44 @@ int UTCountry::run(){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void UTName::setUp() {
+    name = new Name();
+    response = success;
+}
+
+void UTName::successScenario() {
+    try {
+        name->setName(validValue);
+        if (name->getName() != validValue)
+            response = failure;
+    }
+    catch(invalid_argument error) {
+        response = failure;
+    }
+    catch(out_of_range error) {
+        response = failure;
+    }
+}
+
+void UTName::failureScenario() {
+    try {
+        name->setName(invalidValue);
+        response = failure;
+    }
+    catch(invalid_argument error) {
+        if (name->getName() == invalidValue)
+            response = failure;
+    }
+}
+
+void UTName::tearDown() {
+    delete name;
+}
+
+int UTName::run() {
+    setUp();
+    failureScenario();
+    successScenario();
+    tearDown();
+    return response;
+}
