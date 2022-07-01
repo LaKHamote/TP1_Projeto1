@@ -110,4 +110,22 @@ class UTCountry {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class UTName {
+    private:
+        const string validValue   = "Linus Torvalds";
+        const string invalidValue = "riCharD StaLLmaN";
+        Name *name;
+        bool response;
+        void setUp();
+        void successScenario();
+        void failureScenario();
+        void tearDown();
+    public:
+        const static int success = 1;
+        const static int failure = 0;
+        int run();
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 #endif
