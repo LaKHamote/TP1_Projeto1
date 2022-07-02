@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include <sstream>
 
 void City::validate(string value) {
     if (allowedCitys.find(value) == allowedCitys.end())
