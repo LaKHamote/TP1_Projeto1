@@ -55,7 +55,7 @@ bool Code::luhn(string code){
 void Code::validate(string code){
     int i;
 
-    if (code.size() > LENGHT)
+    if (code.size() != LENGHT)
         throw invalid_argument("Invalid code Format");
     for (i = 0;i < LENGHT;i++)
         if (!(code[i] >= MINIMUM && code[i] <= MAXIMUM))
@@ -108,3 +108,28 @@ void Name::validate(string name) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void Password::validate(string password){
+    bool hasDigit = false, hasLowercase = false, hasUppercase = false, hasSpecial = false, invalidChar = false;
+    int i;
+
+    if (password.size() != LENGHT)
+        throw invalid_argument("Invalid password Format!");
+
+    for (i = 0;i < LENGHT;i++){
+        if (password[i] >= '0' && password[i] <= '9')
+            hasDigit = true;
+        else if (password[i] >= 'a' && password[i] <= 'z')
+            hasLowercase = true;
+        else if (password[i] >= 'A' && password[i] <= 'Z')
+            hasUppercase = true;
+        else if (password[i] == '!' || password[i] == '#' || password[i] == '$' || password[i] == '%' || password[i] == '&')
+            hasSpecial = true;
+        else
+            invalidChar = true;
+    }
+
+    if (!(!invalidChar && ((hasLowercase || hasUppercase) && hasDigit && hasSpecial)))
+        throw invalid_argument("Invalid password Format!");
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

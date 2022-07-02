@@ -73,3 +73,47 @@ void UTName::setUp() {
     domain = new Name();
     response = SUCCESS;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void UTPassword::setUp(){
+    password = new Password();
+    state = sucess;
+}
+
+void UTPassword::tearDown(){
+    delete password;
+}
+
+void UTPassword::sucessScenario(){
+    try{
+        password->setValue(VALID);
+        if (password->getValue() != VALID)
+            state = failure;
+    }
+    catch(invalid_argument& error){
+        state = failure;
+    }
+}
+
+void UTPassword::failureScenario(){
+    try{
+        password->setValue(INVALID);
+        state = failure;
+    }
+    catch(invalid_argument& error){
+        if (password->getValue() == INVALID)
+            state = failure;
+    }
+}
+
+int UTPassword::run(){
+    setUp();
+    sucessScenario();
+    failureScenario();
+    tearDown();
+    return state;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
