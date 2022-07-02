@@ -7,7 +7,6 @@ using namespace std;
 
 // CIC0197UNB
 
-
 int main() {
 
     UTCity testCityA;
@@ -67,19 +66,8 @@ int main() {
         case UTDate::failure: cout << "Failure - Name" << endl;
             break;
     }
-    Name *name;
-    name = new Name();
-    try {
-        name->setName("rms@gnu.org");
-        name->getName();
-        printf("Perfection\n");
-    }
-    catch (invalid_argument error) {
-        cout << error.what() << endl;
-    }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    printf("--------------------------\n");
 
     return 0;
 }

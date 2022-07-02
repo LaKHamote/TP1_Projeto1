@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <unordered_set>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ using namespace std;
 class Domain {
     protected:
         string value;
+        virtual ~Domain() {};
         virtual void validate(string) {};
     public:
         void setValue(string);
@@ -39,7 +41,8 @@ inline void Domain::setValue(string value) {
  */
 class City:public Domain {
     private:
-        const string allowedCitys[19] = {"Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro", "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
+        const unordered_set<string> allowedCitys = { "Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro",
+                                                            "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
         void validate(string);
 };
 
@@ -79,15 +82,9 @@ class Country:public Domain {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class Name {
+class Name:public Domain {
     private:
-        string name = "";
         void validate(string);
-    public:
-        void setName(string);
-        string getName() {
-            return name;
-        }
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
