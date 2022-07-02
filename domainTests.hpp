@@ -2,7 +2,6 @@
 #define testHppIncluded
 
 #include "domain.hpp"
-
 #include <string>
 
 using namespace std;

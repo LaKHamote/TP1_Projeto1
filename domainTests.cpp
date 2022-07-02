@@ -1,7 +1,6 @@
 #include "domainTests.hpp"
 #include "domain.hpp"
 
-
 using namespace std;
 
 template <class Domain>
@@ -33,8 +32,8 @@ void UTDomain<Domain>::tearDown() {
     delete domain;
 }
 
-template <class Batata>
-int UTDomain<Batata>::run() {
+template <class Domain>
+int UTDomain<Domain>::run() {
     setUp();
     successScenario();
     failureScenario();

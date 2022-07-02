@@ -1,12 +1,11 @@
 #include "domain.hpp"
-
 #include <iostream>
 #include <string>
 #include <regex>
 #include <sstream>
 
-void City::validate(string value) {
-    if (allowedCitys.find(value) == allowedCitys.end())
+void City::validate(string city) {
+    if (allowedCities.find(city) == allowedCities.end())
         throw invalid_argument("Invalid City");
 }
 
@@ -30,18 +29,18 @@ void Email::validate(string email) {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 bool Code::luhn(string code){
-    int i, sum = 0, codeInt[LENGHT];
+    int i, sum = 0, codeInt[LENGTH];
     bool valid = false;
 
-    for (i = 0;i < LENGHT;i++)
+    for (i = 0;i < LENGTH;i++)
         codeInt[i] = (int) code[i] - 48; // tabela ASCII
 
-    for (i = LENGHT - 2;i >= 0;i -= 2){
+    for (i = LENGTH - 2;i >= 0;i -= 2){
         codeInt[i] *= 2;
         if (codeInt[i] > 9)
             codeInt[i] -= 9;
     }
-    for (i = 0;i < LENGHT;i++)
+    for (i = 0;i < LENGTH;i++)
         sum += codeInt[i];
 
     if (sum % 10 == 0)
@@ -53,9 +52,9 @@ bool Code::luhn(string code){
 void Code::validate(string code){
     int i;
 
-    if (code.size() != LENGHT)
+    if (code.size() != LENGTH)
         throw invalid_argument("Invalid code Format");
-    for (i = 0;i < LENGHT;i++)
+    for (i = 0;i < LENGTH;i++)
         if (!(code[i] >= MINIMUM && code[i] <= MAXIMUM))
             throw invalid_argument("Invalid code Format");
     if (!(luhn(code)))
@@ -66,14 +65,7 @@ void Code::validate(string code){
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void Country::validate(string country){
-    int i;
-    bool validCountry = false;
-
-    for (i = 0;i < LENGHT;i++)
-        if (valids[i] == country)
-            validCountry = true;
-
-    if (!(validCountry))
+    if (allowedCountries.find(country) == allowedCountries.end())
         throw invalid_argument("Invalid country Format");
 }
 
@@ -110,10 +102,10 @@ void Password::validate(string password){
     bool hasDigit = false, hasLowercase = false, hasUppercase = false, hasSpecial = false, invalidChar = false;
     int i;
 
-    if (password.size() != LENGHT)
+    if (password.size() != LENGTH)
         throw invalid_argument("Invalid password Format!");
 
-    for (i = 0;i < LENGHT;i++){
+    for (i = 0;i < LENGTH;i++){
         if (password[i] >= '0' && password[i] <= '9')
             hasDigit = true;
         else if (password[i] >= 'a' && password[i] <= 'z')
