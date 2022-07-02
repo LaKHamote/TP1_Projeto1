@@ -7,4 +7,8 @@ clean:
 
 run:
 	+$(MAKE) -C bin
+
+linux:
+	+$(MAKE) -C bin
+	rm -rf ./bin/*.o ./bin/*.exe
 	
