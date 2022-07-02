@@ -23,7 +23,7 @@ void Date::validate(string date) {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void Email::validate(string email) {
-    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    const regex pattern("(\\w+)(\\.|-|_)?(\\w*)@(\\w+)(\\.|-|_)?(\\w*)(\\.(\\w+))+");
     if (!regex_match(email, pattern)) {
         throw invalid_argument("Invalid e-mail Format");
     }

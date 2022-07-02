@@ -107,9 +107,6 @@ void UTEmail::successScenario() {
     catch(invalid_argument& error) {
         response = failure;
     }
-    catch(out_of_range& error) {
-        response = failure;
-    }
 }
 
 void UTEmail::failureScenario() {
