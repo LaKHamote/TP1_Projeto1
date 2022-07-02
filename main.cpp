@@ -72,9 +72,9 @@ int main() {
     
     UTPassword testPasswordA;
     switch (testPasswordA.run()) {
-        case UTPassword::sucess: cout << "Success - Password" << endl;
+        case UTPassword::SUCCESS: cout << "Success - Password" << endl;
             break;
-        case UTPassword::failure: cout << "Failure - Password" << endl;
+        case UTPassword::FAILURE: cout << "Failure - Password" << endl;
             break;
     }
     

@@ -92,7 +92,6 @@ class Name:public Domain {
 class Password:public Domain {
     private:
         static const int LENGHT = 5;
-        string password;
         void validate(string);
 };
 
