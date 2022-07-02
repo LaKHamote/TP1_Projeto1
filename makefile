@@ -10,6 +10,7 @@ run:
 	+$(MAKE) -C bin
 
 linux:
+	rm -rf ./bin/*.o ./bin/*.exe
 	+$(MAKE) -C bin
 	rm -rf ./bin/*.o ./bin/*.exe
 	
