@@ -95,11 +95,11 @@ void Name::validate(string name) {
     string aux;
     stringstream ss(name);
     while (ss >> aux) {
-        if ((int)aux[0] < 64 || (int)aux[0] > 90) {
+        if (aux[0] < 'A' || aux[0] > 'Z') {
             throw invalid_argument("Invalid name format!");
         }
-        for (int i = 1; i < aux.length(); i++) {
-            if ((int)aux[i] < 97 || (int)aux[i] > 122) {
+        for (string::iterator it = aux.begin() + 1; it < aux.end(); it++) {
+            if (*it < 'a' || *it > 'z') {
                 throw invalid_argument("Invalid name format!");
             }
         }
