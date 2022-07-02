@@ -4,300 +4,77 @@
 
 using namespace std;
 
-void UTCity::setUp() {
-    city = new City();
-    response = success;
-}
-
-void UTCity::successScenario() {
+template <class Domain>
+void UTDomain<Domain>::successScenario() {
     try {
-        city->setValue(validValue);
-        if (city->getValue() != validValue)
-            response = failure;
+        domain->setValue(VALID());
+        if (domain->getValue() != VALID())
+            response = FAILURE;
     }
     catch(invalid_argument& error) {
-        response = failure;
+        response = FAILURE;
     }
 }
 
-void UTCity::failureScenario() {
+template <class Domain>
+void UTDomain<Domain>::failureScenario() {
     try {
-        city->setValue(invalidValue);
-        response = failure;
+        domain->setValue(INVALID());
+        response = FAILURE;
     }
     catch(invalid_argument& error) {
-        if (city->getValue() == invalidValue)
-            response = failure;
+        if (domain->getValue() == INVALID())
+            response = FAILURE;
     }
 }
 
-void UTCity::tearDown() {
-    delete city;
+template <class Domain>
+void UTDomain<Domain>::tearDown() {
+    delete domain;
 }
 
-int UTCity::run() {
+template <class Batata>
+int UTDomain<Batata>::run() {
     setUp();
-    failureScenario();
     successScenario();
+    failureScenario();
     tearDown();
     return response;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void UTCity::setUp() {
+    domain = new City();
+    response = SUCCESS;
+}
 
 void UTDate::setUp() {
-    date = new Date();
-    response = success;
+    domain = new Date();
+    response = SUCCESS;
 }
-
-void UTDate::successScenario() {
-    try {
-        date->setValue(validValue);
-        if (date->getValue() != validValue)
-            response = failure;
-    }
-    catch(invalid_argument& error) {
-        response = failure;
-    }
-    catch(out_of_range& error) {
-        response = failure;
-    }
-}
-
-void UTDate::failureScenario() {
-    try {
-        date->setValue(invalidValue);
-        response = failure;
-    }
-    catch(invalid_argument& error) {
-        if (date->getValue() == invalidValue)
-            response = failure;
-    }
-    catch(out_of_range& error) {
-        if (date->getValue() == invalidValue)
-            response = failure;
-    }
-}
-
-void UTDate::tearDown() {
-    delete date;
-}
-
-int UTDate::run() {
-    setUp();
-    failureScenario();
-    successScenario();
-    tearDown();
-    return response;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTEmail::setUp() {
-    email = new Email();
-    response = success;
+    domain = new Email();
+    response = SUCCESS;
 }
-
-void UTEmail::successScenario() {
-    try {
-        email->setValue(validValue);
-        if (email->getValue() != validValue)
-            response = failure;
-    }
-    catch(invalid_argument& error) {
-        response = failure;
-    }
-}
-
-void UTEmail::failureScenario() {
-    try {
-        email->setValue(invalidValue);
-        response = failure;
-    }
-    catch(invalid_argument& error) {
-        if (email->getValue() == invalidValue)
-            response = failure;
-    }
-}
-
-void UTEmail::tearDown() {
-    delete email;
-}
-
-int UTEmail::run() {
-    setUp();
-    failureScenario();
-    successScenario();
-    tearDown();
-    return response;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTCode::setUp(){
-    code = new Code();
-    state = sucess;
+    domain = new Code();
+    response = SUCCESS;
 }
-
-void UTCode::tearDown(){
-    delete code;
-}
-
-void UTCode::sucessScenario(){
-    try{
-        code->setValue(VALID);
-        if (code->getValue() != VALID)
-            state = failure;
-    }
-    catch(invalid_argument& error){
-        state = failure;
-    }
-}
-
-void UTCode::failureScenario(){
-    try{
-        code->setValue(INVALID);
-        state = failure;
-    }
-    catch(invalid_argument& error){
-        if (code->getValue() == INVALID)
-            state = failure;
-    }
-}
-
-int UTCode::run(){
-    setUp();
-    sucessScenario();
-    failureScenario();
-    tearDown();
-    return state;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTCountry::setUp(){
-    country = new Country();
-    state = sucess;
+    domain = new Country();
+    response = SUCCESS;
 }
-
-void UTCountry::tearDown(){
-    delete country;
-}
-
-void UTCountry::sucessScenario(){
-    try{
-        country->setValue(VALID);
-        if (country->getValue() != VALID)
-            state = failure;
-    }
-    catch(invalid_argument& error){
-        state = failure;
-    }
-}
-
-void UTCountry::failureScenario(){
-    try{
-        country->setValue(INVALID);
-        state = failure;
-    }
-    catch(invalid_argument& error){
-        if (country->getValue() == INVALID)
-            state = failure;
-    }
-}
-
-int UTCountry::run(){
-    setUp();
-    sucessScenario();
-    failureScenario();
-    tearDown();
-    return state;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTName::setUp() {
-    name = new Name();
-    response = success;
+    domain = new Name();
+    response = SUCCESS;
 }
-
-void UTName::successScenario() {
-    try {
-        name->setValue(validValue);
-        if (name->getValue() != validValue)
-            response = failure;
-    }
-    catch(invalid_argument& error) {
-        response = failure;
-    }
-    catch(out_of_range& error) {
-        response = failure;
-    }
-}
-
-void UTName::failureScenario() {
-    try {
-        name->setValue(invalidValue);
-        response = failure;
-    }
-    catch(invalid_argument& error) {
-        if (name->getValue() == invalidValue)
-            response = failure;
-    }
-}
-
-void UTName::tearDown() {
-    delete name;
-}
-
-int UTName::run() {
-    setUp();
-    failureScenario();
-    successScenario();
-    tearDown();
-    return response;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTPassword::setUp(){
-    password = new Password();
-    state = sucess;
+    domain = new Password();
+    response = SUCCESS;
 }
-
-void UTPassword::tearDown(){
-    delete password;
-}
-
-void UTPassword::sucessScenario(){
-    try{
-        password->setValue(VALID);
-        if (password->getValue() != VALID)
-            state = failure;
-    }
-    catch(invalid_argument& error){
-        state = failure;
-    }
-}
-
-void UTPassword::failureScenario(){
-    try{
-        password->setValue(INVALID);
-        state = failure;
-    }
-    catch(invalid_argument& error){
-        if (password->getValue() == INVALID)
-            state = failure;
-    }
-}
-
-int UTPassword::run(){
-    setUp();
-    sucessScenario();
-    failureScenario();
-    tearDown();
-    return state;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
