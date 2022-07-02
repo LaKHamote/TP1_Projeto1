@@ -14,8 +14,8 @@ using namespace std;
 class Domain {
     protected:
         string value;
-        virtual void validate(string) {};
         virtual ~Domain() {};
+        virtual void validate(string) {};
     public:
         void setValue(string);
         string getValue() const;
@@ -41,7 +41,8 @@ inline void Domain::setValue(string value) {
  */
 class City:public Domain {
     private:
-        unordered_map<string, bool> allowedCitys = { {"Antalya", true}, {"Bangkok", true}, {"Delhi", true}, {"Dubai", true}, {"Hong Kong", true}, {"Londres", true}, {"Macau", true}, {"Mumbai", true}, {"Paris", true}, {"Rio de Janeiro", true}, {"Sao Paulo", true}, {"Seul", true}, {"Istambul", true}, {"Kuala Lumpur", true}, {"Nova Iorque", true}, {"Osaka", true}, {"Phuket", true}, {"Shenzhen", true}, {"Toquio", true} };
+        const unordered_map<string, bool> allowedCitys = { {"Antalya", true}, {"Bangkok", true}, {"Delhi", true}, {"Dubai", true}, {"Hong Kong", true}, {"Londres", true}, {"Macau", true}, {"Mumbai", true}, {"Paris", true}, {"Rio de Janeiro", true},
+                                                            {"Sao Paulo", true}, {"Seul", true}, {"Istambul", true}, {"Kuala Lumpur", true}, {"Nova Iorque", true}, {"Osaka", true}, {"Phuket", true}, {"Shenzhen", true}, {"Toquio", true} };
         void validate(string);
 };
 

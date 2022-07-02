@@ -5,7 +5,7 @@
 #include <regex>
 
 void City::validate(string value) {
-    if (allowedCitys.find(value)->second)
+    if (allowedCitys.find(value) == allowedCitys.end())
         throw invalid_argument("Invalid City");
 }
 
