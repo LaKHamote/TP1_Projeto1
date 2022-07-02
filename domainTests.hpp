@@ -122,4 +122,24 @@ class UTName {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class UTPassword {
+    private:
+        static const int LENGHT = 5;
+        const string VALID = {"aA&22"};   
+        const string INVALID = {"manga"};   
+        Password *password;                       
+        int state;                           
+        void setUp();                        
+        void tearDown();                       
+        void sucessScenario();       
+        void failureScenario();          
+
+    public:
+        const static int sucess  =  0;        
+        const static int failure = -1;      
+        int run();                          
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 #endif
