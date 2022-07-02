@@ -7,129 +7,74 @@
 
 using namespace std;
 
+template <class Domain>
 class UTDomain {
     protected:
+        Domain *domain;                            // Referência para unidade em teste.
         bool response = SUCCESS;
-        virtual int setUp() {};
+        virtual string VALID() = 0;
+        virtual string INVALID() = 0;
+        virtual void setUp() = 0;
         void successScenario();
         void failureScenario();
         void tearDown();
-        virtual string VALID() = 0;
-        virtual string INVALID() = 0;
-        //virtual ~UTDomain() {};
+        virtual ~UTDomain() {};
     public:
-        const static int SUCCESS = 1;
-        const static int FAILURE = 0;
-        int run();
+        const static int SUCCESS = 1;             // Definição de constante para reportar resultado de teste.
+        const static int FAILURE = 0;             // Definição de constante para reportar resultado de teste.
+        virtual int run();                        // Método para executar teste.
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class UTCity:public UTDomain {
+class UTCity:public UTDomain<City> {
     private:
         string VALID() { return "Londres"; };
         string INVALID() { return "Wakanda"; };
-        City *city;
-        int setUp();
-};
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-class UTDate {
-    private:
-        const string VALID = "15/Fev";
-        const string INVALID = "40/Mar";
-        Date *date;
-        bool response;
         void setUp();
-        void successScenario();
-        void failureScenario();
-        void tearDown();
-    public:
-        const static int success = 1;
-        const static int failure = 0;
-        int run();
 };
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class UTEmail {
+class UTDate:public UTDomain<Date> {
     private:
-        const string VALID   = "torvalds@linux-foundation.org";
-        const string INVALID = "This is an invalid email format.";
-        Email *email;
-        bool response;
+        string VALID() { return "15/Fev"; };
+        string INVALID() { return "40/Mar"; };
         void setUp();
-        void successScenario();
-        void failureScenario();
-        void tearDown();
-    public:
-        const static int success = 1;
-        const static int failure = 0;
-        int run();
 };
-
-// const string UTEmail::VALID = "torvalds@linux-foundation.org";
-// const string UTEmail::INVALID = "This is an invalid email format.";
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class UTCode {
+class UTEmail:public UTDomain<Email> {
+    private:
+        string VALID() { return "torvalds@linux-foundation.org"; };
+        string INVALID() { return "This is an invalid email format.";};
+        void setUp();
+};
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class UTCode:public UTDomain<Code> {
     private:
         static const int LENGHT = 11;
-        const string VALID = {"79927398713"};   
-        const string INVALID = {"79927398712"};   
-        Code *code;                         
-        int state;                             
-        void setUp();                           
-        void tearDown();                        
-        void sucessScenario();            
-        void failureScenario();              
-
-    public:
-        const static int sucess  =  0;          
-        const static int failure = -1;          
-        int run();                              
+        string VALID() { return "79927398713"; };   
+        string INVALID() { return "79927398712"; };                           
+        void setUp();                            
 };
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class UTCountry {
+class UTCountry:public UTDomain<Country> {
     private:
         static const int LENGHT = 12;
-        const string VALID = {"Turquia"};   // Definição de constante para evitar número mágico.
-        const string INVALID = {"Inglaterra"};   // Definição de constante para evitar número mágico.
-        Country *country;                         // Referência para unidade em teste.
-        int state;                             // Estado do teste.
-        void setUp();                           // Método para criar unidade em teste.
-        void tearDown();                        // Método para destruir unidade em teste.
-        void sucessScenario();            // Cenário de teste.
-        void failureScenario();              // Cenário de teste.
-
-    public:
-        const static int sucess  =  0;          // Definição de constante para reportar resultado de teste.
-        const static int failure = -1;          // Definição de constante para reportar resultado de teste.
-        int run();                              // Método para executar teste.
+        string VALID() { return "Turquia"; };
+        string INVALID() { return "Inglaterra"; };
+        void setUp(); 
 };
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class UTName {
+class UTName:public UTDomain<Name> {
     private:
-        const string VALID   = "Linus Torvalds";
-        const string INVALID = "riCharD StaLLmaN";
-        Name *name;
-        bool response;
+        string VALID() { return "Linus Torvalds"; };
+        string INVALID() { return "riCharD StaLLmaN"; };
         void setUp();
-        void successScenario();
-        void failureScenario();
-        void tearDown();
-    public:
-        const static int success = 1;
-        const static int failure = 0;
-        int run();
 };
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif
