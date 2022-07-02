@@ -1,9 +1,10 @@
 all: 
-	rm -rf ./bin/*.o ./bin/*.exe
+	del .\bin\*.o .\bin\*.exe
 	+$(MAKE) -C bin
+	del .\bin\*.o .\bin\*.exe
 
 clean:
-	rm -rf ./bin/*.o ./bin/*.exe
+	del .\bin\*.o .\bin\*.exe
 
 run:
 	+$(MAKE) -C bin

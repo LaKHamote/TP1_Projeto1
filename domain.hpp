@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ class Domain {
     protected:
         string value;
         virtual void validate(string) {};
+        virtual ~Domain() {};
     public:
         void setValue(string);
         string getValue() const;
@@ -39,7 +41,7 @@ inline void Domain::setValue(string value) {
  */
 class City:public Domain {
     private:
-        const string allowedCitys[19] = {"Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro", "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
+        unordered_map<string, bool> allowedCitys = { {"Antalya", true}, {"Bangkok", true}, {"Delhi", true}, {"Dubai", true}, {"Hong Kong", true}, {"Londres", true}, {"Macau", true}, {"Mumbai", true}, {"Paris", true}, {"Rio de Janeiro", true}, {"Sao Paulo", true}, {"Seul", true}, {"Istambul", true}, {"Kuala Lumpur", true}, {"Nova Iorque", true}, {"Osaka", true}, {"Phuket", true}, {"Shenzhen", true}, {"Toquio", true} };
         void validate(string);
 };
 
@@ -79,15 +81,9 @@ class Country:public Domain {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class Name {
+class Name:public Domain {
     private:
-        string name = "";
         void validate(string);
-    public:
-        void setName(string);
-        string getName() {
-            return name;
-        }
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

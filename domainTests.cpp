@@ -15,7 +15,7 @@ void UTCity::successScenario() {
         if (city->getValue() != validValue)
             response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         response = failure;
     }
 }
@@ -25,7 +25,7 @@ void UTCity::failureScenario() {
         city->setValue(invalidValue);
         response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         if (city->getValue() == invalidValue)
             response = failure;
     }
@@ -56,10 +56,10 @@ void UTDate::successScenario() {
         if (date->getValue() != validValue)
             response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         response = failure;
     }
-    catch(out_of_range error) {
+    catch(out_of_range& error) {
         response = failure;
     }
 }
@@ -69,11 +69,11 @@ void UTDate::failureScenario() {
         date->setValue(invalidValue);
         response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         if (date->getValue() == invalidValue)
             response = failure;
     }
-    catch(out_of_range error) {
+    catch(out_of_range& error) {
         if (date->getValue() == invalidValue)
             response = failure;
     }
@@ -104,10 +104,10 @@ void UTEmail::successScenario() {
         if (email->getValue() != validValue)
             response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         response = failure;
     }
-    catch(out_of_range error) {
+    catch(out_of_range& error) {
         response = failure;
     }
 }
@@ -117,7 +117,7 @@ void UTEmail::failureScenario() {
         email->setValue(invalidValue);
         response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         if (email->getValue() == invalidValue)
             response = failure;
     }
@@ -152,7 +152,7 @@ void UTCode::sucessScenario(){
         if (code->getValue() != VALID)
             state = failure;
     }
-    catch(invalid_argument error){
+    catch(invalid_argument& error){
         state = failure;
     }
 }
@@ -162,7 +162,7 @@ void UTCode::failureScenario(){
         code->setValue(INVALID);
         state = failure;
     }
-    catch(invalid_argument error){
+    catch(invalid_argument& error){
         if (code->getValue() == INVALID)
             state = failure;
     }
@@ -193,7 +193,7 @@ void UTCountry::sucessScenario(){
         if (country->getValue() != VALID)
             state = failure;
     }
-    catch(invalid_argument error){
+    catch(invalid_argument& error){
         state = failure;
     }
 }
@@ -203,7 +203,7 @@ void UTCountry::failureScenario(){
         country->setValue(INVALID);
         state = failure;
     }
-    catch(invalid_argument error){
+    catch(invalid_argument& error){
         if (country->getValue() == INVALID)
             state = failure;
     }
@@ -226,25 +226,25 @@ void UTName::setUp() {
 
 void UTName::successScenario() {
     try {
-        name->setName(validValue);
-        if (name->getName() != validValue)
+        name->setValue(validValue);
+        if (name->getValue() != validValue)
             response = failure;
     }
-    catch(invalid_argument error) {
+    catch(invalid_argument& error) {
         response = failure;
     }
-    catch(out_of_range error) {
+    catch(out_of_range& error) {
         response = failure;
     }
 }
 
 void UTName::failureScenario() {
     try {
-        name->setName(invalidValue);
+        name->setValue(invalidValue);
         response = failure;
     }
-    catch(invalid_argument error) {
-        if (name->getName() == invalidValue)
+    catch(invalid_argument& error) {
+        if (name->getValue() == invalidValue)
             response = failure;
     }
 }

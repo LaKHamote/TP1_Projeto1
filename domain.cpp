@@ -5,11 +5,9 @@
 #include <regex>
 
 void City::validate(string value) {
-    for (const auto &item : allowedCitys) {
-        if (item == value) { return; }
-    }
-    throw invalid_argument("Invalid City");
-};
+    if (allowedCitys.find(value)->second)
+        throw invalid_argument("Invalid City");
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,7 +16,7 @@ void Date::validate(string date) {
     const regex pattern("(0[1-9]|[12][0-9]|3[01])/(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)");
     if (!regex_match(date, pattern))
         throw invalid_argument("Invalid Date Format");
-};
+}
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +78,7 @@ void Country::validate(string country){
         throw invalid_argument("Invalid country Format");
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void Name::validate(string name) {
     if (name.length() > 30) {
@@ -105,11 +103,6 @@ void Name::validate(string name) {
             }
         }
     }
-}
-
-void Name::setName(string name) {
-    validate(name);
-    this->name = name;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
