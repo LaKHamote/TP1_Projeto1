@@ -58,12 +58,12 @@ void UTEmail::setUp() {
     response = SUCCESS;
 }
 
-void UTCode::setUp(){
+void UTCode::setUp() {
     domain = new Code();
     response = SUCCESS;
 }
 
-void UTCountry::setUp(){
+void UTCountry::setUp( ){
     domain = new Country();
     response = SUCCESS;
 }
@@ -73,7 +73,12 @@ void UTName::setUp() {
     response = SUCCESS;
 }
 
-void UTPassword::setUp(){
+void UTPassword::setUp() {
     domain = new Password();
+    response = SUCCESS;
+}
+
+void UTLanguage::setUp() {
+    domain = new Language();
     response = SUCCESS;
 }

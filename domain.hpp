@@ -83,5 +83,12 @@ class Password:public Domain {
         void validate(string);
 };
 
+class Language:public Domain {
+    private:
+        const unordered_set<string> allowedLanguages = {"Ingles", "Chines", "Mandarim", "Hindi", "Espanhol", "Frances", 
+                                                        "Arabe", "Bengali", "Russo", "Portugues", "Indonesio"};
+        void validate(string);
+};
+
 
 #endif

@@ -63,6 +63,14 @@ int main() {
         case UTPassword::FAILURE: cout << "Failure: Password" << endl;
             break;
     }
+
+    UTLanguage testLanguageA;
+    switch (testLanguageA.run()) {
+        case UTLanguage::SUCCESS: cout << "Success: Language" << endl;
+            break;
+        case UTLanguage::FAILURE: cout << "Failure: Language" << endl;
+            break;
+    }
     
     return 0;
 }

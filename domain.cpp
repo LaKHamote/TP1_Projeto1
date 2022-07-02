@@ -28,7 +28,7 @@ void Email::validate(string email) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-bool Code::luhn(string code){
+bool Code::luhn(string code) {
     int i, sum = 0, codeInt[LENGTH];
     bool valid = false;
 
@@ -49,7 +49,7 @@ bool Code::luhn(string code){
     return valid;
 }
 
-void Code::validate(string code){
+void Code::validate(string code) {
     int i;
 
     if (code.size() != LENGTH)
@@ -64,7 +64,7 @@ void Code::validate(string code){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void Country::validate(string country){
+void Country::validate(string country) {
     if (allowedCountries.find(country) == allowedCountries.end())
         throw invalid_argument("Invalid country Format");
 }
@@ -98,7 +98,7 @@ void Name::validate(string name) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void Password::validate(string password){
+void Password::validate(string password) {
     bool hasDigit = false, hasLowercase = false, hasUppercase = false, hasSpecial = false, invalidChar = false;
     int i;
 
@@ -123,3 +123,8 @@ void Password::validate(string password){
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void Language::validate(string languages) {
+    if (allowedLanguages.find(languages) == allowedLanguages.end())
+        throw invalid_argument("Invalid language Format");
+}

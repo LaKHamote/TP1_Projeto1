@@ -83,7 +83,14 @@ class UTPassword:public UTDomain<Password> {
         string INVALID() { return "manga"; };                        
         void setUp();                      
 };
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class UTLanguage:public UTDomain<Language> {
+    private:
+        string VALID() { return "Ingles"; };   
+        string INVALID() { return "Klingon"; };                        
+        void setUp();                      
+};
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif
