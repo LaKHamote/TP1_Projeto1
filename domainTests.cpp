@@ -4,38 +4,41 @@
 
 using namespace std;
 
-void UTCity::setUp() {
-    city = new City();
-    response = success;
+City *domain;
+
+int UTCity::setUp() {
+    domain = new City();
+    response = SUCCESS;
+    return 8;
 }
 
-void UTCity::successScenario() {
+void UTDomain::successScenario() {
     try {
-        city->setValue(validValue);
-        if (city->getValue() != validValue)
-            response = failure;
+        domain->setValue(VALID());
+        if (domain->getValue() != VALID())
+            response = FAILURE;
     }
     catch(invalid_argument& error) {
-        response = failure;
+        response = FAILURE;
     }
 }
 
-void UTCity::failureScenario() {
+void UTDomain::failureScenario() {
     try {
-        city->setValue(invalidValue);
-        response = failure;
+        domain->setValue(INVALID());
+        response = FAILURE;
     }
     catch(invalid_argument& error) {
-        if (city->getValue() == invalidValue)
-            response = failure;
+        if (domain->getValue() == INVALID())
+            response = FAILURE;
     }
 }
 
-void UTCity::tearDown() {
-    delete city;
+void UTDomain::tearDown() {
+    delete domain;
 }
 
-int UTCity::run() {
+int UTDomain::run() {
     setUp();
     failureScenario();
     successScenario();
@@ -52,29 +55,22 @@ void UTDate::setUp() {
 
 void UTDate::successScenario() {
     try {
-        date->setValue(validValue);
-        if (date->getValue() != validValue)
+        date->setValue(VALID);
+        if (date->getValue() != VALID)
             response = failure;
     }
     catch(invalid_argument& error) {
-        response = failure;
-    }
-    catch(out_of_range& error) {
         response = failure;
     }
 }
 
 void UTDate::failureScenario() {
     try {
-        date->setValue(invalidValue);
+        date->setValue(INVALID);
         response = failure;
     }
     catch(invalid_argument& error) {
-        if (date->getValue() == invalidValue)
-            response = failure;
-    }
-    catch(out_of_range& error) {
-        if (date->getValue() == invalidValue)
+        if (date->getValue() == INVALID)
             response = failure;
     }
 }
@@ -100,25 +96,22 @@ void UTEmail::setUp() {
 
 void UTEmail::successScenario() {
     try {
-        email->setValue(validValue);
-        if (email->getValue() != validValue)
+        email->setValue(VALID);
+        if (email->getValue() != VALID)
             response = failure;
     }
     catch(invalid_argument& error) {
-        response = failure;
-    }
-    catch(out_of_range& error) {
         response = failure;
     }
 }
 
 void UTEmail::failureScenario() {
     try {
-        email->setValue(invalidValue);
+        email->setValue(INVALID);
         response = failure;
     }
     catch(invalid_argument& error) {
-        if (email->getValue() == invalidValue)
+        if (email->getValue() == INVALID)
             response = failure;
     }
 }
@@ -226,8 +219,8 @@ void UTName::setUp() {
 
 void UTName::successScenario() {
     try {
-        name->setValue(validValue);
-        if (name->getValue() != validValue)
+        name->setValue(VALID);
+        if (name->getValue() != VALID)
             response = failure;
     }
     catch(invalid_argument& error) {
@@ -240,11 +233,11 @@ void UTName::successScenario() {
 
 void UTName::failureScenario() {
     try {
-        name->setValue(invalidValue);
+        name->setValue(INVALID);
         response = failure;
     }
     catch(invalid_argument& error) {
-        if (name->getValue() == invalidValue)
+        if (name->getValue() == INVALID)
             response = failure;
     }
 }

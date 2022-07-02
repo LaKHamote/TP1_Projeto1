@@ -11,9 +11,9 @@ int main() {
 
     UTCity testCityA;
     switch (testCityA.run()) {
-        case UTCity::success: cout << "Success - City" << endl;
+        case UTCity::SUCCESS: cout << "Success - City" << endl;
                                 break;
-        case UTCity::failure: cout << "Failure - City" << endl;
+        case UTCity::FAILURE: cout << "Failure - City" << endl;
                                 break;
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ int main() {
     printf("--------------------------\n");
 
     UTEmail testEmailA;
-    switch (testDateA.run()) {
+    switch (testEmailA.run()) {
         case UTDate::success: cout << "Success - Email" << endl;
             break;
         case UTDate::failure: cout << "Failure - Email" << endl;

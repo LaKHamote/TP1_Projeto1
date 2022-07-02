@@ -7,28 +7,38 @@
 
 using namespace std;
 
-class UTCity {
-    private:
-        const string validValue = "Londres";
-        const string invalidValue = "Wakanda";
-        City *city;
-        bool response;
-        void setUp();
+class UTDomain {
+    protected:
+        bool response = SUCCESS;
+        virtual int setUp() {};
         void successScenario();
         void failureScenario();
         void tearDown();
+        virtual string VALID() = 0;
+        virtual string INVALID() = 0;
+        //virtual ~UTDomain() {};
     public:
-        const static int success = 1;
-        const static int failure = 0;
+        const static int SUCCESS = 1;
+        const static int FAILURE = 0;
         int run();
+};
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class UTCity:public UTDomain {
+    private:
+        string VALID() { return "Londres"; };
+        string INVALID() { return "Wakanda"; };
+        City *city;
+        int setUp();
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTDate {
     private:
-        const string validValue = "15/Fev";
-        const string invalidValue = "40/Mar";
+        const string VALID = "15/Fev";
+        const string INVALID = "40/Mar";
         Date *date;
         bool response;
         void setUp();
@@ -45,8 +55,8 @@ class UTDate {
 
 class UTEmail {
     private:
-        const string validValue   = "torvalds@linux-foundation.org";
-        const string invalidValue = "This is an invalid email format.";
+        const string VALID   = "torvalds@linux-foundation.org";
+        const string INVALID = "This is an invalid email format.";
         Email *email;
         bool response;
         void setUp();
@@ -59,8 +69,8 @@ class UTEmail {
         int run();
 };
 
-// const string UTEmail::validValue = "torvalds@linux-foundation.org";
-// const string UTEmail::invalidValue = "This is an invalid email format.";
+// const string UTEmail::VALID = "torvalds@linux-foundation.org";
+// const string UTEmail::INVALID = "This is an invalid email format.";
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -106,8 +116,8 @@ class UTCountry {
 
 class UTName {
     private:
-        const string validValue   = "Linus Torvalds";
-        const string invalidValue = "riCharD StaLLmaN";
+        const string VALID   = "Linus Torvalds";
+        const string INVALID = "riCharD StaLLmaN";
         Name *name;
         bool response;
         void setUp();
