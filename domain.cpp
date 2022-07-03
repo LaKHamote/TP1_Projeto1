@@ -4,6 +4,9 @@
 #include <regex>
 #include <sstream>
 
+
+const unordered_set<string> City::allowedCities = { "Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro",
+                                            "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
 void City::validate(string city) {
     if (allowedCities.find(city) == allowedCities.end())
         throw invalid_argument("Invalid City");
@@ -64,6 +67,9 @@ void Code::validate(string code) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+const unordered_set<string> Country::allowedCountries = {"Estados Unidos", "Brasil", "China", "Coreia do Sul", "Emirados", "França",
+                                                        "India", "Japao", "Malasia", "Reino Unido", "Tailandia", "Turquia"};
 void Country::validate(string country) {
     if (allowedCountries.find(country) == allowedCountries.end())
         throw invalid_argument("Invalid country Format");
@@ -124,7 +130,10 @@ void Password::validate(string password) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void Language::validate(string languages) {
-    if (allowedLanguages.find(languages) == allowedLanguages.end())
-        throw invalid_argument("Invalid language Format");
+
+const unordered_set<string> Language::allowedLanguages = { "Ingles", "Chines", "Mandarim", "Hindi", "Espanhol",
+                                                        "Frances", "Arabe", "Bengali", "Russo", "Portugues", "Indonesio"};
+void Language::validate(string language) {
+    if (allowedLanguages.find(language) == allowedLanguages.end())
+        throw invalid_argument("Invalid Language");
 }

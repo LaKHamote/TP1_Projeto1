@@ -3,13 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include <stdexcept>
 #include <unordered_set>
 
 using namespace std;
 
 /**
- * Parent Class
+ * Domain parent Class
  */
 class Domain {
     protected:
@@ -41,11 +40,20 @@ inline void Domain::setValue(string value) {
  */
 class City:public Domain {
     private:
-        const unordered_set<string> allowedCities = { "Antalya", "Bangkok", "Delhi", "Dubai", "Hong Kong", "Londres", "Macau", "Mumbai", "Paris", "Rio de Janeiro",
-                                                        "Sao Paulo", "Seul", "Istambul", "Kuala Lumpur", "Nova Iorque", "Osaka", "Phuket", "Shenzhen", "Toquio" };
+        const static unordered_set<string> allowedCities;
         void validate(string);
 };
 
+/**
+ * Portrayal of date.
+ * 
+ * Format rules:
+ * 
+ * - Date is valid if in the following format:
+ * 
+ * -> DD/MES
+ * -> Ex: 08/Mar    
+ */
 class Date:public Domain {
     private:
         void validate(string);
@@ -67,8 +75,7 @@ class Code:public Domain {
 
 class Country:public Domain {
     private:
-        const unordered_set<string> allowedCountries = {"Estados Unidos", "Brasil", "China", "Coreia do Sul", "Emirados", "França",
-                                                        "India", "Japao", "Malasia", "Reino Unido", "Tailandia", "Turquia"};
+        const static unordered_set<string> allowedCountries;
         void validate(string);
 };
 
@@ -85,8 +92,7 @@ class Password:public Domain {
 
 class Language:public Domain {
     private:
-        const unordered_set<string> allowedLanguages = {"Ingles", "Chines", "Mandarim", "Hindi", "Espanhol", "Frances", 
-                                                        "Arabe", "Bengali", "Russo", "Portugues", "Indonesio"};
+        const static unordered_set<string> allowedLanguages;
         void validate(string);
 };
 

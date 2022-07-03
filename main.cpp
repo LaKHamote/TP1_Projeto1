@@ -15,7 +15,7 @@ int main() {
         case UTCity::FAILURE: cout << "Failure: Cities" << endl;
             break;
     }
-    
+
     UTDate testDateA;
     switch (testDateA.run()) {
         case UTDate::SUCCESS: cout << "Success: Date" << endl;
@@ -23,7 +23,7 @@ int main() {
         case UTDate::FAILURE: cout << "Failure: Date" << endl;
             break;
     }
-    
+
     UTEmail testEmailA;
     switch (testEmailA.run()) {
         case UTEmail::SUCCESS: cout << "Success: Email" << endl;
@@ -31,7 +31,7 @@ int main() {
         case UTEmail::FAILURE: cout << "Failure: Email" << endl;
             break;
     }
-    
+
     UTCode testCodeA;
     switch (testCodeA.run()) {
         case UTCode::SUCCESS: cout << "Success: Code" << endl;
@@ -39,7 +39,7 @@ int main() {
         case UTCode::FAILURE: cout << "Failure: Code" << endl;
             break;
     }
-    
+
     UTCountry testCountryA;
     switch (testCountryA.run()) {
         case UTCountry::SUCCESS: cout << "Success: Country" << endl;
@@ -47,7 +47,7 @@ int main() {
         case UTCountry::FAILURE: cout << "Failure: Country" << endl;
             break;
     }
-    
+
     UTName testNameA;
     switch (testNameA.run()) {
         case UTName::SUCCESS: cout << "Success: Name" << endl;
@@ -71,6 +71,6 @@ int main() {
         case UTLanguage::FAILURE: cout << "Failure: Language" << endl;
             break;
     }
-    
+
     return 0;
 }
