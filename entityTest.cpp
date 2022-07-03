@@ -5,8 +5,8 @@
 
 using namespace std;
 
-template <class Entity>
-void UTEntity<Entity>::successScenario() {
+template <>
+void UTEntity<User>::successScenario() {
     try {
         entity->setName(UTName::VALID());
         entity->setEmail(UTEmail::VALID());
@@ -28,7 +28,7 @@ void UTEntity<Entity>::successScenario() {
     }
 }
 
-template <class Entity>
+template <class Entity> //falta arrumar
 void UTEntity<Entity>::failureScenario() {
     try {
         entity->setName(UTName::INVALID());
