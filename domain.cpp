@@ -130,10 +130,34 @@ void Password::validate(string password) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
 const unordered_set<string> Language::allowedLanguages = { "Ingles", "Chines", "Mandarim", "Hindi", "Espanhol",
                                                         "Frances", "Arabe", "Bengali", "Russo", "Portugues", "Indonesio"};
 void Language::validate(string language) {
     if (allowedLanguages.find(language) == allowedLanguages.end())
         throw invalid_argument("Invalid Language");
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const unordered_set<char> Description::allowedSymbols = {' ', '.', ',', ';', ':', '?', '!', '-'};
+
+void Description::validate(string description) {
+    if (description.length() > 40) {
+        throw invalid_argument("Description has too many characters!");
+    }
+    const regex pattern1("[ |.|,|;|:|?|!|-]{2,}");
+    if (regex_search(description, pattern1)) {
+        throw invalid_argument("Description can't have multiple symbols/whitespaces!");
+    }
+    for (char i: description) {
+        if (!(
+            (i >= 'a' && i <= 'z') ||
+            (i >= 'A' && i <= 'Z') ||
+            (allowedSymbols.find(i) != allowedSymbols.end())
+        )) {
+            throw invalid_argument("Invalid characters in the description.");
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

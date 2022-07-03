@@ -75,3 +75,7 @@ void UTPassword::setUp() {
 void UTLanguage::setUp() {
     domain = new Language();
 }
+
+void UTDescription::setUp() {
+    domain = new Description();
+}

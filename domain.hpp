@@ -96,5 +96,10 @@ class Language:public Domain {
         void validate(string);
 };
 
+class Description:public Domain {
+    private:
+        const static unordered_set<char> allowedSymbols;
+        void validate(string);
+};
 
 #endif

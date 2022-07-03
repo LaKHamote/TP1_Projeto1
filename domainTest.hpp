@@ -95,4 +95,14 @@ class UTLanguage:public UTDomain<Language> {
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+class UTDescription:public UTDomain<Description> {
+    protected:
+        string VALID() const { return "This is a valid description."; };
+        string INVALID() const { return "This    ISN'T    a valid description...   ^_^"; };
+        void setUp();
+    public:
+
+};
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 #endif
