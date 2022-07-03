@@ -1,5 +1,5 @@
-#ifndef testHppIncluded
-#define testHppIncluded
+#ifndef domainTestHppIncluded
+#define domainTestHppIncluded
 
 #include "domain.hpp"
 #include <string>
@@ -11,8 +11,8 @@ class UTDomain {
     protected:
         Domain *domain;                            // Referência para unidade em teste.
         bool response = SUCCESS;
-        virtual string VALID() = 0;
-        virtual string INVALID() = 0;
+        virtual string VALID() const = 0;
+        virtual string INVALID() const = 0;
         virtual void setUp() = 0;
         void successScenario();
         void failureScenario();
@@ -27,68 +27,70 @@ class UTDomain {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCity:public UTDomain<City> {
-    private:
-        string VALID() { return "Londres"; };
-        string INVALID() { return "Wakanda"; };
+    protected:
+        string VALID() const { return "Londres"; };
+        string INVALID() const { return "Wakanda"; };
         void setUp();
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTDate:public UTDomain<Date> {
-    private:
-        string VALID() { return "15/Fev"; };
-        string INVALID() { return "40/Mar"; };
+    protected:
+        string VALID() const { return "15/Fev"; };
+        string INVALID() const { return "40/Mar"; };
         void setUp();
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTEmail:public UTDomain<Email> {
-    private:
-        string VALID() { return "torvalds@linux-foundation.org"; };
-        string INVALID() { return "This is an invalid email format.";};
+    protected:
+        string VALID() const { return "torvalds@linux-foundation.org"; };
+        string INVALID() const { return "This is an invalid email format.";};
         void setUp();
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCode:public UTDomain<Code> {
-    private:
+    protected:
         static const int LENGHT = 11;
-        string VALID() { return "79927398713"; };   
-        string INVALID() { return "79927398712"; };                           
+        string VALID() const { return "79927398713"; };   
+        string INVALID() const { return "79927398712"; };                           
         void setUp();                            
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCountry:public UTDomain<Country> {
-    private:
+    protected:
         static const int LENGHT = 12;
-        string VALID() { return "Turquia"; };
-        string INVALID() { return "Inglaterra"; };
+        string VALID() const { return "Turquia"; };
+        string INVALID() const { return "Inglaterra"; };
         void setUp(); 
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTName:public UTDomain<Name> {
-    private:
-        string VALID() { return "Linus Torvalds"; };
-        string INVALID() { return "riCharD StaLLmaN"; };
+    protected:
+        string VALID() const { return "Linus Torvalds"; };
+        string INVALID() const { return "riCharD StaLLmaN"; };
         void setUp();
+    public:
+
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTPassword:public UTDomain<Password> {
-    private:
+    protected:
         static const int LENGHT = 5;
-        string VALID() { return "aA&22"; };   
-        string INVALID() { return "manga"; };                        
+        string VALID() const { return "aA&22"; };   
+        string INVALID() const { return "manga"; };                        
         void setUp();                      
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTLanguage:public UTDomain<Language> {
-    private:
-        string VALID() { return "Ingles"; };   
-        string INVALID() { return "Klingon"; };                        
+    protected:
+        string VALID() const { return "Ingles"; };   
+        string INVALID() const { return "Klingon"; };                        
         void setUp();                      
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

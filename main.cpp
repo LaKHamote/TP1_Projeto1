@@ -10,9 +10,9 @@ int main() {
 
     UTCity testCityA;
     switch (testCityA.run()) {
-        case UTCity::SUCCESS: cout << "Success: Cities" << endl;
+        case UTCity::SUCCESS: cout << "Success: City" << endl;
             break;
-        case UTCity::FAILURE: cout << "Failure: Cities" << endl;
+        case UTCity::FAILURE: cout << "Failure: City" << endl;
             break;
     }
 
@@ -69,6 +69,14 @@ int main() {
         case UTLanguage::SUCCESS: cout << "Success: Language" << endl;
             break;
         case UTLanguage::FAILURE: cout << "Failure: Language" << endl;
+            break;
+    }
+
+    UTUser testUserA;
+    switch (testUserA.run()) {
+        case UTUser::SUCCESS: cout << "Success: User" << endl;
+            break;
+        case UTUser::FAILURE: cout << "Failure: User" << endl;
             break;
     }
 

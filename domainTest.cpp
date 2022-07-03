@@ -1,4 +1,4 @@
-#include "domainTests.hpp"
+#include "domainTest.hpp"
 #include "domain.hpp"
 
 using namespace std;
@@ -11,6 +11,7 @@ void UTDomain<Domain>::successScenario() {
             response = FAILURE;
     }
     catch(invalid_argument& error) {
+        cout << error.what() << endl;
         response = FAILURE;
     }
 }
@@ -45,40 +46,32 @@ int UTDomain<Domain>::run() {
 
 void UTCity::setUp() {
     domain = new City();
-    response = SUCCESS;
 }
 
 void UTDate::setUp() {
     domain = new Date();
-    response = SUCCESS;
 }
 
 void UTEmail::setUp() {
     domain = new Email();
-    response = SUCCESS;
 }
 
 void UTCode::setUp() {
     domain = new Code();
-    response = SUCCESS;
 }
 
 void UTCountry::setUp( ){
     domain = new Country();
-    response = SUCCESS;
 }
 
 void UTName::setUp() {
     domain = new Name();
-    response = SUCCESS;
 }
 
 void UTPassword::setUp() {
     domain = new Password();
-    response = SUCCESS;
 }
 
 void UTLanguage::setUp() {
     domain = new Language();
-    response = SUCCESS;
 }
