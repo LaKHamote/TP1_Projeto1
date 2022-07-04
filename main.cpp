@@ -72,6 +72,14 @@ int main() {
             break;
     }
 
+    UTDescription testDescriptionA;
+    switch (testDescriptionA.run()) {
+        case UTDescription::SUCCESS: cout << "Success: Description" << endl;
+            break;
+        case UTDescription::FAILURE: cout << "Failure: Description" << endl;
+            break;
+    }
+
     UTUser testUserA;
     switch (testUserA.run()) {
         case UTUser::SUCCESS: cout << "Success: User" << endl;
