@@ -8,7 +8,7 @@
 using namespace std;
 
 /**
- * Domain parent Class
+ * Parent Class of all Domains
  */
 class Domain {
     protected:
@@ -20,10 +20,24 @@ class Domain {
         string getValue() const;
 };
 
+/**
+ * Function to access the value of a Domain
+ * 
+ * Return:
+ * 
+ * -string 
+ */
 inline string Domain::getValue() const {
     return value;
 }
 
+/**
+ * Function to assign the value to a Domain in a specific format
+ * 
+ * Params:
+ * 
+ * -string 
+ */
 inline void Domain::setValue(string value) {
     validate(value);
     this->value = value;
@@ -52,7 +66,7 @@ class City:public Domain {
  * - Date is valid if in the following format:
  * 
  * -> DD/MES
- * -> Ex: 08/Mar    
+ * Ex: 08/Mar    
  */
 class Date:public Domain {
     private:
@@ -99,6 +113,13 @@ class Language:public Domain {
 class Description:public Domain {
     private:
         const static unordered_set<char> allowedSymbols;
+        void validate(string);
+};
+
+class Grade:public Domain {
+    private:
+        static const int MAXIMUM = 10;
+        static const int MINIMUM = 0;
         void validate(string);
 };
 

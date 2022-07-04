@@ -80,6 +80,14 @@ int main() {
             break;
     }
 
+    UTGrade testGradeA;
+    switch (testGradeA.run()) {
+        case UTGrade::SUCCESS: cout << "Success: Grade" << endl;
+            break;
+        case UTGrade::FAILURE: cout << "Failure: Grade" << endl;
+            break;
+    }
+
     UTUser testUserA;
     switch (testUserA.run()) {
         case UTUser::SUCCESS: cout << "Success: User" << endl;

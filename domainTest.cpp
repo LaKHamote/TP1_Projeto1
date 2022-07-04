@@ -79,3 +79,7 @@ void UTLanguage::setUp() {
 void UTDescription::setUp() {
     domain = new Description();
 }
+
+void UTGrade::setUp() {
+    domain = new Grade();
+}

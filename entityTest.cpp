@@ -5,6 +5,21 @@
 
 using namespace std;
 
+template <class Entity>
+void UTEntity<Entity>::tearDown() {
+    delete entity;
+}
+
+template <class Entity>
+int UTEntity<Entity>::run() {
+    setUp();
+    successScenario();
+    failureScenario();
+    tearDown();
+    return response;
+}
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template <>
 void UTEntity<User>::successScenario() {
     try {
@@ -28,8 +43,8 @@ void UTEntity<User>::successScenario() {
     }
 }
 
-template <class Entity> //falta arrumar
-void UTEntity<Entity>::failureScenario() {
+template <> //falta arrumar
+void UTEntity<User>::failureScenario() {
     try {
         entity->setName(UTName::INVALID());
         response = FAILURE;
@@ -40,21 +55,6 @@ void UTEntity<Entity>::failureScenario() {
     }
 }
 
-template <class Entity>
-void UTEntity<Entity>::tearDown() {
-    delete entity;
-}
-
-template <class Entity>
-int UTEntity<Entity>::run() {
-    setUp();
-    successScenario();
-    failureScenario();
-    tearDown();
-    return response;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 void UTUser::setUp() {
     entity = new User();

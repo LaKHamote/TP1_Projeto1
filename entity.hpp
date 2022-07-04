@@ -10,14 +10,6 @@
 using namespace std;
 
 /**
- * Entity parent Class
- */
-class Entity {
-    protected:
-    public:
-};
-
-/**
  * Portrayal of User
  */
 class User {
