@@ -13,13 +13,13 @@ void UTEntity<User>::successScenario() {
         entity->setPassword(UTPassword::VALID());
         entity->setLanguage(UTLanguage::VALID());
         entity->setDate(UTDate::VALID());
-        //entity->setDescription(UTDescription::VALID());
+        entity->setDescription(UTDescription::VALID());
         if (entity->getName() != UTName::VALID() ||
             entity->getEmail() != UTEmail::VALID() ||
             entity->getPassword() != UTPassword::VALID() ||
             entity->getLanguage() != UTLanguage::VALID() ||
-            entity->getDate() != UTDate::VALID()
-            //entity->getDescription() != UTDescription::VALID()
+            entity->getDate() != UTDate::VALID() ||
+            entity->getDescription() != UTDescription::VALID()
         )
             response = FAILURE;
     }

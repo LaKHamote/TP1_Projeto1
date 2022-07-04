@@ -112,8 +112,8 @@ class UTDescription:public UTDomain<Description> {
     protected:
         string VALID() const { return "This is a valid description."; };
         string INVALID() const { return "This    ISN'T    a valid description...   ^_^"; };
+    private:
         void setUp();
-    public:
 
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 using namespace std;
 
 template <class Entity>
-class UTEntity:UTName, UTEmail, UTPassword, UTLanguage, UTDate, UTCity, UTCode, UTCountry {
+class UTEntity:UTName, UTEmail, UTPassword, UTLanguage, UTDate, UTDescription, UTCity, UTCode, UTCountry {
     protected:
         Entity *entity;                            // Referência para unidade em teste.
         virtual ~UTEntity() {};

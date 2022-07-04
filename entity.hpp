@@ -27,20 +27,20 @@ class User {
         Password password;
         Language language;
         Date date;
-        //Description description;
+        Description description;
     public:
         string getName() const { return name.getValue(); };
         string getEmail() const { return email.getValue(); };
         string getPassword() const { return password.getValue(); };
         string getLanguage() const { return language.getValue(); };
         string getDate() const { return date.getValue(); };
-        //string getDescription() const { return description.getValue(); };
+        string getDescription() const { return description.getValue(); };
         void setName(string name) { this->name.setValue(name); };
         void setEmail(string  email) { this->email.setValue(email); };
         void setPassword(string  password) { this->password.setValue(password); };
         void setLanguage(string  language) { this->language.setValue(language); };
         void setDate(string  date) { this->date.setValue(date); };
-        //void setDescription(string  description) { this->description.setValue(description; };
+        void setDescription(string  description) { this->description.setValue(description); };
 };
 
 
