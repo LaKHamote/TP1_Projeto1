@@ -1,4 +1,4 @@
-all: main.exe domain.o domainTests.o
+all: main.exe domain.o domainTests.o entity.o entityTests.o
 	./main.exe
 
 domain.o:
