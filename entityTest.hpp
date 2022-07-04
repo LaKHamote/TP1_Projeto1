@@ -11,7 +11,7 @@ template <class Entity>
 class UTEntity:UTName, UTEmail, UTPassword, UTLanguage, UTDate, UTDescription, UTCity, UTCode, UTCountry {
     protected:
         Entity *entity;                            // Referência para unidade em teste.
-        virtual ~UTEntity() {};
+        //virtual ~UTEntity() {};                  // nao sei se precisa
     private:
         virtual void setUp() = 0;
         void successScenario();

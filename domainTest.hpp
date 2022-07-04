@@ -10,7 +10,7 @@ template <class Domain>
 class UTDomain {
     protected:
         Domain *domain;                            // Referência para unidade em teste.
-        virtual ~UTDomain() {};
+        //virtual ~UTDomain() {};                  // nao sei se precisa
     private:
         virtual string VALID() const = 0;
         virtual string INVALID() const = 0;
@@ -61,7 +61,6 @@ class UTCode:public UTDomain<Code> {
         string INVALID() const { return "79927398712"; };
     private:                           
         static const int LENGHT = 11;
-    private:
         void setUp();                            
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,7 +71,6 @@ class UTCountry:public UTDomain<Country> {
         string INVALID() const { return "Inglaterra"; };
     private:
         static const int LENGHT = 12;
-    private:
         void setUp(); 
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +81,6 @@ class UTName:public UTDomain<Name> {
         string INVALID() const { return "riCharD StaLLmaN"; };
     private:
         void setUp();
-    private:
 
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,8 +90,7 @@ class UTPassword:public UTDomain<Password> {
         string VALID() const { return "aA&22"; };   
         string INVALID() const { return "manga"; };   
     private:
-        static const int LENGHT = 5; 
-    private:
+        static const int LENGHT = 5;
         void setUp();                      
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
