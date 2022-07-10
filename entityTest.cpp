@@ -60,3 +60,34 @@ void UTUser::successScenario() {
     response = FAILURE;
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const string UTAccommodation::VALID_CODE = "79927398713";
+const string UTAccommodation::VALID_CITY = "Londres";
+const string UTAccommodation::VALID_COUNTRY = "Turquia";
+const string UTAccommodation::VALID_GRADE = "10";
+const string UTAccommodation::VALID_DESCRIPTION = "This is a valid description.";
+
+void UTAccommodation::successScenario() {
+    Code code;
+    code.setValue(VALID_CODE);
+    entity->setCode(code);
+    City city;
+    city.setValue(VALID_CITY);
+    entity->setCity(city);
+    Country country;
+    country.setValue(VALID_COUNTRY);
+    entity->setCountry(country);
+    Grade grade;
+    grade.setValue(VALID_GRADE);
+    entity->setGrade(grade);
+    Description description;
+    description.setValue(VALID_DESCRIPTION);
+    entity->setDescription(description);
+    if (entity->getCode().getValue() != VALID_CODE ||
+        entity->getCity().getValue() != VALID_CITY ||
+        entity->getCountry().getValue() != VALID_COUNTRY ||
+        entity->getGrade().getValue() != VALID_GRADE ||
+        entity->getDescription().getValue() != VALID_DESCRIPTION
+    )
+    response = FAILURE;
+}

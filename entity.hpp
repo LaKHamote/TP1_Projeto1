@@ -17,6 +17,8 @@ using namespace std;
  * -Language
  * -Date
  * -Description
+ * 
+ * Author: 211038262
  */
 class User {
     private:
@@ -34,14 +36,42 @@ class User {
         Date getDate() const { return date; };
         Description getDescription() const { return description; };
         void setName(const Name& name) { this->name = name; };
-        void setEmail(const Email&  email) { this->email = email; };
-        void setPassword(const Password&  password) { this->password = password; };
+        void setEmail(const Email& email) { this->email = email; };
+        void setPassword(const Password& password) { this->password = password; };
         void setLanguage(const Language& language) { this->language = language; };
         void setDate(const Date& date) { this->date = date; };
         void setDescription(const Description& description) { this->description = description; };
 };
 
-
+/**
+ * Portrayal of an Accommodation that is composed of 6 classes:
+ * -Code
+ * -City
+ * -Country
+ * -Grade
+ * -Description
+ * 
+ * Author: 211038262
+ */
+class Accommodation {
+    private:
+        Code code;
+        City city;
+        Country country;
+        Grade grade;
+        Description description;
+    public:
+        Code getCode() const { return code; };
+        City getCity() const { return city; };
+        Country getCountry() const { return country; };
+        Grade getGrade() const { return grade; };
+        Description getDescription() const { return description; };
+        void setCode(const Code& code) { this->code = code; };
+        void setCity(const City& city) { this->city = city; };
+        void setCountry(const Country& country) { this->country = country; };
+        void setGrade(const Grade& grade) { this->grade = grade; };
+        void setDescription(const Description& description) { this->description = description; };
+};
 
 
 

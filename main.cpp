@@ -96,5 +96,13 @@ int main() {
             break;
     }
 
+    UTAccommodation testAccommodationA;
+    switch (testAccommodationA.run()) {
+        case UTAccommodation::SUCCESS: cout << "Success: Accommodation" << endl;
+            break;
+        case UTAccommodation::FAILURE: cout << "Failure: Accommodation" << endl;
+            break;
+    }
+
     return 0;
 }

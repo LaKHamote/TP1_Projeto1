@@ -36,6 +36,16 @@ class UTUser:public UTEntity<User> {
         const static string VALID_DESCRIPTION;
 };
 
+class UTAccommodation:public UTEntity<Accommodation> {
+    private:
+        void successScenario(); 
+        const static string VALID_CODE;
+        const static string VALID_CITY;
+        const static string VALID_COUNTRY;
+        const static string VALID_GRADE;
+        const static string VALID_DESCRIPTION;
+};
+
 
 
 #endif
