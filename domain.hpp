@@ -21,18 +21,7 @@ class Domain {
 };
 
 /**
- * Function to access the value of a Domain
- * 
- * Return:
- * 
- * -string 
- */
-inline string Domain::getValue() const {
-    return value;
-}
-
-/**
- * Function to assign the value to a Domain in a specific format
+ * Method to assign the value to a Domain in a specific format
  * 
  * Params:
  * 
@@ -41,6 +30,17 @@ inline string Domain::getValue() const {
 inline void Domain::setValue(string value) {
     validate(value);
     this->value = value;
+}
+
+/**
+ * Method to access the value of a Domain
+ * 
+ * Return:
+ * 
+ * -string 
+ */
+inline string Domain::getValue() const {
+    return value;
 }
 
 /**

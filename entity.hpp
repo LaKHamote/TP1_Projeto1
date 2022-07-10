@@ -10,7 +10,13 @@
 using namespace std;
 
 /**
- * Portrayal of User
+ * Portrayal of User that is composed of 6 classes:
+ * -Name
+ * -Email
+ * -Password
+ * -Language
+ * -Date
+ * -Description
  */
 class User {
     private:
@@ -21,18 +27,18 @@ class User {
         Date date;
         Description description;
     public:
-        string getName() const { return name.getValue(); };
-        string getEmail() const { return email.getValue(); };
-        string getPassword() const { return password.getValue(); };
-        string getLanguage() const { return language.getValue(); };
-        string getDate() const { return date.getValue(); };
-        string getDescription() const { return description.getValue(); };
-        void setName(string name) { this->name.setValue(name); };
-        void setEmail(string  email) { this->email.setValue(email); };
-        void setPassword(string  password) { this->password.setValue(password); };
-        void setLanguage(string  language) { this->language.setValue(language); };
-        void setDate(string  date) { this->date.setValue(date); };
-        void setDescription(string  description) { this->description.setValue(description); };
+        Name getName() const { return name; };
+        Email getEmail() const { return email; };
+        Password getPassword() const { return password; };
+        Language getLanguage() const { return language; };
+        Date getDate() const { return date; };
+        Description getDescription() const { return description; };
+        void setName(const Name& name) { this->name = name; };
+        void setEmail(const Email&  email) { this->email = email; };
+        void setPassword(const Password&  password) { this->password = password; };
+        void setLanguage(const Language& language) { this->language = language; };
+        void setDate(const Date& date) { this->date = date; };
+        void setDescription(const Description& description) { this->description = description; };
 };
 
 

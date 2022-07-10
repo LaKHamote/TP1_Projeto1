@@ -8,19 +8,18 @@
 using namespace std;
 
 template <class Entity>
-class UTEntity:UTName, UTEmail, UTPassword, UTLanguage, UTDate, UTDescription, UTCity, UTCode, UTCountry {
+class UTEntity {
     protected:
-        Entity *entity;                            // Referência para unidade em teste.
-        //virtual ~UTEntity() {};                  // nao sei se precisa
-    private:
-        virtual void setUp() = 0;
-        void successScenario();
-        void failureScenario();
-        void tearDown();
         bool response = SUCCESS;
+        Entity *entity;
+        //virtual ~UTEntity() {};
+    private:
+        void setUp();
+        virtual void successScenario() = 0;
+        void tearDown();
     public:
-        const static int SUCCESS = 1;             // Definição de constante para reportar resultado de teste.
-        const static int FAILURE = 0;             // Definição de constante para reportar resultado de teste.
+        const static int SUCCESS = 1;
+        const static int FAILURE = 0;
         virtual int run();
 };
 
@@ -28,7 +27,13 @@ class UTEntity:UTName, UTEmail, UTPassword, UTLanguage, UTDate, UTDescription, U
 
 class UTUser:public UTEntity<User> {
     private:
-        void setUp();
+        void successScenario(); 
+        const static string VALID_NAME;
+        const static string VALID_EMAIL;
+        const static string VALID_PASSWORD;
+        const static string VALID_LANGUAGE;
+        const static string VALID_DATE;
+        const static string VALID_DESCRIPTION;
 };
 
 

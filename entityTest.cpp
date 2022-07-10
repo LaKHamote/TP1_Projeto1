@@ -6,6 +6,11 @@
 using namespace std;
 
 template <class Entity>
+void UTEntity<Entity>::setUp() {
+    entity = new Entity();
+}
+
+template <class Entity>
 void UTEntity<Entity>::tearDown() {
     delete entity;
 }
@@ -14,48 +19,44 @@ template <class Entity>
 int UTEntity<Entity>::run() {
     setUp();
     successScenario();
-    failureScenario();
     tearDown();
     return response;
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-template <>
-void UTEntity<User>::successScenario() {
-    try {
-        entity->setName(UTName::VALID());
-        entity->setEmail(UTEmail::VALID());
-        entity->setPassword(UTPassword::VALID());
-        entity->setLanguage(UTLanguage::VALID());
-        entity->setDate(UTDate::VALID());
-        entity->setDescription(UTDescription::VALID());
-        if (entity->getName() != UTName::VALID() ||
-            entity->getEmail() != UTEmail::VALID() ||
-            entity->getPassword() != UTPassword::VALID() ||
-            entity->getLanguage() != UTLanguage::VALID() ||
-            entity->getDate() != UTDate::VALID() ||
-            entity->getDescription() != UTDescription::VALID()
-        )
-            response = FAILURE;
-    }
-    catch(invalid_argument& error) {
-        response = FAILURE;
-    }
-}
+const string UTUser::VALID_NAME = "Linus Torvalds";
+const string UTUser::VALID_EMAIL = "torvalds@linux-foundation.org";
+const string UTUser::VALID_PASSWORD = "aA&22";
+const string UTUser::VALID_LANGUAGE = "Ingles";
+const string UTUser::VALID_DATE = "15/Fev";
+const string UTUser::VALID_DESCRIPTION = "This is a valid description.";
 
-template <> //falta arrumar
-void UTEntity<User>::failureScenario() {
-    try {
-        entity->setName(UTName::INVALID());
-        response = FAILURE;
-    }
-    catch(invalid_argument& error) {
-        if (entity->getName() == UTName::INVALID())
-            response = FAILURE;
-    }
+void UTUser::successScenario() {
+    Name name;
+    name.setValue(VALID_NAME);
+    entity->setName(name);
+    Email email;
+    email.setValue(VALID_EMAIL);
+    entity->setEmail(email);
+    Password password;
+    password.setValue(VALID_PASSWORD);
+    entity->setPassword(password);
+    Language language;
+    language.setValue(VALID_LANGUAGE);
+    entity->setLanguage(language);
+    Date date;
+    date.setValue(VALID_DATE);
+    entity->setDate(date);
+    Description description;
+    description.setValue(VALID_DESCRIPTION);
+    entity->setDescription(description);
+    if (entity->getName().getValue() != VALID_NAME ||
+        entity->getEmail().getValue() != VALID_EMAIL ||
+        entity->getPassword().getValue() != VALID_PASSWORD ||
+        entity->getLanguage().getValue() != VALID_LANGUAGE ||
+        entity->getDate().getValue() != VALID_DATE ||
+        entity->getDescription().getValue() != VALID_DESCRIPTION
+    )
+    response = FAILURE;
 }
-
-
-void UTUser::setUp() {
-    entity = new User();
-}
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
