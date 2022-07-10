@@ -46,6 +46,14 @@ class UTAccommodation:public UTEntity<Accommodation> {
         const static string VALID_DESCRIPTION;
 };
 
+class UTRating:public UTEntity<Rating> {
+    private:
+        void successScenario(); 
+        const static string VALID_CODE;
+        const static string VALID_GRADE;
+        const static string VALID_DESCRIPTION;
+};
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif

@@ -58,6 +58,7 @@ class UTEmail:public UTDomain<Email> {
         string INVALID() const { return "This is an invalid email format.";};
         void setUp();
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCode:public UTDomain<Code> {
@@ -67,6 +68,7 @@ class UTCode:public UTDomain<Code> {
         static const int LENGHT = 11;
         void setUp();                            
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTCountry:public UTDomain<Country> {
@@ -76,6 +78,7 @@ class UTCountry:public UTDomain<Country> {
         static const int LENGHT = 12;
         void setUp(); 
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTName:public UTDomain<Name> {
@@ -85,6 +88,7 @@ class UTName:public UTDomain<Name> {
         void setUp();
 
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTPassword:public UTDomain<Password> {
@@ -94,6 +98,7 @@ class UTPassword:public UTDomain<Password> {
         static const int LENGHT = 5;
         void setUp();                      
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTLanguage:public UTDomain<Language> {
@@ -102,6 +107,7 @@ class UTLanguage:public UTDomain<Language> {
         string INVALID() const { return "Klingon"; };                        
         void setUp();                      
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UTDescription:public UTDomain<Description> {
@@ -113,6 +119,7 @@ class UTDescription:public UTDomain<Description> {
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 class UTGrade:public UTDomain<Grade> {
     private:
         string VALID() const { return "10"; };
@@ -120,6 +127,7 @@ class UTGrade:public UTDomain<Grade> {
         void setUp();
 
 };
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #endif

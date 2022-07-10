@@ -75,6 +75,7 @@ class Date:public Domain {
 
 /**
  * Email Domain
+ * Author: 211026673
  * 
  * It contains a valid email value.
  * 
@@ -114,6 +115,7 @@ class Country:public Domain {
 
 /**
  * Name Domain
+ * Author: 211026673
  * 
  * It contains a valid name value.
  * 
@@ -151,6 +153,7 @@ class Language:public Domain {
 
 /**
  * Description Domain
+ * Author: 211026673
  * 
  * It contains a simple description.
  * 

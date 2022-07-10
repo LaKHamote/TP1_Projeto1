@@ -73,8 +73,28 @@ class Accommodation {
         void setDescription(const Description& description) { this->description = description; };
 };
 
-
-
-
+/**
+ * Portrayal of an Accommodation that is composed of 6 classes:
+ * -Code
+ * -City
+ * -Country
+ * -Grade
+ * -Description
+ * 
+ * Author: 211026673
+ */
+class Rating {
+    private:
+        Code code;
+        Grade grade;
+        Description description;
+    public:
+        Code getCode() const { return code; };
+        Grade getGrade() const { return grade; };
+        Description getDescription() const { return description; };
+        void setCode(const Code& code) { this->code = code; };
+        void setGrade(const Grade& grade) { this->grade = grade; };
+        void setDescription(const Description& description) { this->description = description; };
+};
 
 #endif

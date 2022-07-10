@@ -47,39 +47,30 @@ int UTDomain<Domain>::run() {
 void UTCity::setUp() {
     domain = new City();
 }
-
 void UTDate::setUp() {
     domain = new Date();
 }
-
 void UTEmail::setUp() {
     domain = new Email();
 }
-
 void UTCode::setUp() {
     domain = new Code();
 }
-
 void UTCountry::setUp( ){
     domain = new Country();
 }
-
 void UTName::setUp() {
     domain = new Name();
 }
-
 void UTPassword::setUp() {
     domain = new Password();
 }
-
 void UTLanguage::setUp() {
     domain = new Language();
 }
-
 void UTDescription::setUp() {
     domain = new Description();
 }
-
 void UTGrade::setUp() {
     domain = new Grade();
 }

@@ -22,6 +22,7 @@ int UTEntity<Entity>::run() {
     tearDown();
     return response;
 }
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const string UTUser::VALID_NAME = "Linus Torvalds";
@@ -57,8 +58,9 @@ void UTUser::successScenario() {
         entity->getDate().getValue() != VALID_DATE ||
         entity->getDescription().getValue() != VALID_DESCRIPTION
     )
-    response = FAILURE;
+        response = FAILURE;
 }
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const string UTAccommodation::VALID_CODE = "79927398713";
@@ -89,5 +91,30 @@ void UTAccommodation::successScenario() {
         entity->getGrade().getValue() != VALID_GRADE ||
         entity->getDescription().getValue() != VALID_DESCRIPTION
     )
-    response = FAILURE;
+        response = FAILURE;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const string UTRating::VALID_CODE = "79927398713";
+const string UTRating::VALID_GRADE = "10";
+const string UTRating::VALID_DESCRIPTION = "This is a valid description.";
+
+void UTRating::successScenario() {
+    Code code;
+    code.setValue(VALID_CODE);
+    entity->setCode(code);
+    Grade grade;
+    grade.setValue(VALID_GRADE);
+    entity->setGrade(grade);
+    Description description;
+    description.setValue(VALID_DESCRIPTION);
+    entity->setDescription(description);
+    if (entity->getCode().getValue() != VALID_CODE ||
+        entity->getGrade().getValue() != VALID_GRADE ||
+        entity->getDescription().getValue() != VALID_DESCRIPTION
+    )
+        response = FAILURE;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

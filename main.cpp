@@ -104,5 +104,13 @@ int main() {
             break;
     }
 
+    UTRating testRatingA;
+    switch (testRatingA.run()) {
+        case UTRating::SUCCESS: cout << "Success: Rating" << endl;
+            break;
+        case UTRating::FAILURE: cout << "Failure: Rating" << endl;
+            break;
+    }
+
     return 0;
 }
