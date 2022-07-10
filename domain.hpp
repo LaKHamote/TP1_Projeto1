@@ -59,6 +59,25 @@ class Date:public Domain {
         void validate(string);
 };
 
+/**
+ * Email Domain
+ * 
+ * It contains a valid email value.
+ * 
+ * Parameters:
+ *      string - a string containing the email.
+ * 
+ * The format rules are:
+ *      AAAA@BBBB.CCC
+ *      Where AAAA can be alphanumeric characters and the symbols '.', '-', '_';
+ *      AAAA must be followed by '@'.
+ *      BBBB can be alphanumeric characters and the symbols '.', '-', '_';
+ *      BBBB must end with a '.';
+ *      CCCC can only have alphanumeric characters.
+ *      
+ * Exceptions:
+ *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
+*/
 class Email:public Domain {
     private:
         void validate(string);
@@ -79,6 +98,26 @@ class Country:public Domain {
         void validate(string);
 };
 
+/**
+ * Name Domain
+ * 
+ * It contains a valid name value.
+ * 
+ * Parameters:
+ *      string - a string containing the name.
+ * 
+ * The format rules are:
+ *      30 chars. max;
+ *      The parameter can't end with a whitespace;
+ *      It also can't have multiple whitespaces;
+ *      The characters can only be alphabetic;
+ *      Each name must start with a capitalized letter;
+ *      All the letters for each name/surname, apart from the first one, must not be capitalized;
+ *      Names are separated by 1 (one) whitespace.
+ * 
+ * Exceptions:
+ *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
+*/
 class Name:public Domain {
     private:
         void validate(string);
@@ -96,6 +135,23 @@ class Language:public Domain {
         void validate(string);
 };
 
+/**
+ * Description Domain
+ * 
+ * It contains a simple description.
+ * 
+ * Parameters:
+ *      string - a string containing the description.
+ * 
+ * The format rules are:
+ *      40 chars max;
+ *      Only alfabetic characters and symbols;
+ *      The allowed symbols are: ' ', '.', ',', ';', ':', '?', '!', '-';
+ *      Sequential sumbols or spaces are not allowed.
+ *      
+ * Exceptions:
+ *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
+*/
 class Description:public Domain {
     private:
         const static unordered_set<char> allowedSymbols;
