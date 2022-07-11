@@ -60,7 +60,6 @@ inline string Domain::getValue() const {
  * Exceptions:
  *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
 */
-
 class City:public Domain {
     private:
         const static unordered_set<string> allowedCities;
@@ -131,8 +130,6 @@ class Email:public Domain {
  * Exceptions:
  *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
 */
-
-
 class Code:public Domain {
     private:
         static const char MAXIMUM = '9';
@@ -159,7 +156,6 @@ class Code:public Domain {
  * Exceptions:
  *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
 */
-
 class Country:public Domain {
     private:
         const static unordered_set<string> allowedCountries;
@@ -209,7 +205,6 @@ class Name:public Domain {
  * Exceptions:
  *      throws std::invalid_argument if the parameter doesn't follow any of the rules.
 */
-
 class Password:public Domain {
     private:
         static const int LENGTH = 5;
@@ -278,7 +273,6 @@ class Description:public Domain {
  * Exceptions:
  *      throws std::invalid_argument if the parameter doesn't follow the rule.
 */
-
 class Grade:public Domain {
     private:
         static const int MAXIMUM = 10;
