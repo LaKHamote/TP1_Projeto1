@@ -7,12 +7,20 @@
 
 using namespace std;
 
-template <class Entity>
+/**
+ * Parent template class of all tests for entities
+ * 
+ * Template Params:
+ * -Any declared Entity 
+ * 
+ * Author: 211038262
+ */
+template <class EntityName>
 class UTEntity {
     protected:
+        EntityName *entity;
+        virtual ~UTEntity() {};
         bool response = SUCCESS;
-        Entity *entity;
-        //virtual ~UTEntity() {};
     private:
         void setUp();
         virtual void successScenario() = 0;
@@ -25,9 +33,13 @@ class UTEntity {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Entity User
+ * Author: 211038262
+ */
 class UTUser:public UTEntity<User> {
     private:
-        void successScenario(); 
+        void successScenario();
         const static string VALID_NAME;
         const static string VALID_EMAIL;
         const static string VALID_PASSWORD;
@@ -36,6 +48,10 @@ class UTUser:public UTEntity<User> {
         const static string VALID_DESCRIPTION;
 };
 
+/**
+ * Unity Test for Entity Accommodation
+ * Author: 211038262
+ */
 class UTAccommodation:public UTEntity<Accommodation> {
     private:
         void successScenario(); 
@@ -46,6 +62,10 @@ class UTAccommodation:public UTEntity<Accommodation> {
         const static string VALID_DESCRIPTION;
 };
 
+/**
+ * Unity Test for Entity Rating
+ * Author:
+ */
 class UTRating:public UTEntity<Rating> {
     private:
         void successScenario(); 

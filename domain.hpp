@@ -9,12 +9,13 @@ using namespace std;
 
 /**
  * Parent Class of all Domains
+ * Author: 211038262
  */
 class Domain {
     protected:
         string value;
         virtual ~Domain() {};
-        virtual void validate(string) {};
+        virtual void validate(string) = 0;
     public:
         void setValue(string);
         string getValue() const;
@@ -22,6 +23,7 @@ class Domain {
 
 /**
  * Method to assign the value to a Domain in a specific format
+ * Author: 211038262
  *
  * Params:
  *
@@ -34,6 +36,7 @@ inline void Domain::setValue(string value) {
 
 /**
  * Method to access the value of a Domain
+ * Author: 211038262
  *
  * Return:
  *

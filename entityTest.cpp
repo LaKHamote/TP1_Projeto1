@@ -5,18 +5,18 @@
 
 using namespace std;
 
-template <class Entity>
-void UTEntity<Entity>::setUp() {
-    entity = new Entity();
+template <class EntityClass>
+void UTEntity<EntityClass>::setUp() {
+    entity = new EntityClass();
 }
 
-template <class Entity>
-void UTEntity<Entity>::tearDown() {
+template <class EntityClass>
+void UTEntity<EntityClass>::tearDown() {
     delete entity;
 }
 
-template <class Entity>
-int UTEntity<Entity>::run() {
+template <class EntityClass>
+int UTEntity<EntityClass>::run() {
     setUp();
     successScenario();
     tearDown();

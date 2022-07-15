@@ -3,8 +3,8 @@
 
 using namespace std;
 
-template <class Domain>
-void UTDomain<Domain>::successScenario() {
+template <class DomainClass>
+void UTDomain<DomainClass>::successScenario() {
     try {
         domain->setValue(VALID());
         if (domain->getValue() != VALID())
@@ -16,8 +16,8 @@ void UTDomain<Domain>::successScenario() {
     }
 }
 
-template <class Domain>
-void UTDomain<Domain>::failureScenario() {
+template <class DomainClass>
+void UTDomain<DomainClass>::failureScenario() {
     try {
         domain->setValue(INVALID());
         response = FAILURE;
@@ -28,13 +28,13 @@ void UTDomain<Domain>::failureScenario() {
     }
 }
 
-template <class Domain>
-void UTDomain<Domain>::tearDown() {
+template <class DomainClass>
+void UTDomain<DomainClass>::tearDown() {
     delete domain;
 }
 
-template <class Domain>
-int UTDomain<Domain>::run() {
+template <class DomainClass>
+int UTDomain<DomainClass>::run() {
     setUp();
     successScenario();
     failureScenario();

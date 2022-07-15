@@ -7,18 +7,18 @@
 using namespace std;
 
 /**
- * Parent class of all tests for domains
+ * Parent template class of all tests for domains
  * 
  * Template Params:
  * -Any declared Domain 
  * 
  * Author: 211038262
  */
-template <class Domain>
+template <typename DomainClass>
 class UTDomain {
     protected:
-        Domain *domain;
-        //virtual ~UTDomain() {};
+        DomainClass *domain;
+        virtual ~UTDomain() {};
     private:
         virtual string VALID() const = 0;
         virtual string INVALID() const = 0;
@@ -30,11 +30,20 @@ class UTDomain {
     public:
         const static int SUCCESS = 1;
         const static int FAILURE = 0;
+        /**
+         * Method to call all the test cases and inform SUCCESS or FAILURE with a test coverage of one valid and invalid value each
+         * 
+         * Return: int 
+         */
         virtual int run();
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain City
+ * Author: 211038262
+ */
 class UTCity:public UTDomain<City> {
     private:
         string VALID() const { return "Londres"; };
@@ -43,6 +52,10 @@ class UTCity:public UTDomain<City> {
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Date
+ * Author: 211038262
+ */
 class UTDate:public UTDomain<Date> {
     private:
         string VALID() const { return "15/Fev"; };
@@ -52,6 +65,10 @@ class UTDate:public UTDomain<Date> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Email
+ * Author:
+ */
 class UTEmail:public UTDomain<Email> {
     private:
         string VALID() const { return "torvalds@linux-foundation.org"; };
@@ -61,6 +78,10 @@ class UTEmail:public UTDomain<Email> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Code
+ * Author:
+ */
 class UTCode:public UTDomain<Code> {
     private:                           
         string VALID() const { return "79927398713"; };   
@@ -71,6 +92,10 @@ class UTCode:public UTDomain<Code> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Country
+ * Author:
+ */
 class UTCountry:public UTDomain<Country> {
     private:
         string VALID() const { return "Turquia"; };
@@ -81,6 +106,10 @@ class UTCountry:public UTDomain<Country> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain City
+ * Author:
+ */
 class UTName:public UTDomain<Name> {
     private:
         string VALID() const { return "Linus Torvalds"; };
@@ -91,6 +120,10 @@ class UTName:public UTDomain<Name> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain City
+ * Author:
+ */
 class UTPassword:public UTDomain<Password> {
     private:
         string VALID() const { return "aA&22"; };   
@@ -101,6 +134,10 @@ class UTPassword:public UTDomain<Password> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Language
+ * Author: 211038262
+ */
 class UTLanguage:public UTDomain<Language> {
     private:
         string VALID() const { return "Ingles"; };   
@@ -110,6 +147,10 @@ class UTLanguage:public UTDomain<Language> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Description
+ * Author:
+ */
 class UTDescription:public UTDomain<Description> {
     private:
         string VALID() const { return "This is a valid description."; };
@@ -120,6 +161,10 @@ class UTDescription:public UTDomain<Description> {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Unity Test for Domain Grade
+ * Author: 211038262
+ */
 class UTGrade:public UTDomain<Grade> {
     private:
         string VALID() const { return "10"; };
