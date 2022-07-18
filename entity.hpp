@@ -11,11 +11,17 @@ using namespace std;
 
 /**
  * Portrayal of User that is composed of 6 classes:
+ * 
  * -Name
+ * 
  * -Email
+ * 
  * -Password
+ * 
  * -Language
+ * 
  * -Date
+ * 
  * -Description
  * 
  * Author: 211038262
@@ -45,10 +51,15 @@ class User {
 
 /**
  * Portrayal of an Accommodation that is composed of 6 classes:
+ * 
  * -Code
+ * 
  * -City
+ * 
  * -Country
+ * 
  * -Grade
+ * 
  * -Description
  * 
  * Author: 211038262
@@ -75,10 +86,15 @@ class Accommodation {
 
 /**
  * Portrayal of an Accommodation that is composed of 6 classes:
+ * 
  * -Code
+ * 
  * -City
+ * 
  * -Country
+ * 
  * -Grade
+ * 
  * -Description
  * 
  * Author: 211026673

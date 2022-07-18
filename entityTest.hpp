@@ -11,6 +11,7 @@ using namespace std;
  * Parent template class of all tests for entities
  * 
  * Template Params:
+ * 
  * -Any declared Entity 
  * 
  * Author: 211038262
@@ -35,6 +36,7 @@ class UTEntity {
 
 /**
  * Unity Test for Entity User
+ * 
  * Author: 211038262
  */
 class UTUser:public UTEntity<User> {
@@ -50,6 +52,7 @@ class UTUser:public UTEntity<User> {
 
 /**
  * Unity Test for Entity Accommodation
+ * 
  * Author: 211038262
  */
 class UTAccommodation:public UTEntity<Accommodation> {
@@ -64,6 +67,7 @@ class UTAccommodation:public UTEntity<Accommodation> {
 
 /**
  * Unity Test for Entity Rating
+ * 
  * Author: 211026673
  */
 class UTRating:public UTEntity<Rating> {

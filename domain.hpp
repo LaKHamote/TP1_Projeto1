@@ -9,6 +9,7 @@ using namespace std;
 
 /**
  * Parent Class of all Domains
+ * 
  * Author: 211038262
  */
 class Domain {
@@ -23,6 +24,7 @@ class Domain {
 
 /**
  * Method to assign the value to a Domain in a specific format
+ * 
  * Author: 211038262
  *
  * Params:
@@ -36,6 +38,7 @@ inline void Domain::setValue(string value) {
 
 /**
  * Method to access the value of a Domain
+ * 
  * Author: 211038262
  *
  * Return:
@@ -48,6 +51,7 @@ inline string Domain::getValue() const {
 
 /**
  * City Domain
+ * 
  * Author: 211038262
  *
  * It contains a valid city value.
@@ -71,6 +75,7 @@ class City:public Domain {
 
 /**
  * Date Domain
+ * 
  * Author: 211038262
  *
  * It contains a valid date value.
@@ -93,6 +98,7 @@ class Date:public Domain {
 
 /**
  * Email Domain
+ * 
  * Author: 211026673
  *
  * It contains a valid email value.
@@ -118,6 +124,7 @@ class Email:public Domain {
 
 /**
  * Code Domain
+ * 
  * Author: 190043474
  *
  * It contains a valid code value.
@@ -144,6 +151,7 @@ class Code:public Domain {
 
 /**
  * Country Domain
+ * 
  * Author: 190043474
  *
  * It contains a valid country value.
@@ -167,6 +175,7 @@ class Country:public Domain {
 
 /**
  * Name Domain
+ * 
  * Author: 211026673
  *
  * It contains a valid name value.
@@ -193,6 +202,7 @@ class Name:public Domain {
 
 /**
  * Password Domain
+ * 
  * Author: 190043474
  *
  * It contains a password code value.
@@ -217,6 +227,7 @@ class Password:public Domain {
 
 /**
  * Language Domain
+ * 
  * Author: 211038262
  *
  * It contains a valid language value.
@@ -239,6 +250,7 @@ class Language:public Domain {
 
 /**
  * Description Domain
+ * 
  * Author: 211026673
  *
  * It contains a simple description.
@@ -263,6 +275,7 @@ class Description:public Domain {
 
 /**
  * Grade Domain
+ * 
  * Author: 211038262
  *
  * It contains a valid grade value.
