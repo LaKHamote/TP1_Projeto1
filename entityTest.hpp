@@ -64,7 +64,7 @@ class UTAccommodation:public UTEntity<Accommodation> {
 
 /**
  * Unity Test for Entity Rating
- * Author:
+ * Author: 211026673
  */
 class UTRating:public UTEntity<Rating> {
     private:
