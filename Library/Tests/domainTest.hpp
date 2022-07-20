@@ -1,7 +1,7 @@
 #ifndef domainTestHppIncluded
 #define domainTestHppIncluded
 
-#include "domain.hpp"
+#include "../Domains/domain.hpp"
 #include <string>
 
 using namespace std;

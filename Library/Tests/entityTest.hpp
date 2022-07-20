@@ -1,7 +1,7 @@
 #ifndef entityTestHppIncluded
 #define entityTestHppIncluded
 
-#include "entity.hpp"
+#include "../Entities/entity.hpp"
 #include "domainTest.hpp"
 #include <string>
 

@@ -1,5 +1,5 @@
 all:
-	+$(MAKE) -C bin/Library/objs
+	+$(MAKE) -C bin/LibraryObjs
 
 clean library:
-	del .\bin\Library\Objs\*.o
+	del .\bin\LibraryObjs\*.o

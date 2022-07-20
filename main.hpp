@@ -1,4 +1,4 @@
-#include "domainTest.hpp"
-#include "entityTest.hpp"
-#include "domain.hpp"
-#include "entity.hpp"
+#include "Library/Tests/domainTest.hpp"
+#include "Library/Tests/entityTest.hpp"
+#include "Library/Domains/domain.hpp"
+#include "Library/Entities/entity.hpp"

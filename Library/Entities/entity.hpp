@@ -1,7 +1,7 @@
 #ifndef entityHppIncluded
 #define entityHppIncluded
 
-#include "domain.hpp"
+#include "../Domains/domain.hpp"
 #include <iostream>
 #include <string>
 #include <stdexcept>
