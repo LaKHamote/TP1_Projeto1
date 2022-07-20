@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Trabalho1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="bin/obj/Debug/" />
+				<Option output="bin/CodeBlocks/Debug/Trabalho1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin/CodeBlocks/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -16,8 +16,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Trabalho1" prefix_auto="1" extension_auto="1" />
-				<Option object_output="bin/obj/Release/" />
+				<Option output="bin/CodeBlocks/Release/Trabalho1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin/CodeBlocks/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
