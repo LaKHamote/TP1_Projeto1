@@ -1,7 +1,7 @@
 #include "entityTest.hpp"
 #include "domainTest.hpp"
-#include "entity.hpp"
-#include "domain.hpp"
+#include "../Entities/entity.hpp"
+#include "../Domains/domain.hpp"
 
 using namespace std;
 

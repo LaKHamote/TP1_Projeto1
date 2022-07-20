@@ -1,17 +1,5 @@
-all: main.exe domain.o domainTests.o entity.o entityTests.o
-	./main.exe
+all:	main.exe
+	main.exe
 
-domain.o:
-	g++ -std=c++17 -Wall -c ../domain.cpp
-
-domainTests.o:
-	g++ -std=c++17 -Wall -c ../domainTest.cpp
-
-entity.o:
-	g++ -std=c++17 -Wall -c ../entity.cpp
-
-entityTests.o:
-	g++ -std=c++17 -Wall -c ../entityTest.cpp
-
-main.exe: domain.o domainTests.o entity.o entityTests.o
-	g++ -std=c++17 -Wall ./*.o ../main.cpp -o ./main.exe
+main.exe:	../main.cpp
+	g++ -std=c++17 -Wall ./LibraryObjs/*.o ../main.cpp -o main.exe
