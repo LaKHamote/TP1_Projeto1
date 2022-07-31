@@ -1,14 +1,14 @@
 all:	domain.o domainTest.o entity.o entityTest.o
 	+$(MAKE) -C ../
 
-domain.o:
+domain.o:	../../Library/Domains/domain.cpp ../../Library/Domains/domain.hpp
 	g++ -std=c++17 -Wall -c ../../Library/Domains/domain.cpp
 
-domainTest.o:
+domainTest.o:	../../Library/Tests/domainTest.cpp ../../Library/Tests/domainTest.hpp
 	g++ -std=c++17 -Wall -c ../../Library/Tests/domainTest.cpp
 
-entity.o:
+entity.o:	../../Library/Entities/entity.cpp ../../Library/Entities/entity.hpp
 	g++ -std=c++17 -Wall -c ../../Library/Entities/entity.cpp
 
-entityTest.o:
+entityTest.o:	../../Library/Tests/entityTest.cpp ../../Library/Tests/entityTest.hpp
 	g++ -std=c++17 -Wall -c ../../Library/Tests/entityTest.cpp
