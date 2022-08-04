@@ -1,4 +1,4 @@
-all:	domain.o domainTest.o entity.o entityTest.o
+all:	domain.o domainTest.o entity.o entityTest.o libraryTest.exe
 	+$(MAKE) -C ../
 
 domain.o:	../../Library/Domains/domain.cpp ../../Library/Domains/domain.hpp
@@ -12,3 +12,9 @@ entity.o:	../../Library/Entities/entity.cpp ../../Library/Entities/entity.hpp
 
 entityTest.o:	../../Library/Tests/entityTest.cpp ../../Library/Tests/entityTest.hpp
 	g++ -std=c++17 -Wall -c ../../Library/Tests/entityTest.cpp
+
+libraryTest.exe:	../../Library/Tests/run.cpp domain.o domainTest.o entity.o entityTest.o
+	g++ -std=c++17 -Wall ./*.o ../../Library/Tests/run.cpp -o libraryTest.exe
+
+test:	libraryTest.exe
+	libraryTest.exe

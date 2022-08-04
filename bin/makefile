@@ -1,4 +1,4 @@
-library= ./LibraryObjs/domain.o ./LibraryObjs/entity.o ./LibraryObjs/domainTest.o ./LibraryObjs/entityTest.o 
+library= ./LibraryObjs/domain.o ./LibraryObjs/entity.o
 
 all:	main.exe
 	main.exe
