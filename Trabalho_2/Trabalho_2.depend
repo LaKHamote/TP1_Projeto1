@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1661107458 source:/home/lucas/Trabalho_2/main.cpp
+	<string.h>
+	<stdexcept>
+	<iostream>
+	"curses.h"
+	"domain.hpp"
+	"interfaces.hpp"
+	"cntrapresentacao.hpp"
+	"stubs.hpp"
+
+1660960028 source:/home/lucas/Trabalho_2/domain.cpp
+	"domain.hpp"
+	<iostream>
+	<string>
+	<regex>
+	<sstream>
+
+1660959994 /home/lucas/Trabalho_2/domain.hpp
+	<iostream>
+	<string>
+	<unordered_set>
+
+1660960044 source:/home/lucas/Trabalho_2/entity.cpp
+	"entity.hpp"
+
+1660960071 /home/lucas/Trabalho_2/entity.hpp
+	"domain.hpp"
+	<iostream>
+	<string>
+	<stdexcept>
+	<unordered_set>
+
+1660962779 /home/lucas/Trabalho_2/interfaces.hpp
+	"domain.hpp"
+	"entity.hpp"
+
+1661016535 /home/lucas/Trabalho_2/cntrapresentacao.hpp
+	<string.h>
+	"curses.h"
+	"domain.hpp"
+	"entity.hpp"
+	"interfaces.hpp"
+
+1661060448 /home/lucas/Trabalho_2/curses.h
+	<ncurses_dll.h>
+	<stdint.h>
+	<stdio.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdbool.h>
+	<libutf8.h>
+	<wchar.h>
+	<unctrl.h>
+
+1661064323 /home/lucas/Trabalho_2/stubs.hpp
+	<string>
+	"domain.hpp"
+	"interfaces.hpp"
+
+1661110754 source:/home/lucas/Trabalho_2/stubs.cpp
+	"stubs.hpp"
+	"curses.h"
+
+1661109447 source:/home/lucas/Trabalho_2/cntrapresentacao.cpp
+	"cntrapresentacao.hpp"
+
