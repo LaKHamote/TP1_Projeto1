@@ -1,20 +1,20 @@
 all:	domain.o domainTest.o entity.o entityTest.o libraryTest.exe
-	+$(MAKE) -C ../
+	+$(MAKE) -C ../ControllerObjs
 
-domain.o:	../../Library/Domains/domain.cpp ../../Library/Domains/domain.hpp
-	g++ -std=c++17 -Wall -c ../../Library/Domains/domain.cpp
+domain.o:	../../lib/Domains/domain.cpp ../../lib/Domains/domain.hpp
+	g++ -std=c++17 -Wall -c ../../lib/Domains/domain.cpp
 
-domainTest.o:	../../Library/Tests/domainTest.cpp ../../Library/Tests/domainTest.hpp
-	g++ -std=c++17 -Wall -c ../../Library/Tests/domainTest.cpp
+domainTest.o:	../../lib/Tests/domainTest.cpp ../../lib/Tests/domainTest.hpp
+	g++ -std=c++17 -Wall -c ../../lib/Tests/domainTest.cpp
 
-entity.o:	../../Library/Entities/entity.cpp ../../Library/Entities/entity.hpp
-	g++ -std=c++17 -Wall -c ../../Library/Entities/entity.cpp
+entity.o:	../../lib/Entities/entity.cpp ../../lib/Entities/entity.hpp
+	g++ -std=c++17 -Wall -c ../../lib/Entities/entity.cpp
 
-entityTest.o:	../../Library/Tests/entityTest.cpp ../../Library/Tests/entityTest.hpp
-	g++ -std=c++17 -Wall -c ../../Library/Tests/entityTest.cpp
+entityTest.o:	../../lib/Tests/entityTest.cpp ../../lib/Tests/entityTest.hpp
+	g++ -std=c++17 -Wall -c ../../lib/Tests/entityTest.cpp
 
-libraryTest.exe:	../../Library/Tests/run.cpp domain.o domainTest.o entity.o entityTest.o
-	g++ -std=c++17 -Wall ./*.o ../../Library/Tests/run.cpp -o libraryTest.exe
+libraryTest.exe:	../../lib/Tests/run.cpp domain.o domainTest.o entity.o entityTest.o
+	g++ -std=c++17 -Wall ./*.o ../../lib/Tests/run.cpp -o libraryTest.exe
 
 test:	libraryTest.exe
-	libraryTest.exe
+	./libraryTest.exe
