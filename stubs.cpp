@@ -1,5 +1,5 @@
 #include "stubs.hpp"
-#include "curses.h"
+#include "lib/Curses/curses.h"
 
 // Adequar os valores.
 

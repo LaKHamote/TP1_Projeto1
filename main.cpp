@@ -24,7 +24,7 @@ int main()
 
     ISAutenticacao *stubServicoAutenticacao;
     ISUsuario *stubServicoPessoal;
-    ISHospedagem *stubServicoHospedagem;
+    //ISHospedagem *stubServicoHospedagem;
 
     stubServicoAutenticacao = new StubServicoAutenticacao();
     stubServicoPessoal = new StubServicoPessoal();

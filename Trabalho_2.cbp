@@ -47,7 +47,7 @@
 		<Unit filename="cntrapresentacao.hpp">
 			<Option target="Debug" />
 		</Unit>
-		<Unit filename="curses.h">
+		<Unit filename="lib/Curses/curses.h">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="domain.cpp" />

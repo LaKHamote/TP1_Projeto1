@@ -3,6 +3,6 @@
 #include "lib/Domains/domain.hpp"
 #include "lib/Entities/entity.hpp"
 #include "controllers/cntrPresentation.hpp"
-#include "curses.h"
+#include "lib/Curses/curses.h"
 #include "interfaces.hpp"
 #include "stubs.hpp"

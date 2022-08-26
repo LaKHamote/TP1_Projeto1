@@ -2,7 +2,7 @@
 #define CNTRAPRESENTACAO_HPP_INCLUDED
 
 #include <string.h>
-#include "../curses.h"
+#include "../lib/Curses/curses.h"
 #include "../lib/Domains/domain.hpp"
 #include "../lib/Entities/entity.hpp"
 #include "../interfaces.hpp"
