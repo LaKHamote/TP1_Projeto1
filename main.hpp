@@ -2,7 +2,7 @@
 #include "lib/Tests/entityTest.hpp"
 #include "lib/Domains/domain.hpp"
 #include "lib/Entities/entity.hpp"
-#include "Controllers/cntrPresentation.hpp"
+#include "controllers/cntrPresentation.hpp"
 #include "curses.h"
 #include "interfaces.hpp"
 #include "stubs.hpp"
