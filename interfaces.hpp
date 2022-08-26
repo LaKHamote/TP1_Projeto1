@@ -1,8 +1,9 @@
 #ifndef INTERFACES_H_INCLUDED
 #define INTERFACES_H_INCLUDED
 
-#include "domain.hpp"
-#include "entity.hpp"
+#include "lib/Domains/domain.hpp"
+#include "lib/Entities/entity.hpp"
+
 
 //--------------------------------------------------------------------------------------------
 // declaração antecipada

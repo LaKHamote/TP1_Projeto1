@@ -2,10 +2,10 @@
 #define CNTRAPRESENTACAO_HPP_INCLUDED
 
 #include <string.h>
-#include "curses.h"
-#include "domain.hpp"
-#include "entity.hpp"
-#include "interfaces.hpp"
+#include "../curses.h"
+#include "../lib/Domains/domain.hpp"
+#include "../lib/Entities/entity.hpp"
+#include "../interfaces.hpp"
 
 //--------------------------------------------------------------------------------------------
 // Declarações de classes controladoras e implementações de métodos.

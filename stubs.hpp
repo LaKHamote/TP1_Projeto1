@@ -2,7 +2,7 @@
 #define STUBS_HPP_INCLUDED
 
 #include <string>
-#include "domain.hpp"
+#include "lib/Domains/domain.hpp"
 #include "interfaces.hpp"
 
 using namespace std;
