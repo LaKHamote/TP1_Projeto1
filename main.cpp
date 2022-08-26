@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+    //lucas esteve aq
     // Instanciar controladoras de apresentação.
 
     IAControle *cntrApresentacaoControle;
