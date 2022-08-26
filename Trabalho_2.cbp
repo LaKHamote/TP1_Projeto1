@@ -34,26 +34,26 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
-			<Add library="./libcurses.a" />
-			<Add library="./libncurses.a" />
-			<Add library="./libncurses++.a" />
-			<Add library="./libncurses++w.a" />
-			<Add library="./libncursesw.a" />
-			<Add library="./libtinfo.a" />
+			<Add library="./lib/Curses/libcurses.a" />
+			<Add library="./lib/Curses/libncurses.a" />
+			<Add library="./lib/Curses/libncurses++.a" />
+			<Add library="./lib/Curses/libncurses++w.a" />
+			<Add library="./lib/Curses/libncursesw.a" />
+			<Add library="./lib/Curses/libtinfo.a" />
 		</Linker>
-		<Unit filename="cntrapresentacao.cpp">
+		<Unit filename="./controllers/cntrPresentation.cpp">
 			<Option target="Debug" />
 		</Unit>
-		<Unit filename="cntrapresentacao.hpp">
+		<Unit filename="controllers/cntrPresentation.hpp">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="lib/Curses/curses.h">
 			<Option target="Debug" />
 		</Unit>
-		<Unit filename="domain.cpp" />
-		<Unit filename="domain.hpp" />
-		<Unit filename="entity.cpp" />
-		<Unit filename="entity.hpp" />
+		<Unit filename="lib/Domains/domain.cpp" />
+		<Unit filename="lib/Domains/domain.hpp" />
+		<Unit filename="lib/Entities/entity.cpp" />
+		<Unit filename="lib/Entities/entity.hpp" />
 		<Unit filename="interfaces.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="stubs.cpp">
