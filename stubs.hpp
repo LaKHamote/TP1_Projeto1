@@ -27,7 +27,7 @@ class StubServicoPessoal:public ISUsuario {
         static const string INVALIDO;
     public:
         bool cadastrar(User);
-        bool descadastrarConta(User);
+        bool descadastrarConta(Email);
         bool editarConta(User);
         User consultarDadosPessoais(Email);
 };

@@ -58,9 +58,9 @@ class CntrAUsuario:public IAUsuario{
         ISUsuario *cntr;
         void consultarDadosPessoais(Email);
         void editarConta(Email);
-        void descadastrarConta();
+        bool descadastrarConta(Email);
     public:
-        void executar(Email);
+        bool executar(Email); // true enquanto usuario não for descadastrado
         void cadastrar();
         void setCntrSUsuario(ISUsuario*);
 };

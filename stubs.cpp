@@ -32,8 +32,8 @@ bool StubServicoPessoal::editarConta(User usuario){
     return true;
 }
 
-bool StubServicoPessoal::descadastrarConta(User usuario){
-    if(usuario.getEmail().getValue().compare(INVALIDO) == 0)
+bool StubServicoPessoal::descadastrarConta(Email email){
+    if(email.getValue().compare(INVALIDO) == 0)
         return false;
     return true;
 }

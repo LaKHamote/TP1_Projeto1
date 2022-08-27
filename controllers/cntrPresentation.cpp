@@ -82,7 +82,9 @@ void CntrAControle::executar(){
                             echo();
 
                             switch(campo){
-                                case 1: cntrAUsuario->executar(email);                 // Solicita serviço de pessoal.
+                                case 1: if(cntrAUsuario->executar(email)){ // houve descadastramento
+                                            apresentar = false;
+                                        }
                                         break;
                                 case 2: cntrAHospedagem->executar(email);     // Solicita serviço de Hospedagem.
                                         break;
@@ -199,7 +201,7 @@ bool CntrAAutenticacao::autenticar(Email *email){
 
 //--------------------------------------------------------------------------------------------
 
-void CntrAUsuario::executar(Email email){
+bool CntrAUsuario::executar(Email email){
 
     // Mensagens a serem apresentadas na tela de seleção de serviço..
 
@@ -248,12 +250,16 @@ void CntrAUsuario::executar(Email email){
                     break;
             case 2: editarConta(email);
                     break;
-            case 3: descadastrarConta();
+            case 3: if(descadastrarConta(email)){
+                        apresentar = false;
+                        return true; // houve descadastramento
+                    }
                     break;
             case 4: apresentar = false;
                     break;
         }
     }
+    return false; // não houve descadastramento
 }
 
 //--------------------------------------------------------------------------------------------
@@ -564,25 +570,79 @@ void CntrAUsuario::editarConta(Email email){
 }
 
 
-void CntrAUsuario::descadastrarConta(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
+bool CntrAUsuario::descadastrarConta(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
 
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
 
-    char texto[]="Servico descadastrar conta nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+    char texto1[]="Ao descadastrar sua conta todas as hospedagens e avaliacoes atreladas a sua conta serao descadastradas.";
+    char texto2[]="Voce tem certeza que deseja descadastrar sua conta?";                         // Mensagem a ser apresentada.
+    char texto3[]="1 - Descadastrar.";
+    char texto4[]="2 - Retornar.";
+    char texto5[]="Sucesso, conta descadastrada.";
+    char texto6[]="Falha no descadastramento.";
+
+    int campo;    
+
     clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/8,"%s",texto1);                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/8,"%s",texto2);
+    mvprintw(linha/4 + 4,coluna/4,"%s",texto3);
+    mvprintw(linha/4 + 6,coluna/4,"%s",texto4);
     noecho();
-    getch();
+    campo = getch() - 48;
     echo();
+
+    // Descadastra usuario
+    if (campo == 1){
+        if(cntr->descadastrarConta(email)){
+            clear();
+            if (has_colors()){
+                start_color();
+                init_color(COLOR_CYAN, 930, 910, 850);
+                init_pair(1, COLOR_BLACK, COLOR_CYAN);
+                attron(COLOR_PAIR(1));
+                for (int y = 0; y < linha; y++) {
+                    mvhline(y, 0, ' ', coluna);
+                }
+            }
+            box(stdscr, 0, 0);
+            mvprintw(linha/4 + 2,coluna/4,"%s",texto5);                                               // Informa sucesso.
+            noecho();
+            getch();
+            echo();
+            return true;
+        }
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto6);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return false;
+    }
+    return false;
 }
 
 //--------------------------------------------------------------------------------------------
