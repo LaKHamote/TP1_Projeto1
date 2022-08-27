@@ -65,7 +65,7 @@ public:
     virtual bool cadastrar(User) = 0;
     virtual bool descadastrarConta(User) = 0;
     virtual bool editarConta(User) = 0;
-    virtual bool consultarDadosPessoais(Email) = 0;
+    virtual User consultarDadosPessoais(Email) = 0;
     virtual ~ISUsuario(){}
 };
 

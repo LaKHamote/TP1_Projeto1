@@ -243,7 +243,7 @@ void CntrAUsuario::executar(Email email){
         echo();
 
         switch(campo){
-            case 1: consultarDadosPessoais();
+            case 1: consultarDadosPessoais(email);
                     break;
             case 2: editarConta();
                     break;
@@ -394,22 +394,44 @@ void CntrAUsuario::cadastrar(){
 
 //--------------------------------------------------------------------------------------------
 
-void CntrAUsuario::consultarDadosPessoais(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
+void CntrAUsuario::consultarDadosPessoais(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
 
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
 
-    char texto[]="Servico consultar dados pessoais nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+    //char texto[]="Servico consultar dados pessoais nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+    char texto1[] ="Nome            :";
+    char texto2[] ="Email           :";
+    char texto3[] ="Senha           :";
+    char texto4[] ="Idioma          :";
+    char texto5[] ="Aniversario     :";
+    char texto6[] ="Descricao       :";
+    char texto7[] ="Digite algo para retornar.";
+
+    User usuario;
+
+    usuario = cntr->consultarDadosPessoais(email);
+
     clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s %s",texto1, usuario.getName().getValue().c_str());                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s %s",texto2, usuario.getEmail().getValue().c_str()); 
+    mvprintw(linha/4 + 4,coluna/4,"%s %s",texto3, usuario.getPassword().getValue().c_str()); 
+    mvprintw(linha/4 + 6,coluna/4,"%s %s",texto4, usuario.getLanguage().getValue().c_str());
+    mvprintw(linha/4 + 8,coluna/4,"%s %s",texto5, usuario.getDate().getValue().c_str());
+    mvprintw(linha/4 + 10,coluna/4,"%s %s",texto6, usuario.getDescription().getValue().c_str());
+    mvprintw(linha/4 + 12,coluna/4,"%s",texto7);
     noecho();
     getch();
     echo();

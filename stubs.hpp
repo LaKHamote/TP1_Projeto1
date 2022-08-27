@@ -28,7 +28,7 @@ class StubServicoPessoal:public ISUsuario {
         bool cadastrar(User);
         bool descadastrarConta(User);
         bool editarConta(User);
-        bool consultarDadosPessoais(Email);
+        User consultarDadosPessoais(Email);
 };
 
 //--------------------------------------------------------------------------------------------
