@@ -70,8 +70,8 @@ bool StubServicoHospedagem::cadastrarHospedagem(Accommodation hospedagem){
     return true;
 }
 
-bool StubServicoHospedagem::consultarHospedagem(Accommodation *hospedagem){
-    if(hospedagem->getCode().getValue().compare(INVALIDO) == 0)
+bool StubServicoHospedagem::consultarHospedagem(Code code){
+    if(code.getValue().compare(INVALIDO) == 0)
         return false;
 
     //--------------------------------------------------------------------------------------------

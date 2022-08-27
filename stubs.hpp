@@ -40,7 +40,7 @@ class StubServicoHospedagem:public ISHospedagem {
         static const string INVALIDO;
     public:
         bool cadastrarHospedagem(Accommodation);
-        bool consultarHospedagem(Accommodation*);
+        bool consultarHospedagem(Code);
         bool cadastrarAvaliacao(Rating);
         bool descadastrarAvaliacao(Code);
         bool acessarDadosHospedagens(Rating);

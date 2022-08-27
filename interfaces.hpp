@@ -72,6 +72,7 @@ public:
 class ISHospedagem {
 public:
     virtual bool cadastrarHospedagem(Accommodation) = 0;
+    virtual bool consultarHospedagem(Code) = 0;
     virtual bool descadastrarHospedagem(Accommodation) = 0;
     virtual bool editarHospedagem(Accommodation) = 0;
     virtual bool cadastrarAvaliacao(Rating) = 0;

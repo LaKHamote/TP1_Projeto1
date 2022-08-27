@@ -522,16 +522,15 @@ void CntrAHospedagem::executar(){
 
 //--------------------------------------------------------------------------------------------
 
-void CntrAHospedagem::executar(Email){
+void CntrAHospedagem::executar(Email email){
 
     // Mensagens a serem apresentadas tela completa de produtos financeiros.
-
-    char texto1[] ="Selecione um dos servicos : ";
+    char texto1[] ="Selecione um dos servicos:";
     char texto2[] ="1 - Consultar hospedagem.";
-    char texto3[] ="2 - Cadastrar avaliação.";
-    char texto4[] ="3 - Descadastrar avaliação.";
-    char texto5[] ="4 - Consultar avaliação.";
-    char texto6[] ="5 - Acessar dados de hospedagens disponíveis.";
+    char texto3[] ="2 - Cadastrar avaliacao.";
+    char texto4[] ="3 - Descadastrar avaliacao.";
+    char texto5[] ="4 - Consultar avaliacao.";
+    char texto6[] ="5 - Acessar dados de hospedagens disponiveis.";
     char texto7[] ="6 - Listar Hospedagens.";
     char texto8[] ="7 - Retornar.";
 
@@ -551,7 +550,17 @@ void CntrAHospedagem::executar(Email){
 
         // Apresenta tela completa de produtos financeiros.
 
-        clear();                                                                                // Limpa janela.
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);                                                                               // Limpa janela.
         mvprintw(linha/4,coluna/4,"%s",texto1);                                                 // Imprime nome do campo.
         mvprintw(linha/4 + 2,coluna/4,"%s",texto2);                                             // Imprime nome do campo.
         mvprintw(linha/4 + 4,coluna/4,"%s",texto3);                                             // Imprime nome do campo.
@@ -566,7 +575,8 @@ void CntrAHospedagem::executar(Email){
 
         switch(campo){
             case 1: consultarHospedagem();
-                    break;
+                clear();
+                break;
             case 2: cadastrarAvaliacao();
                     break;
             case 3: descadastrarAvaliacao();
@@ -586,21 +596,52 @@ void CntrAHospedagem::executar(Email){
 //--------------------------------------------------------------------------------------------
 
 void CntrAHospedagem::consultarHospedagem(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-
     // Mensagens a serem apresentadas.
 
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
+    getmaxyx(stdscr,linha,coluna);
 
-    char texto[]="Serviço consultar hospedagem não implementado. Digite algo.";                      // Mensagem a ser apresentada.
-    clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    char texto1[] ="Digite o codigo da hospedagem a ser consultada.";
+    char erro1[] ="Formato de codigo invalido.";
+    char idHospedagem[80];
+    clear();    
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);                                                                                // Limpa janela.
+    mvprintw(linha/4,coluna/4,"%s",texto1);   
+    mvprintw(linha/4 + 2,coluna/4,"%s","");   
+    getstr(idHospedagem);
+    Code code;
+    try {
+        code.setValue((string)idHospedagem);
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+    cntr->consultarHospedagem(code);
+                                                    // Imprime nome do campo.
     noecho();
     getch();
     echo();
