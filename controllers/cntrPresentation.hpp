@@ -56,8 +56,8 @@ inline void CntrAAutenticacao::setCntrSAutenticacao(ISAutenticacao *cntr){
 class CntrAUsuario:public IAUsuario{
     private:
         ISUsuario *cntr;
-        void consultarDadosPessoais();
-        void editarConta();
+        void consultarDadosPessoais(Email);
+        void editarConta(Email);
         void descadastrarConta();
     public:
         void executar(Email);

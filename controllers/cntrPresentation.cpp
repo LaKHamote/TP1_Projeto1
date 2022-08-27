@@ -1,4 +1,5 @@
 #include "cntrPresentation.hpp"
+#include <string>
 
 //--------------------------------------------------------------------------------------------
 // Implementações dos métodos de classes controladoras.
@@ -243,9 +244,9 @@ void CntrAUsuario::executar(Email email){
         echo();
 
         switch(campo){
-            case 1: consultarDadosPessoais();
+            case 1: consultarDadosPessoais(email);
                     break;
-            case 2: editarConta();
+            case 2: editarConta(email);
                     break;
             case 3: descadastrarConta();
                     break;
@@ -394,46 +395,172 @@ void CntrAUsuario::cadastrar(){
 
 //--------------------------------------------------------------------------------------------
 
-void CntrAUsuario::consultarDadosPessoais(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
+void CntrAUsuario::consultarDadosPessoais(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
 
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
 
-    char texto[]="Servico consultar dados pessoais nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+    //char texto[]="Servico consultar dados pessoais nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+    char texto1[] ="Nome            :";
+    char texto2[] ="Email           :";
+    char texto3[] ="Senha           :";
+    char texto4[] ="Idioma          :";
+    char texto5[] ="Aniversario     :";
+    char texto6[] ="Descricao       :";
+    char texto7[] ="Digite algo para retornar.";
+
+    User usuario;
+
+    usuario = cntr->consultarDadosPessoais(email);
+
     clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s %s",texto1, usuario.getName().getValue().c_str());                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s %s",texto2, usuario.getEmail().getValue().c_str()); 
+    mvprintw(linha/4 + 4,coluna/4,"%s %s",texto3, usuario.getPassword().getValue().c_str()); 
+    mvprintw(linha/4 + 6,coluna/4,"%s %s",texto4, usuario.getLanguage().getValue().c_str());
+    mvprintw(linha/4 + 8,coluna/4,"%s %s",texto5, usuario.getDate().getValue().c_str());
+    mvprintw(linha/4 + 10,coluna/4,"%s %s",texto6, usuario.getDescription().getValue().c_str());
+    mvprintw(linha/4 + 12,coluna/4,"%s",texto7);
     noecho();
     getch();
     echo();
 }
 
-void CntrAUsuario::editarConta(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
+void CntrAUsuario::editarConta(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
+    char texto1[] ="Preencha os seguintes campos (deixe em branco para nao alterar): ";
+    char texto2[] ="Nome            :";
+    char texto3[] ="Senha           :";
+    char texto4[] ="Idioma          :";
+    char texto5[] ="Aniversario     :";
+    char texto6[] ="Descricao       :";
+    char texto7[] ="Dados em formato incorreto. Digite algo.";
+    char texto8[] ="Sucesso na edicao. Digite algo.";
+    char texto9[]="Falha na edicao. Digite algo.";
+
+    char campo1[80], campo2[80], campo3[80], campo4[80], campo5[80];
 
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
 
-    char texto[]="Servico editar conta nao implementado. Digite algo.";             // Mensagem a ser apresentada.
+
     clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(campo1);
+    mvprintw(linha/4 + 4,coluna/4,"%s",texto3);
+    getstr(campo2);
+    mvprintw(linha/4 + 6,coluna/4,"%s",texto4);
+    getstr(campo3);
+    mvprintw(linha/4 + 8,coluna/4,"%s",texto5);
+    getstr(campo4);
+    mvprintw(linha/4 + 10,coluna/4,"%s",texto6);
+    getstr(campo5);
+
+    // Instancia os domínios.
+
+    Name nome;
+    Password senha;
+    Language idioma;
+    Date aniversario;
+    Description descricao;
+
+    try{
+        nome.setValue(string(campo1));
+        senha.setValue(string(campo2));
+        idioma.setValue(string(campo3));
+        aniversario.setValue(string(campo4));
+        descricao.setValue(string(campo5));
+    }
+    catch(invalid_argument &exp){
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto7);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    User usuario;
+
+    usuario.setName(nome);
+    usuario.setEmail(email);
+    usuario.setPassword(senha);
+    usuario.setLanguage(idioma);
+    usuario.setDate(aniversario);
+    usuario.setDescription(descricao);
+
+    // Edita usuário.
+    if(cntr->editarConta(usuario)){
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto9);                                                       // Informa falha.
     noecho();
     getch();
     echo();
+
+    return;
 }
 
 

@@ -1,10 +1,12 @@
 #include "stubs.hpp"
 #include "lib/Curses/curses.h"
+#include "lib/Domains/domain.hpp"
+#include "lib/Entities/entity.hpp"
 
 // Adequar os valores.
 
 const string StubServicoAutenticacao::INVALIDO = "invalidotorvalds@linux-foundation.org";
-const string StubServicoPessoal::INVALIDO = "invalidotorvalds@linux-foundation.org";
+const string StubServicoPessoal::INVALIDO = "userinvalidotorvalds@linux-foundation.org";
 const string StubServicoHospedagem::INVALIDO = "12345";
 
 //--------------------------------------------------------------------------------------------
@@ -36,10 +38,30 @@ bool StubServicoPessoal::descadastrarConta(User usuario){
     return true;
 }
 
-bool StubServicoPessoal::consultarDadosPessoais(Email email){
-    if(email.getValue().compare(INVALIDO) == 0)
-        return false;
-    return true;
+User StubServicoPessoal::consultarDadosPessoais(Email email){
+    // criando um usuario_stub
+    User usuario_stub;
+
+    Name nome;
+    nome.setValue(string("Lucas Correa"));
+    usuario_stub.setName(nome);
+    Email emails;
+    emails.setValue(string("lucas@mail.com"));
+    usuario_stub.setEmail(emails);
+    Password senha;
+    senha.setValue(string("aA22&"));
+    usuario_stub.setPassword(senha);
+    Language idioma;
+    idioma.setValue(string("Ingles"));
+    usuario_stub.setLanguage(idioma);
+    Date aniversario;
+    aniversario.setValue(string("24/Dez"));
+    usuario_stub.setDate(aniversario);
+    Description descricao;
+    descricao.setValue(string("Minha Descricao"));
+    usuario_stub.setDescription(descricao);
+
+    return usuario_stub;
 }
 
 //--------------------------------------------------------------------------------------------
