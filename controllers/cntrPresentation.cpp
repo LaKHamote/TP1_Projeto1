@@ -650,21 +650,91 @@ void CntrAHospedagem::consultarHospedagem(){
 //--------------------------------------------------------------------------------------------
 
 void CntrAHospedagem::cadastrarAvaliacao(){
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Substituir código seguinte pela implementação do método.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-
-    // Mensagens a serem apresentadas.
-
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
+    getmaxyx(stdscr,linha,coluna);
 
-    char texto[]="Servico cadastrar avaliação não implementado. Digite algo.";       // Mensagem a ser apresentada.
-    clear();                                                                                    // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);                                                      // Imprime nome do campo.
+    char texto1[] ="Digite o codigo da hospedagem para a qual a avaliacao sera cadastrada.";
+    char erro1[] ="Formato de codigo invalido.";
+    char idHospedagem[80];
+    clear();    
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);                                                                                // Limpa janela.
+    mvprintw(linha/4,coluna/4,"%s",texto1);   
+    mvprintw(linha/4 + 2,coluna/4,"%s","");   
+    getstr(idHospedagem);
+    Code code;
+    try {
+        code.setValue((string)idHospedagem);
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    char texto2[] ="Digite a avaliacao para a hospedagem que foi informada.";
+    char erro2[] ="Formato invalido de avaliacao.";
+    char avaliacaoHospedagem[80];
+    clear();    
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);                                                                                // Limpa janela.
+    mvprintw(linha/4,coluna/4,"%s",texto2);   
+    mvprintw(linha/4 + 2,coluna/4,"%s","");   
+    getstr(avaliacaoHospedagem);
+    Grade grade;
+    try {
+        grade.setValue((string)avaliacaoHospedagem);
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",erro2);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    cntr->cadastrarAvaliacao(code, grade);
+
     noecho();
     getch();
     echo();

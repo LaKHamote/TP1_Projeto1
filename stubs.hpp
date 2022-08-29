@@ -37,12 +37,13 @@ class StubServicoPessoal:public ISUsuario {
 //incompleto
 class StubServicoHospedagem:public ISHospedagem {
     private:
-        static const string INVALIDO;
+        static const string CODIGO_INVALIDO;
+        static const string NOTA_INVALIDA;
     public:
         bool cadastrarHospedagem(Accommodation);
         bool consultarHospedagem(Code);
         bool consultarAvaliacao(Code);
-        bool cadastrarAvaliacao(Rating);
+        bool cadastrarAvaliacao(Code, Grade);
         bool descadastrarAvaliacao(Code);
         bool acessarDadosHospedagens(Rating);
         bool listarHospedagens(Rating*);                        // Adaptar assinatura.

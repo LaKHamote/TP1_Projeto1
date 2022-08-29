@@ -75,7 +75,7 @@ public:
     virtual bool consultarHospedagem(Code) = 0;
     virtual bool descadastrarHospedagem(Accommodation) = 0;
     virtual bool editarHospedagem(Accommodation) = 0;
-    virtual bool cadastrarAvaliacao(Rating) = 0;
+    virtual bool cadastrarAvaliacao(Code, Grade) = 0;
     virtual bool descadastrarAvaliacao(Rating) = 0;
     virtual bool editarAvaliacao(Rating) = 0;
     virtual void listarHospedagens() = 0;

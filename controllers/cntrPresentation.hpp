@@ -75,10 +75,10 @@ inline void CntrAUsuario::setCntrSUsuario(ISUsuario *cntr){
 class CntrAHospedagem:public IAHospedagem{
     private:
         ISHospedagem *cntr;
-        void consultarHospedagem();
-        void cadastrarAvaliacao();
+        void consultarHospedagem(); // Feito
+        void cadastrarAvaliacao(); // Feito
         void descadastrarAvaliacao();
-        void consultarAvaliacao();
+        void consultarAvaliacao(); // Feito
         void acessarDadosHospedagens();
         void listarHospedagens();
     public:
