@@ -83,6 +83,19 @@ bool StubServicoHospedagem::consultarHospedagem(Code code){
     return true;
 }
 
+bool StubServicoHospedagem::consultarAvaliacao(Code code){
+    if(code.getValue().compare(INVALIDO) == 0)
+        return false;
+
+    //--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
+    // Implementar código que atribui valores ao objeto identificado por conta.
+    //--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
+
+    return true;
+}
+
 bool StubServicoHospedagem::cadastrarAvaliacao(Rating avaliacao){
     if(avaliacao.getCode().getValue().compare(INVALIDO) == 0)
         return false;

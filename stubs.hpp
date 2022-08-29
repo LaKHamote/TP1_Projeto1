@@ -41,6 +41,7 @@ class StubServicoHospedagem:public ISHospedagem {
     public:
         bool cadastrarHospedagem(Accommodation);
         bool consultarHospedagem(Code);
+        bool consultarAvaliacao(Code);
         bool cadastrarAvaliacao(Rating);
         bool descadastrarAvaliacao(Code);
         bool acessarDadosHospedagens(Rating);
