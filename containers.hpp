@@ -36,6 +36,8 @@ class ContainerAvaliacao{
         bool incluir(Rating);                             // Métodos responsáveis por prestar serviços.
         bool remover(Code);
         bool pesquisar(Rating*);
+        bool pesquisar_usuario(Rating*, Email);
+        bool pesquisar_hospedagem(Rating*, Code);
         bool atualizar(Rating);
 };
 
@@ -49,6 +51,7 @@ class ContainerHospedagem{
         bool incluir(Accommodation);                          // Métodos responsáveis por prestar serviços.
         bool remover(Code);
         bool pesquisar(Accommodation*);
+        bool pesquisar_anfitriao(Accommodation*, Email);
         bool atualizar(Accommodation);
 };
 

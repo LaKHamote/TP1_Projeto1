@@ -43,20 +43,71 @@ bool CntrSUsuario::cadastrar(User usuario){
     return container->incluir(usuario);
 }
 
-// falta implemetar
+// falta implementar
 bool CntrSUsuario::descadastrarConta(Email email){
-    return true;
-}
+    ContainerUsuario *container_usuario;
+    ContainerHospedagem *container_hospedagem;
+    ContainerAvaliacao *container_avaliacao;
 
-//falta implementar
-bool CntrSUsuario::editarConta(User usuario){
-    return true;
-}
+    container_usuario = ContainerUsuario::getInstancia();
+    container_hospedagem = ContainerHospedagem::getInstancia();
+    container_avaliacao = ContainerAvaliacao::getInstancia();
 
-//falta implementar
-User CntrSUsuario::consultarDadosPessoais(Email email){
     User usuario;
+    Accommodation hospedagem;
+    Rating avaliacao;
+
+    usuario.setEmail(email);
     
+    if (container_usuario->pesquisar(&usuario)){
+        while (container_hospedagem->pesquisar_anfitriao(&hospedagem, usuario.getEmail())){         // busca hospedagens do usuario (enquanto houver)
+            container_hospedagem->remover(hospedagem.getCode());                                    // remove hospedagem
+            while (container_avaliacao->pesquisar_hospedagem(&avaliacao, hospedagem.getCode())){    // busca avaliacoes relacionada a hospedagem encontrada (enquanto houver)
+                container_avaliacao->remover(avaliacao.getCode());                                  // remove avaliacao
+            }
+        }
+        while (container_avaliacao->pesquisar_usuario(&avaliacao, usuario.getEmail())){
+            container_avaliacao->remover(avaliacao.getCode());
+        }
+        return container_usuario->remover(usuario.getEmail());
+    }
+    return false;
+}
+
+bool CntrSUsuario::editarConta(User usuario){
+    // Instancia container de usuários.
+    ContainerUsuario *container;
+
+    container = ContainerUsuario::getInstancia();
+
+    User usuario_antes_da_edicao;
+
+    usuario_antes_da_edicao.setEmail(usuario.getEmail());
+    container->pesquisar(&usuario_antes_da_edicao);
+    if (usuario.getName().getValue() == "")
+        usuario.setName(usuario_antes_da_edicao.getName());
+    if (usuario.getPassword().getValue() == "")
+        usuario.setPassword(usuario_antes_da_edicao.getPassword());
+    if (usuario.getLanguage().getValue() == "")
+        usuario.setLanguage(usuario_antes_da_edicao.getLanguage());
+    if (usuario.getDate().getValue() == "")
+        usuario.setDate(usuario_antes_da_edicao.getDate());
+    if (usuario.getDescription().getValue() == "")
+        usuario.setDescription(usuario_antes_da_edicao.getDescription());
+
+    return container->atualizar(usuario);
+}
+
+User CntrSUsuario::consultarDadosPessoais(Email email){
+    ContainerUsuario *container;
+
+    container = ContainerUsuario::getInstancia();
+
+    User usuario;
+
+    usuario.setEmail(email);
+    container->pesquisar(&usuario);
+
     return usuario;
 }
 

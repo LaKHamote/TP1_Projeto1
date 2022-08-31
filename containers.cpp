@@ -75,6 +75,26 @@ bool ContainerAvaliacao::pesquisar(Rating* avaliacao){
     return false;
 }
 
+bool ContainerAvaliacao::pesquisar_usuario(Rating* avaliacao, Email email){
+    for(map<string, Rating>::iterator it = container.begin();it != container.end();it++){
+        if (it->second.getEmail().getValue().compare(email.getValue()) == 0){
+            *avaliacao = it->second;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ContainerAvaliacao::pesquisar_hospedagem(Rating* avaliacao, Code code){
+    for(map<string, Rating>::iterator it = container.begin();it != container.end();it++){
+        if (it->second.getAccommodationCode().getValue().compare(code.getValue()) == 0){
+            *avaliacao = it->second;
+            return true;
+        }
+    }
+    return false;
+}
+
 bool ContainerAvaliacao::atualizar(Rating avaliacao){
     map<string, Rating>::iterator it = container.find(avaliacao.getCode().getValue());
     if(it != container.end()){
@@ -111,6 +131,16 @@ bool ContainerHospedagem::pesquisar(Accommodation* hospedagem){
     if(it != container.end()){
         *hospedagem = it->second;
         return true;
+    }
+    return false;
+}
+
+bool ContainerHospedagem::pesquisar_anfitriao(Accommodation* hospedagem, Email email){
+    for(map<string, Accommodation>::iterator it = container.begin();it != container.end();it++){
+        if (it->second.getEmail().getValue().compare(email.getValue()) == 0){
+            *hospedagem = it->second;
+            return true;
+        }
     }
     return false;
 }

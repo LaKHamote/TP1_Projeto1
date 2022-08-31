@@ -447,7 +447,7 @@ void CntrAUsuario::consultarDadosPessoais(Email email){
 void CntrAUsuario::editarConta(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
-    char texto1[] ="Preencha os seguintes campos (deixe em branco para nao alterar): ";
+    char texto1[] ="Preencha os seguintes campos: (Deixe em branco caso nao queira alterar)";
     char texto2[] ="Nome            :";
     char texto3[] ="Senha           :";
     char texto4[] ="Idioma          :";
@@ -495,11 +495,16 @@ void CntrAUsuario::editarConta(Email email){
     Description descricao;
 
     try{
-        nome.setValue(string(campo1));
-        senha.setValue(string(campo2));
-        idioma.setValue(string(campo3));
-        aniversario.setValue(string(campo4));
-        descricao.setValue(string(campo5));
+        if (string(campo1) != "")
+            nome.setValue(string(campo1));
+        if (string(campo2) != "")
+            senha.setValue(string(campo2));
+        if (string(campo3) != "")
+            idioma.setValue(string(campo3));
+        if (string(campo4) != "")
+            aniversario.setValue(string(campo4));
+        if (string(campo5) != "")
+            descricao.setValue(string(campo5));   
     }
     catch(invalid_argument &exp){
         clear();                                                                                    // Limpa janela.
