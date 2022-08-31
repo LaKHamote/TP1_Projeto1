@@ -76,11 +76,11 @@ class CntrAHospedagem:public IAHospedagem{
     private:
         ISHospedagem *cntr;
         string auxiliar(int, int, char[], char[]);
-        void consultarHospedagem(); // Feito
-        void cadastrarAvaliacao(); // Feito
-        void cadastrarHospedagem(); // 90% pronto, falta polimento
+        void consultarHospedagem();
+        void cadastrarAvaliacao();
+        void cadastrarHospedagem();
         void descadastrarAvaliacao();
-        void consultarAvaliacao(); // Feito
+        void consultarAvaliacao();
         void acessarDadosHospedagens();
         void listarHospedagens();
     public:

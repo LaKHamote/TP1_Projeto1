@@ -111,21 +111,12 @@ bool StubServicoHospedagem::descadastrarAvaliacao(Code codigo){
     return true;
 }
 
-bool StubServicoHospedagem::acessarDadosHospedagens(Rating avaliacao){
-    if(avaliacao.getCode().getValue().compare(CODIGO_INVALIDO) == 0)
+bool StubServicoHospedagem::acessarDadosHospedagens(Code code){
+    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
     return true;
 }
 
-bool StubServicoHospedagem::listarHospedagens(Rating *avaliacao){
-    if(avaliacao->getCode().getValue().compare(CODIGO_INVALIDO) == 0)
-        return false;
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Implementar código que atribui valores ao objeto identificado por aplicacao.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-
+bool StubServicoHospedagem::listarHospedagens(){
     return true;
 }

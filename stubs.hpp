@@ -45,8 +45,8 @@ class StubServicoHospedagem:public ISHospedagem {
         bool consultarAvaliacao(Code);
         bool cadastrarAvaliacao(Code, Grade);
         bool descadastrarAvaliacao(Code);
-        bool acessarDadosHospedagens(Rating);
-        bool listarHospedagens(Rating*);                        // Adaptar assinatura.
+        bool acessarDadosHospedagens(Code);
+        bool listarHospedagens();
 };
 
 
