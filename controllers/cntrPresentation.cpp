@@ -523,8 +523,6 @@ void CntrAHospedagem::executar(){
 //--------------------------------------------------------------------------------------------
 
 void CntrAHospedagem::executar(Email email){
-
-    // Mensagens a serem apresentadas tela completa de produtos financeiros.
     char texto1[] ="Selecione um dos servicos:";
     char texto2[] ="1 - Consultar hospedagem.";
     char texto3[] ="2 - Cadastrar hospedagem.";
@@ -534,23 +532,14 @@ void CntrAHospedagem::executar(Email email){
     char texto7[] ="6 - Acessar dados de hospedagens disponiveis.";
     char texto8[] ="7 - Listar Hospedagens.";
     char texto9[] ="8 - Retornar.";
-
     int campo;                                                                                  // Campo de entrada.
-
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
-
     echo();                                                                                     // Habilita eco.
-
     bool apresentar = true;                                                                     // Controle de laço.
-
     echo();                                                                                     // Habilita eco.
-
     while(apresentar){
-
         // Apresenta tela completa de produtos financeiros.
-
         clear();
         if (has_colors()){
             start_color();
@@ -574,7 +563,6 @@ void CntrAHospedagem::executar(Email email){
         noecho();
         campo = getch() - 48;                                                                   // Leitura do campo de entrada e conversão de ASCII.
         echo();
-
         switch(campo){
             case 1:
                 consultarHospedagem();
@@ -606,15 +594,7 @@ void CntrAHospedagem::executar(Email email){
 
 //--------------------------------------------------------------------------------------------
 
-void CntrAHospedagem::consultarHospedagem(){
-    // Mensagens a serem apresentadas.
-
-    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);
-
-    char texto1[] ="Digite o codigo da hospedagem a ser consultada.";
-    char erro1[] ="Formato de codigo invalido.";
-    char idHospedagem[80];
+string CntrAHospedagem::auxiliar(int linha, int coluna, char campo[], char texto[]) {
     clear();    
     if (has_colors()){
         start_color();
@@ -626,12 +606,23 @@ void CntrAHospedagem::consultarHospedagem(){
         }
     }
     box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto1);   
+    mvprintw(linha/4,coluna/4,"%s",texto);   
     mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(idHospedagem);
+    getstr(campo);
+    return (string)campo;
+}
+
+//--------------------------------------------------------------------------------------------
+
+void CntrAHospedagem::consultarHospedagem(){
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);
+    char texto1[] ="Digite o codigo da hospedagem a ser consultada.";
+    char erro1[] ="Formato de codigo invalido.";
+    char idHospedagem[80];
     Code code;
     try {
-        code.setValue((string)idHospedagem);
+        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -652,60 +643,37 @@ void CntrAHospedagem::consultarHospedagem(){
         return;
     }
     cntr->consultarHospedagem(code);
-                                                    // Imprime nome do campo.
     noecho();
     getch();
     echo();
 }
-//--------------------------------------------------------------------------------------------
 
-string CntrAHospedagem::auxiliar(int linha, int coluna, char campo[], char texto[]) {
-    clear();    
-    if (has_colors()){
-        start_color();
-        init_color(COLOR_CYAN, 930, 910, 850);
-        init_pair(1, COLOR_BLACK, COLOR_CYAN);
-        attron(COLOR_PAIR(1));
-        for (int y = 0; y < linha; y++) {
-            mvhline(y, 0, ' ', coluna);
-        }
-    }
-    box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);   
-    mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(campo);
-    return (string)campo;
-}
+//--------------------------------------------------------------------------------------------
 
 void CntrAHospedagem::cadastrarHospedagem() {
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
     char textoCodigo[] ="Digite o codigo da hospedagem a ser cadastrada.";
-    char textoCidade[] ="Cidade";
-    char textoPais[] ="Pais";
-    char textoAvaliacao[] ="Avaliacao";
-    char textoDescricao[] ="Descricao";
+    char textoCidade[] ="Digite a cidade de origem.";
+    char textoPais[] ="Digite o pais de origem.";
+    char textoDescricao[] ="Digite uma descricao para a hospedagem.";
     char campoCodigo[80];
     char campoCidade[80];
     char campoPais[80];
-    char campoAvaliacao[80];
     char campoDescricao[80];
     char erroCodigo[] ="Formato de codigo invalido.";
     char erroCidade[] ="Formato de cidade invalido.";
     char erroPais[] ="Formato de pais invalido.";
-    char erroAvaliacao[] ="Formato de avaliacao invalido.";
     char erroDescricao[] ="Formato de descricao invalido.";
-    char *erros[5] = {
+    char *erros[4] = {
         erroCodigo,
         erroCidade,
         erroPais,
-        erroAvaliacao,
         erroDescricao
     };
     Code code;
     City city;
     Country country;
-    Grade grade;
     Description description;
     Accommodation hospedagem;
     int index = 0;
@@ -716,10 +684,7 @@ void CntrAHospedagem::cadastrarHospedagem() {
         ++index;
         country.setValue(auxiliar(linha, coluna, campoPais, textoPais));
         ++index;
-        grade.setValue(auxiliar(linha, coluna, campoAvaliacao, textoAvaliacao));
-        ++index;
         description.setValue(auxiliar(linha, coluna, campoDescricao, textoDescricao));
-        ++index;
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -742,7 +707,6 @@ void CntrAHospedagem::cadastrarHospedagem() {
     hospedagem.setCode(code);
     hospedagem.setCity(city);
     hospedagem.setCountry(country);
-    hospedagem.setGrade(grade);
     hospedagem.setDescription(description);
     cntr->cadastrarHospedagem(hospedagem);
 }
@@ -752,67 +716,20 @@ void CntrAHospedagem::cadastrarHospedagem() {
 void CntrAHospedagem::cadastrarAvaliacao(){
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
-
     char texto1[] ="Digite o codigo da hospedagem para a qual a avaliacao sera cadastrada.";
-    char erro1[] ="Formato de codigo invalido.";
-    char idHospedagem[80];
-    clear();    
-    if (has_colors()){
-        start_color();
-        init_color(COLOR_CYAN, 930, 910, 850);
-        init_pair(1, COLOR_BLACK, COLOR_CYAN);
-        attron(COLOR_PAIR(1));
-        for (int y = 0; y < linha; y++) {
-            mvhline(y, 0, ' ', coluna);
-        }
-    }
-    box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto1);   
-    mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(idHospedagem);
-    Code code;
-    try {
-        code.setValue((string)idHospedagem);
-    }
-    catch(invalid_argument &exp) {
-        clear();                                                                                    // Limpa janela.
-        if (has_colors()){
-            start_color();
-            init_color(COLOR_CYAN, 930, 910, 850);
-            init_pair(1, COLOR_BLACK, COLOR_CYAN);
-            attron(COLOR_PAIR(1));
-            for (int y = 0; y < linha; y++) {
-                mvhline(y, 0, ' ', coluna);
-            }
-        }
-        box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
-        noecho();                                                                               // Desabilita eco.
-        getch();                                                                                // Leitura de caracter digitado.
-        echo();                                                                                 // Habilita eco.
-        return;
-    }
-
     char texto2[] ="Digite a avaliacao para a hospedagem que foi informada.";
+    char erro1[] ="Formato de codigo invalido.";
     char erro2[] ="Formato invalido de avaliacao.";
+    char *erros[2] = {erro1, erro2};
+    char idHospedagem[80];
     char avaliacaoHospedagem[80];
-    clear();    
-    if (has_colors()){
-        start_color();
-        init_color(COLOR_CYAN, 930, 910, 850);
-        init_pair(1, COLOR_BLACK, COLOR_CYAN);
-        attron(COLOR_PAIR(1));
-        for (int y = 0; y < linha; y++) {
-            mvhline(y, 0, ' ', coluna);
-        }
-    }
-    box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto2);   
-    mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(avaliacaoHospedagem);
+    Code code;
     Grade grade;
+    int index = 0;
     try {
-        grade.setValue((string)avaliacaoHospedagem);
+        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
+        ++index;
+        grade.setValue(auxiliar(linha, coluna, avaliacaoHospedagem, texto2));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -826,15 +743,13 @@ void CntrAHospedagem::cadastrarAvaliacao(){
             }
         }
         box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro2);                                           // Informa formato incorreto.
+        mvprintw(linha/4 + 2,coluna/4,"%s",erros[index]);                                           // Informa formato incorreto.
         noecho();                                                                               // Desabilita eco.
         getch();                                                                                // Leitura de caracter digitado.
         echo();                                                                                 // Habilita eco.
         return;
     }
-
     cntr->cadastrarAvaliacao(code, grade);
-
     noecho();
     getch();
     echo();
@@ -868,27 +783,12 @@ void CntrAHospedagem::descadastrarAvaliacao(){
 void CntrAHospedagem::consultarAvaliacao(){
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
-
     char texto1[] ="Digite o codigo da hospedagem cuja avaliacao sera consultada.";
     char erro1[] ="Formato de codigo invalido.";
     char idHospedagem[80];
-    clear();    
-    if (has_colors()){
-        start_color();
-        init_color(COLOR_CYAN, 930, 910, 850);
-        init_pair(1, COLOR_BLACK, COLOR_CYAN);
-        attron(COLOR_PAIR(1));
-        for (int y = 0; y < linha; y++) {
-            mvhline(y, 0, ' ', coluna);
-        }
-    }
-    box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto1);   
-    mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(idHospedagem);
     Code code;
     try {
-        code.setValue((string)idHospedagem);
+        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -909,7 +809,6 @@ void CntrAHospedagem::consultarAvaliacao(){
         return;
     }
     cntr->consultarHospedagem(code);
-
     noecho();
     getch();
     echo();
