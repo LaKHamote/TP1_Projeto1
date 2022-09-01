@@ -1,11 +1,12 @@
 #include "stubs.hpp"
 #include "lib/Curses/curses.h"
+#include "lib/Domains/domain.hpp"
+#include "lib/Entities/entity.hpp"
 
 // Adequar os valores.
 
 const string StubServicoAutenticacao::INVALIDO = "invalidotorvalds@linux-foundation.org";
-const string StubServicoPessoal::INVALIDO = "invalidotorvalds@linux-foundation.org";
-const string StubServicoHospedagem::CODIGO_INVALIDO = "12345";
+const string StubServicoPessoal::INVALIDO = "userinvalidotorvalds@linux-foundation.org";
 const string StubServicoHospedagem::NOTA_INVALIDA = "11";
 
 //--------------------------------------------------------------------------------------------
@@ -31,8 +32,8 @@ bool StubServicoPessoal::editarConta(User usuario){
     return true;
 }
 
-bool StubServicoPessoal::descadastrarConta(User usuario){
-    if(usuario.getEmail().getValue().compare(INVALIDO) == 0)
+bool StubServicoPessoal::descadastrarConta(Email email){
+    if(email.getValue().compare(INVALIDO) == 0)
         return false;
     return true;
 }

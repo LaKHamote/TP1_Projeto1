@@ -22,12 +22,12 @@ int main()
 
     // Instanciar stubs de serviço.
 
-    ISAutenticacao *stubServicoAutenticacao;
-    ISUsuario *stubServicoPessoal;
+    ISAutenticacao *cntrServicoAutenticacao;
+    ISUsuario *cntrServicoPessoal;
     //ISHospedagem *stubServicoHospedagem;
 
-    stubServicoAutenticacao = new StubServicoAutenticacao();
-    stubServicoPessoal = new StubServicoPessoal();
+    cntrServicoAutenticacao = new CntrSAutenticacao();
+    cntrServicoPessoal = new CntrSUsuario();
     //stubServicoHospedagem = new StubServicoHospedagem(); precisa implementar os metódos da interface
 
     // Interligar controladoras e stubs.
@@ -36,8 +36,8 @@ int main()
     cntrApresentacaoControle->setCntrAUsuario(cntrApresentacaoPessoal);
     cntrApresentacaoControle->setCntrAHospedagem(cntrApresentacaoHospedagem);
 
-    cntrApresentacaoAutenticacao->setCntrSAutenticacao(stubServicoAutenticacao);
-    cntrApresentacaoPessoal->setCntrSUsuario(stubServicoPessoal);
+    cntrApresentacaoAutenticacao->setCntrSAutenticacao(cntrServicoAutenticacao);
+    cntrApresentacaoPessoal->setCntrSUsuario(cntrServicoPessoal);
     //cntrApresentacaoHospedagem->setCntrSHospedagem(stubServicoHospedagem);
 
     initscr();                                                                      // Iniciar curses.

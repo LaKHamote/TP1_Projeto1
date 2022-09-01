@@ -3,6 +3,7 @@
 
 #include <string>
 #include "lib/Domains/domain.hpp"
+#include "lib/Entities/entity.hpp"
 #include "interfaces.hpp"
 
 using namespace std;
@@ -26,7 +27,7 @@ class StubServicoPessoal:public ISUsuario {
         static const string INVALIDO;
     public:
         bool cadastrar(User);
-        bool descadastrarConta(User);
+        bool descadastrarConta(Email);
         bool editarConta(User);
         User consultarDadosPessoais(Email);
 };

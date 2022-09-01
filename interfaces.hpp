@@ -37,7 +37,7 @@ public:
 
 class IAUsuario {
 public:
-    virtual void executar(Email) = 0;
+    virtual bool executar(Email) = 0; // true enquanto usuario não for descadastrado
     virtual void cadastrar() = 0;
     virtual void setCntrSUsuario(ISUsuario*) = 0;
     virtual ~IAUsuario(){}
@@ -63,7 +63,7 @@ public:
 class ISUsuario {
 public:
     virtual bool cadastrar(User) = 0;
-    virtual bool descadastrarConta(User) = 0;
+    virtual bool descadastrarConta(Email) = 0;
     virtual bool editarConta(User) = 0;
     virtual User consultarDadosPessoais(Email) = 0;
     virtual ~ISUsuario(){}

@@ -71,17 +71,20 @@ class Accommodation {
         Country country;
         Grade grade;
         Description description;
+        Email email;                    
     public:
         Code getCode() const { return code; };
         City getCity() const { return city; };
         Country getCountry() const { return country; };
         Grade getGrade() const { return grade; };
         Description getDescription() const { return description; };
+        Email getEmail() const {return email; };
         void setCode(const Code& code) { this->code = code; };
         void setCity(const City& city) { this->city = city; };
         void setCountry(const Country& country) { this->country = country; };
         void setGrade(const Grade& grade) { this->grade = grade; };
         void setDescription(const Description& description) { this->description = description; };
+        void setEmail(const Email& email) {this->email = email; };
 };
 
 /**
@@ -104,13 +107,19 @@ class Rating {
         Code code;
         Grade grade;
         Description description;
+        Email email;
+        Code accommodation_code;
     public:
         Code getCode() const { return code; };
         Grade getGrade() const { return grade; };
         Description getDescription() const { return description; };
+        Email getEmail() const {return email; };
+        Code getAccommodationCode() const {return accommodation_code; };
         void setCode(const Code& code) { this->code = code; };
         void setGrade(const Grade& grade) { this->grade = grade; };
         void setDescription(const Description& description) { this->description = description; };
+        void setEmail(const Email& email) {this->email = email; };
+        void setAccommodationCode(const Code& accommodtion_code) {this->accommodation_code = accommodation_code; };
 };
 
 #endif
