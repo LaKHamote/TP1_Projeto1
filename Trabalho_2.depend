@@ -1,0 +1,82 @@
+# depslib dependency file v1.0
+1661604871 source:/home/lordq/Documents/TP1_Projeto1/lib/Domains/domain.cpp
+	"domain.hpp"
+	<iostream>
+	<string>
+	<regex>
+	<sstream>
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/lib/Domains/domain.hpp
+	<iostream>
+	<string>
+	<unordered_set>
+
+1661604871 source:/home/lordq/Documents/TP1_Projeto1/lib/Entities/entity.cpp
+	"entity.hpp"
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/lib/Entities/entity.hpp
+	"../Domains/domain.hpp"
+	<iostream>
+	<string>
+	<stdexcept>
+	<unordered_set>
+
+1661604871 source:/home/lordq/Documents/TP1_Projeto1/main.cpp
+	"main.hpp"
+	<string.h>
+	<stdexcept>
+	<iostream>
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/main.hpp
+	"lib/Tests/domainTest.hpp"
+	"lib/Tests/entityTest.hpp"
+	"lib/Domains/domain.hpp"
+	"lib/Entities/entity.hpp"
+	"controllers/cntrPresentation.hpp"
+	"lib/Curses/curses.h"
+	"interfaces.hpp"
+	"stubs.hpp"
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/lib/Tests/domainTest.hpp
+	"../Domains/domain.hpp"
+	<string>
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/lib/Tests/entityTest.hpp
+	"../Entities/entity.hpp"
+	"domainTest.hpp"
+	<string>
+
+1661625564 /home/lordq/Documents/TP1_Projeto1/controllers/cntrPresentation.hpp
+	<string.h>
+	"../lib/Curses/curses.h"
+	"../lib/Domains/domain.hpp"
+	"../lib/Entities/entity.hpp"
+	"../interfaces.hpp"
+
+1661604871 /home/lordq/Documents/TP1_Projeto1/lib/Curses/curses.h
+	<ncurses_dll.h>
+	<stdint.h>
+	<stdio.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdbool.h>
+	<libutf8.h>
+	<wchar.h>
+	<unctrl.h>
+
+1661624651 /home/lordq/Documents/TP1_Projeto1/interfaces.hpp
+	"lib/Domains/domain.hpp"
+	"lib/Entities/entity.hpp"
+
+1661624607 /home/lordq/Documents/TP1_Projeto1/stubs.hpp
+	<string>
+	"lib/Domains/domain.hpp"
+	"interfaces.hpp"
+
+1661625592 source:/home/lordq/Documents/TP1_Projeto1/controllers/cntrPresentation.cpp
+	"cntrPresentation.hpp"
+
+1661624731 source:/home/lordq/Documents/TP1_Projeto1/stubs.cpp
+	"stubs.hpp"
+	"lib/Curses/curses.h"
+

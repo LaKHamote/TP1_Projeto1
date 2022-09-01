@@ -5,7 +5,8 @@
 
 const string StubServicoAutenticacao::INVALIDO = "invalidotorvalds@linux-foundation.org";
 const string StubServicoPessoal::INVALIDO = "invalidotorvalds@linux-foundation.org";
-const string StubServicoHospedagem::INVALIDO = "12345";
+const string StubServicoHospedagem::CODIGO_INVALIDO = "12345";
+const string StubServicoHospedagem::NOTA_INVALIDA = "11";
 
 //--------------------------------------------------------------------------------------------
 // Implementações dos métodos dos stubs.
@@ -65,13 +66,13 @@ User StubServicoPessoal::consultarDadosPessoais(Email email){
 //--------------------------------------------------------------------------------------------
 
 bool StubServicoHospedagem::cadastrarHospedagem(Accommodation hospedagem){
-    if(hospedagem.getCode().getValue().compare(INVALIDO) == 0)
+    if(hospedagem.getCode().getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
     return true;
 }
 
-bool StubServicoHospedagem::consultarHospedagem(Accommodation *hospedagem){
-    if(hospedagem->getCode().getValue().compare(INVALIDO) == 0)
+bool StubServicoHospedagem::consultarHospedagem(Code code){
+    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
 
     //--------------------------------------------------------------------------------------------
@@ -83,33 +84,39 @@ bool StubServicoHospedagem::consultarHospedagem(Accommodation *hospedagem){
     return true;
 }
 
-bool StubServicoHospedagem::cadastrarAvaliacao(Rating avaliacao){
-    if(avaliacao.getCode().getValue().compare(INVALIDO) == 0)
+bool StubServicoHospedagem::consultarAvaliacao(Code code){
+    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
+        return false;
+
+    //--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
+    // Implementar código que atribui valores ao objeto identificado por conta.
+    //--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
+
+    return true;
+}
+
+bool StubServicoHospedagem::cadastrarAvaliacao(Code code, Grade grade){
+    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
+        return false;
+    if(grade.getValue().compare(NOTA_INVALIDA) == 0)
         return false;
     return true;
 }
 
 bool StubServicoHospedagem::descadastrarAvaliacao(Code codigo){
-    if(codigo.getValue().compare(INVALIDO) == 0)
+    if(codigo.getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
     return true;
 }
 
-bool StubServicoHospedagem::acessarDadosHospedagens(Rating avaliacao){
-    if(avaliacao.getCode().getValue().compare(INVALIDO) == 0)
+bool StubServicoHospedagem::acessarDadosHospedagens(Code code){
+    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
     return true;
 }
 
-bool StubServicoHospedagem::listarHospedagens(Rating *avaliacao){
-    if(avaliacao->getCode().getValue().compare(INVALIDO) == 0)
-        return false;
-
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-    // Implementar código que atribui valores ao objeto identificado por aplicacao.
-    //--------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------
-
+bool StubServicoHospedagem::listarHospedagens(){
     return true;
 }
