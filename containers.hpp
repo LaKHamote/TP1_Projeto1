@@ -53,6 +53,7 @@ class ContainerHospedagem{
         bool pesquisar(Accommodation*);
         bool pesquisar_anfitriao(Accommodation*, Email);
         bool atualizar(Accommodation);
+        map<string, Accommodation> getContainer();
 };
 
 #endif // CONTAINERS_HPP_INCLUDED

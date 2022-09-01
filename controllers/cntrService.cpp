@@ -113,4 +113,127 @@ User CntrSUsuario::consultarDadosPessoais(Email email){
 
 //--------------------------------------------------------------------------------------------
 
+bool CntrSHospedagem::cadastrarHospedagem(Accommodation hospedagem){
 
+    ContainerHospedagem *container;
+
+    container = ContainerHospedagem::getInstancia();
+
+    if (container->pesquisar(&hospedagem))
+        return false;
+
+    return container->incluir(hospedagem);
+}
+
+bool CntrSHospedagem::descadastrarHospedagem(Code codigo){
+
+    ContainerHospedagem *container_hospedagem;
+    ContainerAvaliacao *container_avaliacao;
+
+    container_hospedagem = ContainerHospedagem::getInstancia();
+    container_avaliacao = ContainerAvaliacao::getInstancia();
+
+    Rating avaliacao;
+
+    while (container_avaliacao->pesquisar_hospedagem(&avaliacao, codigo)){    // busca avaliacoes relacionada a hospedagem encontrada (enquanto houver)
+        container_avaliacao->remover(avaliacao.getCode());                                  // remove avaliacao
+    }
+
+    container_hospedagem->remover(codigo);
+    return false;
+}
+
+bool CntrSHospedagem::editarHospedagem(Accommodation hospedagem){
+    ContainerHospedagem *container;
+
+    container = ContainerHospedagem::getInstancia();
+
+    Accommodation hospedagem_antes_da_edicao;
+
+    hospedagem_antes_da_edicao.setCode(hospedagem.getCode());
+    container->pesquisar(&hospedagem_antes_da_edicao); // n entendi
+    if (hospedagem.getCity().getValue() == "")
+        hospedagem.setCity(hospedagem_antes_da_edicao.getCity());
+    if (hospedagem.getCountry().getValue() == "")
+        hospedagem.setCountry(hospedagem_antes_da_edicao.getCountry());
+    if (hospedagem.getGrade().getValue() == "")
+        hospedagem.setGrade(hospedagem_antes_da_edicao.getGrade());
+    if (hospedagem.getEmail().getValue() == "")
+        hospedagem.setEmail(hospedagem_antes_da_edicao.getEmail());
+    if (hospedagem.getDescription().getValue() == "")
+        hospedagem.setDescription(hospedagem_antes_da_edicao.getDescription());
+
+    return container->atualizar(hospedagem);
+}
+
+Accommodation CntrSHospedagem::consultarHospedagem(Code code){
+    ContainerHospedagem *container;
+
+    container = ContainerHospedagem::getInstancia();
+
+    Accommodation hospedagem;
+
+    hospedagem.setCode(code);
+    container->pesquisar(&hospedagem);
+
+    return hospedagem;
+}
+
+bool CntrSHospedagem::cadastrarAvaliacao(Rating avaliacao){
+
+    ContainerAvaliacao *container;
+
+    container = ContainerAvaliacao::getInstancia();
+
+    if (container->pesquisar(&avaliacao))
+        return false;
+
+    return container->incluir(avaliacao);
+}
+
+bool CntrSHospedagem::descadastrarAvaliacao(Code codigo){
+    ContainerAvaliacao *container_hospedagem;
+
+    container_hospedagem = ContainerAvaliacao::getInstancia();
+
+    container_hospedagem->remover(codigo);
+
+    return false;
+}
+
+bool CntrSHospedagem::editarAvaliacao(Rating avaliacao){
+    ContainerAvaliacao *container;
+
+    container = ContainerAvaliacao::getInstancia();
+
+    Rating avaliacao_antes_da_edicao;
+
+    avaliacao_antes_da_edicao.setCode(avaliacao.getCode());
+    container->pesquisar(&avaliacao_antes_da_edicao);
+    if (avaliacao.getGrade().getValue() == "")
+        avaliacao.setGrade(avaliacao_antes_da_edicao.getGrade());
+    if (avaliacao.getDescription().getValue() == "")
+        avaliacao.setDescription(avaliacao_antes_da_edicao.getDescription());
+
+    return container->atualizar(avaliacao);
+}
+
+map<string, Accommodation> CntrSHospedagem::listarHospedagens(){
+    ContainerHospedagem *container;
+
+    container = ContainerHospedagem::getInstancia();
+
+    return container->getContainer();
+}
+
+User CntrSHospedagem::acessarDadosAnfitriaoHospedagem(Code code){
+    ContainerHospedagem *container;
+
+    container = ContainerHospedagem::getInstancia();
+    /////////////////////////////
+    ///////////////////////////
+    /////////////////////////////
+
+    User user;
+    return user;
+}

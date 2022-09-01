@@ -29,10 +29,19 @@ class CntrSUsuario:public ISUsuario{
 
 //--------------------------------------------------------------------------------------------
 
-/*
+
 class CntrSHospedagem:public ISHospedagem{
-    // Métodos públicos presentes na interface realizada.
+    public:
+        bool cadastrarHospedagem(Accommodation);
+        bool descadastrarHospedagem(Code);
+        bool editarHospedagem(Accommodation);
+        Accommodation consultarHospedagem(Code);
+        bool cadastrarAvaliacao(Rating);
+        bool descadastrarAvaliacao(Code);
+        bool editarAvaliacao(Rating);
+        map<string, Accommodation> listarHospedagens();
+        User acessarDadosAnfitriaoHospedagem(Code); //////////////falta
 };
-*/
+
 
 #endif // CONTROLADORASSERVICO_H_INCLUDED

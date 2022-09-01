@@ -47,6 +47,12 @@
 		<Unit filename="controllers/cntrPresentation.hpp">
 			<Option target="Debug" />
 		</Unit>
+		<Unit filename="controllers/cntrService.hpp">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="controllers/cntrService.hpp">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="lib/Curses/curses.h">
 			<Option target="Debug" />
 		</Unit>
@@ -57,6 +63,7 @@
 		<Unit filename="interfaces.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="stubs.cpp">
+		<Unit filename="containers.cpp">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="stubs.hpp">

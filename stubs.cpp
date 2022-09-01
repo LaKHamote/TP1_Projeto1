@@ -73,9 +73,11 @@ bool StubServicoHospedagem::cadastrarHospedagem(Accommodation hospedagem){
     return true;
 }
 
-bool StubServicoHospedagem::consultarHospedagem(Code code){
+Accommodation StubServicoHospedagem::consultarHospedagem(Code code){
+    Accommodation hospedagem;
+
     if(code.getValue().compare(CODIGO_INVALIDO) == 0)
-        return false;
+        return hospedagem;
 
     //--------------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------
@@ -83,7 +85,7 @@ bool StubServicoHospedagem::consultarHospedagem(Code code){
     //--------------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------
 
-    return true;
+    return hospedagem;
 }
 
 bool StubServicoHospedagem::consultarAvaliacao(Code code){
@@ -99,10 +101,10 @@ bool StubServicoHospedagem::consultarAvaliacao(Code code){
     return true;
 }
 
-bool StubServicoHospedagem::cadastrarAvaliacao(Code code, Grade grade){
-    if(code.getValue().compare(CODIGO_INVALIDO) == 0)
+bool StubServicoHospedagem::cadastrarAvaliacao(Rating avaliacao){
+    if(avaliacao.getCode().getValue().compare(CODIGO_INVALIDO) == 0)
         return false;
-    if(grade.getValue().compare(NOTA_INVALIDA) == 0)
+    if(avaliacao.getGrade().getValue().compare(NOTA_INVALIDA) == 0)
         return false;
     return true;
 }
@@ -113,12 +115,15 @@ bool StubServicoHospedagem::descadastrarAvaliacao(Code codigo){
     return true;
 }
 
-bool StubServicoHospedagem::acessarDadosHospedagens(Code code){
+User StubServicoHospedagem::acessarDadosAnfitriaoHospedagem(Code code){
+    User user;
     if(code.getValue().compare(CODIGO_INVALIDO) == 0)
-        return false;
-    return true;
+        return user;
+    return user;
 }
 
-bool StubServicoHospedagem::listarHospedagens(){
-    return true;
+map<string, Accommodation> StubServicoHospedagem::listarHospedagens(){
+    map<string, Accommodation> container;
+
+    return container;
 }

@@ -4,7 +4,7 @@
 #include "lib/Domains/domain.hpp"
 #include "lib/Entities/entity.hpp"
 
-
+#include <map>
 //--------------------------------------------------------------------------------------------
 // declaração antecipada
 
@@ -72,14 +72,14 @@ public:
 class ISHospedagem {
 public:
     virtual bool cadastrarHospedagem(Accommodation) = 0;
-    virtual bool consultarHospedagem(Code) = 0;
-    virtual bool descadastrarHospedagem(Accommodation) = 0;
+    virtual bool descadastrarHospedagem(Code) = 0;
     virtual bool editarHospedagem(Accommodation) = 0;
-    virtual bool cadastrarAvaliacao(Code, Grade) = 0;
+    virtual Accommodation consultarHospedagem(Code) = 0;
+    virtual bool cadastrarAvaliacao(Rating) = 0;
     virtual bool descadastrarAvaliacao(Code) = 0;
     virtual bool editarAvaliacao(Rating) = 0;
-    virtual bool listarHospedagens() = 0;
-    virtual bool acessarDadosHospedagens(Code) = 0;
+    virtual std::map<string, Accommodation> listarHospedagens() = 0;
+    virtual User acessarDadosAnfitriaoHospedagem(Code) = 0;
     virtual ~ISHospedagem(){}
 };
 

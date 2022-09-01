@@ -154,3 +154,7 @@ bool ContainerHospedagem::atualizar(Accommodation hospedagem){
     return false;
 }
 
+map<string, Accommodation> ContainerHospedagem::getContainer(){
+    return container;
+}
+

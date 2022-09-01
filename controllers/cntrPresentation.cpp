@@ -903,7 +903,20 @@ void CntrAHospedagem::cadastrarAvaliacao(){
         echo();                                                                                 // Habilita eco.
         return;
     }
-    cntr->cadastrarAvaliacao(code, grade);
+    Rating avaliacao;
+    avaliacao.setCode(code);
+    avaliacao.setGrade(grade);
+
+
+
+
+    
+    ////////////////////// falta implementar accommodacion_grade e email
+
+
+
+
+    cntr->cadastrarAvaliacao(avaliacao);
     noecho();
     getch();
     echo();
@@ -1005,7 +1018,7 @@ void CntrAHospedagem::acessarDadosHospedagens(){
         echo();                                                                                 // Habilita eco.
         return;
     }
-    cntr->acessarDadosHospedagens(code);
+    cntr->acessarDadosAnfitriaoHospedagem(code);
     noecho();
     getch();
     echo();
