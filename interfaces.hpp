@@ -72,13 +72,14 @@ public:
 class ISHospedagem {
 public:
     virtual bool cadastrarHospedagem(Accommodation) = 0;
+    virtual bool consultarHospedagem(Code) = 0;
     virtual bool descadastrarHospedagem(Accommodation) = 0;
     virtual bool editarHospedagem(Accommodation) = 0;
-    virtual bool cadastrarAvaliacao(Rating) = 0;
-    virtual bool descadastrarAvaliacao(Rating) = 0;
+    virtual bool cadastrarAvaliacao(Code, Grade) = 0;
+    virtual bool descadastrarAvaliacao(Code) = 0;
     virtual bool editarAvaliacao(Rating) = 0;
-    virtual void listarHospedagens() = 0;
-    virtual void acessarDadosHospedagens() = 0;
+    virtual bool listarHospedagens() = 0;
+    virtual bool acessarDadosHospedagens(Code) = 0;
     virtual ~ISHospedagem(){}
 };
 
