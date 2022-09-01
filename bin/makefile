@@ -1,9 +1,10 @@
 library= ./LibraryObjs/domain.o ./LibraryObjs/entity.o
 controllers= ./ControllerObjs/cntrPresentation.o
-curses= ../lib/Curses/libcurses.a ../lib/Curses/libncurses.a ../lib/Curses/libncurses++.a ../lib/Curses/libncurses++w.a ../lib/Curses/libncursesw.a ../lib/Curses/libtinfo.a
+cpp_source= ../stubs.cpp ../containers.cpp ../main.cpp
+flags= -lncurses -ltinfo
 
 all:	main.exe
 	./main.exe
 
-main.exe:	../main.cpp $(library) $(controllers) ../stubs.cpp
-	g++ -std=c++17 -Wall $(library) $(controllers) ../stubs.cpp ../main.cpp -lncurses -ltinfo -o main.exe
+main.exe:	$(library) $(controllers) $(cpp_source)
+	g++ -std=c++17 -Wall $(library) $(controllers) $(cpp_source) $(flags) -o main.exe

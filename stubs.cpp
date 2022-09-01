@@ -8,6 +8,7 @@
 const string StubServicoAutenticacao::INVALIDO = "invalidotorvalds@linux-foundation.org";
 const string StubServicoPessoal::INVALIDO = "userinvalidotorvalds@linux-foundation.org";
 const string StubServicoHospedagem::NOTA_INVALIDA = "11";
+const string StubServicoHospedagem::CODIGO_INVALIDO = "12345"; 
 
 //--------------------------------------------------------------------------------------------
 // Implementações dos métodos dos stubs.
