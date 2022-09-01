@@ -2,3 +2,6 @@
 *.exe
 ./bin/Debug
 ./bin/obj
+*.depend
+*.layout
+./.vscode
