@@ -1,5 +1,5 @@
 library= ./LibraryObjs/domain.o ./LibraryObjs/entity.o
-controllers= ./ControllerObjs/cntrPresentation.o
+controllers= ./ControllerObjs/cntrPresentation.o ./ControllerObjs/cntrService.o
 cpp_source= ../stubs.cpp ../containers.cpp ../main.cpp
 flags= -lncurses -ltinfo
 
