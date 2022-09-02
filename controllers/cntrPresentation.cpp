@@ -813,24 +813,29 @@ void CntrAHospedagem::cadastrarHospedagem() {
     char textoCidade[] ="Digite a cidade de origem.";
     char textoPais[] ="Digite o pais de origem.";
     char textoDescricao[] ="Digite uma descricao para a hospedagem.";
+    char textoEmail[] ="Digite o email do usuario.";
     char campoCodigo[80];
     char campoCidade[80];
     char campoPais[80];
     char campoDescricao[80];
+    char campoEmail[80];
     char erroCodigo[] ="Formato de codigo invalido.";
     char erroCidade[] ="Formato de cidade invalido.";
     char erroPais[] ="Formato de pais invalido.";
     char erroDescricao[] ="Formato de descricao invalido.";
-    char *erros[4] = {
+    char erroEmail[] ="Formato de email invalido.";
+    char *erros[5] = {
         erroCodigo,
         erroCidade,
         erroPais,
-        erroDescricao
+        erroDescricao,
+        erroEmail
     };
     Code code;
     City city;
     Country country;
     Description description;
+    Email email;
     Accommodation hospedagem;
     int index = 0;
     try {
@@ -841,6 +846,8 @@ void CntrAHospedagem::cadastrarHospedagem() {
         country.setValue(auxiliar(linha, coluna, campoPais, textoPais));
         ++index;
         description.setValue(auxiliar(linha, coluna, campoDescricao, textoDescricao));
+        ++index;
+        email.setValue(auxiliar(linha, coluna, campoEmail, textoEmail));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -864,6 +871,7 @@ void CntrAHospedagem::cadastrarHospedagem() {
     hospedagem.setCity(city);
     hospedagem.setCountry(country);
     hospedagem.setDescription(description);
+    hospedagem.setEmail(email);
     cntr->cadastrarHospedagem(hospedagem);
 }
 
@@ -871,19 +879,31 @@ void CntrAHospedagem::cadastrarAvaliacao(){
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
     char texto1[] ="Digite o codigo da hospedagem para a qual a avaliacao sera cadastrada.";
-    char texto2[] ="Digite a avaliacao para a hospedagem que foi informada.";
+    char texto2[] ="Digite o codigo da avaliacao a ser cadastrada.";
+    char texto3[] ="Digite a avaliacao para a hospedagem que foi informada.";
+    char texto4[] ="Digite o email para a hospedagem que foi informada.";
     char erro1[] ="Formato de codigo invalido.";
-    char erro2[] ="Formato invalido de avaliacao.";
-    char *erros[2] = {erro1, erro2};
-    char idHospedagem[80];
+    char erro2[] ="Formato de codigo invalido.";
+    char erro3[] ="Formato invalido de avaliacao.";
+    char erro4[] ="Formato invalido de email.";
+    char *erros[4] = {erro1, erro2, erro3, erro4};
+    char codigoHospedagem[80];
+    char codigoAvaliacao[80];
     char avaliacaoHospedagem[80];
-    Code code;
+    char emailHospedagem[80];
+    Code codeHospedagem;
+    Code codeAvaliacao;
     Grade grade;
+    Email email;
     int index = 0;
     try {
-        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
+        codeHospedagem.setValue(auxiliar(linha, coluna, codigoHospedagem, texto1));
         ++index;
-        grade.setValue(auxiliar(linha, coluna, avaliacaoHospedagem, texto2));
+        codeAvaliacao.setValue(auxiliar(linha, coluna, codigoAvaliacao, texto2));
+        ++index;
+        grade.setValue(auxiliar(linha, coluna, avaliacaoHospedagem, texto3));
+        ++index;
+        email.setValue(auxiliar(linha, coluna, emailHospedagem, texto4));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -904,18 +924,10 @@ void CntrAHospedagem::cadastrarAvaliacao(){
         return;
     }
     Rating avaliacao;
-    avaliacao.setCode(code);
+    avaliacao.setAccommodationCode(codeHospedagem);
+    avaliacao.setCode(codeAvaliacao);
     avaliacao.setGrade(grade);
-
-
-
-
-    
-    ////////////////////// falta implementar accommodacion_grade e email
-
-
-
-
+    avaliacao.setEmail(email);
     cntr->cadastrarAvaliacao(avaliacao);
     noecho();
     getch();
