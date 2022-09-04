@@ -4,7 +4,7 @@
 #include "../lib/Entities/entity.hpp"
 #include "../containers.hpp"
 #include <list>
-#include <boost/lexical_cast.hpp>
+#include <bits/stdc++.h>
 
 //--------------------------------------------------------------------------------------------
 // Implementações de métodos de classes controladoras da camada de serviço.
@@ -227,8 +227,8 @@ bool CntrSHospedagem::cadastrarAvaliacao(Rating avaliacao){
             hospedagem.setGrade(nota);
         }
         else {
-            nota_anterior_int = boost::lexical_cast<int>(nota_anterior);
-            nova_nota = nota_anterior_int - ((nota_anterior_int - (boost::lexical_cast<int>(avaliacao.getGrade().getValue()))) / (qtd_avaliacoes_ja_existentes + 1));
+            nota_anterior_int = stoi(nota_anterior);
+            nova_nota = nota_anterior_int - ((nota_anterior_int - (stoi(avaliacao.getGrade().getValue()))) / (qtd_avaliacoes_ja_existentes));
             nota.setValue(to_string(nova_nota));
             hospedagem.setGrade(nota);
         }
