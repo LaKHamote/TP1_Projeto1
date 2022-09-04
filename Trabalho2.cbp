@@ -47,7 +47,7 @@
 		<Unit filename="controllers/cntrPresentation.hpp">
 			<Option target="Debug" />
 		</Unit>
-		<Unit filename="controllers/cntrService.hpp">
+		<Unit filename="controllers/cntrService.cpp">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="controllers/cntrService.hpp">
@@ -62,7 +62,9 @@
 		<Unit filename="lib/Entities/entity.hpp" />
 		<Unit filename="interfaces.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="container.cpp" />
+		<Unit filename="main.hpp" />
+		<Unit filename="containers.hpp" />
+		<Unit filename="containers.cpp" />
 		<Unit filename="stubs.cpp">
 			<Option target="Debug" />
 		</Unit>
