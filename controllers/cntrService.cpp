@@ -3,6 +3,8 @@
 #include "../lib/Domains/domain.hpp"
 #include "../lib/Entities/entity.hpp"
 #include "../containers.hpp"
+#include <list>
+#include <boost/lexical_cast.hpp>
 
 //--------------------------------------------------------------------------------------------
 // Implementações de métodos de classes controladoras da camada de serviço.
@@ -43,7 +45,6 @@ bool CntrSUsuario::cadastrar(User usuario){
     return container->incluir(usuario);
 }
 
-// falta implementar
 bool CntrSUsuario::descadastrarConta(Email email){
     ContainerUsuario *container_usuario;
     ContainerHospedagem *container_hospedagem;
@@ -113,8 +114,15 @@ User CntrSUsuario::consultarDadosPessoais(Email email){
 
 //--------------------------------------------------------------------------------------------
 
-bool CntrSHospedagem::cadastrarHospedagem(Accommodation hospedagem){
+list<string> CntrSHospedagem::listarHospedagens(){
+    ContainerHospedagem *container;
 
+    container = ContainerHospedagem::getInstancia();
+
+    return container->getKeys();
+}
+
+bool CntrSHospedagem::cadastrarHospedagem(Accommodation hospedagem){
     ContainerHospedagem *container;
 
     container = ContainerHospedagem::getInstancia();
@@ -133,13 +141,17 @@ bool CntrSHospedagem::descadastrarHospedagem(Code codigo){
     container_hospedagem = ContainerHospedagem::getInstancia();
     container_avaliacao = ContainerAvaliacao::getInstancia();
 
+    Accommodation hospedagem;
     Rating avaliacao;
 
-    while (container_avaliacao->pesquisar_hospedagem(&avaliacao, codigo)){    // busca avaliacoes relacionada a hospedagem encontrada (enquanto houver)
-        container_avaliacao->remover(avaliacao.getCode());                                  // remove avaliacao
-    }
+    hospedagem.setCode(codigo);
 
-    container_hospedagem->remover(codigo);
+    if (container_hospedagem->pesquisar(&hospedagem)){
+        while (container_avaliacao->pesquisar_hospedagem(&avaliacao, codigo)){                  // busca avaliacoes relacionada a hospedagem encontrada (enquanto houver)
+            container_avaliacao->remover(avaliacao.getCode());                                  // remove avaliacao
+        }
+        return container_hospedagem->remover(codigo);
+    }
     return false;
 }
 
@@ -151,7 +163,7 @@ bool CntrSHospedagem::editarHospedagem(Accommodation hospedagem){
     Accommodation hospedagem_antes_da_edicao;
 
     hospedagem_antes_da_edicao.setCode(hospedagem.getCode());
-    container->pesquisar(&hospedagem_antes_da_edicao); // n entendi
+    container->pesquisar(&hospedagem_antes_da_edicao);
     if (hospedagem.getCity().getValue() == "")
         hospedagem.setCity(hospedagem_antes_da_edicao.getCity());
     if (hospedagem.getCountry().getValue() == "")
@@ -181,24 +193,56 @@ Accommodation CntrSHospedagem::consultarHospedagem(Code code){
 
 bool CntrSHospedagem::cadastrarAvaliacao(Rating avaliacao){
 
-    ContainerAvaliacao *container;
+    ContainerAvaliacao *container_avaliacao;
+    ContainerHospedagem *container_hospedagem;
 
-    container = ContainerAvaliacao::getInstancia();
+    container_avaliacao = ContainerAvaliacao::getInstancia();
+    container_hospedagem = ContainerHospedagem::getInstancia();
 
-    if (container->pesquisar(&avaliacao))
+    Accommodation hospedagem;
+    hospedagem.setCode(avaliacao.getAccommodationCode());
+    if (container_avaliacao->pesquisar(&avaliacao) || !container_hospedagem->pesquisar(&hospedagem))
         return false;
 
-    return container->incluir(avaliacao);
+    if (container_avaliacao->incluir(avaliacao)){           // inclui a nota na hospedagem avaliada
+        container_hospedagem->pesquisar(&hospedagem);
+        list<string> codigosAvaliacoes;
+        codigosAvaliacoes = container_avaliacao->getKeys();
+        Rating avaliacao_existente;
+        Code codigo;
+        int qtd_avaliacoes_ja_existentes = 0;                   // para verificar a existencia de outras avaliacoes
+        for(list<string>::iterator elemento = codigosAvaliacoes.begin(); elemento != codigosAvaliacoes.end(); elemento++){
+            codigo.setValue(*elemento);
+            avaliacao_existente.setCode(codigo);
+            if (avaliacao_existente.getAccommodationCode().getValue().compare(hospedagem.getCode().getValue())){
+                qtd_avaliacoes_ja_existentes++;
+            }
+        }
+        string nota_anterior;
+        int nota_anterior_int, nova_nota;
+        Grade nota;
+        nota_anterior = hospedagem.getGrade().getValue();
+        if (nota_anterior == ""){
+            nota.setValue(avaliacao.getGrade().getValue());
+            hospedagem.setGrade(nota);
+        }
+        else {
+            nota_anterior_int = boost::lexical_cast<int>(nota_anterior);
+            nova_nota = nota_anterior_int - ((nota_anterior_int - (boost::lexical_cast<int>(avaliacao.getGrade().getValue()))) / (qtd_avaliacoes_ja_existentes + 1));
+            nota.setValue(to_string(nova_nota));
+            hospedagem.setGrade(nota);
+        }
+        return container_hospedagem->atualizar(hospedagem);
+    }
+    return false;
 }
 
 bool CntrSHospedagem::descadastrarAvaliacao(Code codigo){
-    ContainerAvaliacao *container_hospedagem;
+    ContainerAvaliacao *container_avaliacao;
 
-    container_hospedagem = ContainerAvaliacao::getInstancia();
+    container_avaliacao = ContainerAvaliacao::getInstancia();
 
-    container_hospedagem->remover(codigo);
-
-    return false;
+    return container_avaliacao->remover(codigo);
 }
 
 bool CntrSHospedagem::editarAvaliacao(Rating avaliacao){
@@ -214,26 +258,38 @@ bool CntrSHospedagem::editarAvaliacao(Rating avaliacao){
         avaliacao.setGrade(avaliacao_antes_da_edicao.getGrade());
     if (avaliacao.getDescription().getValue() == "")
         avaliacao.setDescription(avaliacao_antes_da_edicao.getDescription());
+    avaliacao.setAccommodationCode(avaliacao_antes_da_edicao.getAccommodationCode());
 
     return container->atualizar(avaliacao);
 }
 
-map<string, Accommodation> CntrSHospedagem::listarHospedagens(){
-    ContainerHospedagem *container;
-
-    container = ContainerHospedagem::getInstancia();
-
-    return container->getContainer();
-}
-
 User CntrSHospedagem::acessarDadosAnfitriaoHospedagem(Code code){
-    ContainerHospedagem *container;
+    ContainerHospedagem *container_hospedagem;
+    ContainerUsuario *container_usuario;
 
-    container = ContainerHospedagem::getInstancia();
-    /////////////////////////////
-    ///////////////////////////
-    /////////////////////////////
+    container_hospedagem = ContainerHospedagem::getInstancia();
+    container_usuario = ContainerUsuario::getInstancia();
 
     User user;
+    Accommodation hospedagem;
+
+    hospedagem.setCode(code);
+    container_hospedagem->pesquisar(&hospedagem);
+    user.setEmail(hospedagem.getEmail());
+    container_usuario->pesquisar(&user);
+
     return user;
+}
+
+Rating CntrSHospedagem::consultarAvaliacao(Code code){
+    ContainerAvaliacao *container;
+
+    container = ContainerAvaliacao::getInstancia();
+
+    Rating avaliacao;
+
+    avaliacao.setCode(code);
+    container->pesquisar(&avaliacao);
+
+    return avaliacao;
 }

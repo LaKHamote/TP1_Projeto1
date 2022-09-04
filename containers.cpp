@@ -1,4 +1,5 @@
 #include "containers.hpp"
+#include <list>
 
 ContainerUsuario* ContainerUsuario::instancia = nullptr;
 ContainerAvaliacao* ContainerAvaliacao::instancia = nullptr;
@@ -104,6 +105,16 @@ bool ContainerAvaliacao::atualizar(Rating avaliacao){
     return false;
 }
 
+list<string> ContainerAvaliacao::getKeys(){
+    list<string> chaves;
+
+    for (map<string, Rating>::iterator it = container.begin(); it != container.end();it++){
+        chaves.push_back(it->first);
+    }
+
+    return chaves;
+}
+
 //------------------------------------------------------------------------------------
 // Implementações de métodos de classe container hospedagem.
 
@@ -154,7 +165,13 @@ bool ContainerHospedagem::atualizar(Accommodation hospedagem){
     return false;
 }
 
-map<string, Accommodation> ContainerHospedagem::getContainer(){
-    return container;
+list<string> ContainerHospedagem::getKeys(){
+    list<string> chaves;
+
+    for (map<string, Accommodation>::iterator it = container.begin(); it != container.end();it++){
+        chaves.push_back(it->first);
+    }
+
+    return chaves;
 }
 

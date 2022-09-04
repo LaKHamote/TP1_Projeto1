@@ -5,6 +5,8 @@
 #include "lib/Entities/entity.hpp"
 
 #include <map>
+#include <list>
+
 //--------------------------------------------------------------------------------------------
 // declaração antecipada
 
@@ -78,8 +80,9 @@ public:
     virtual bool cadastrarAvaliacao(Rating) = 0;
     virtual bool descadastrarAvaliacao(Code) = 0;
     virtual bool editarAvaliacao(Rating) = 0;
-    virtual std::map<string, Accommodation> listarHospedagens() = 0;
     virtual User acessarDadosAnfitriaoHospedagem(Code) = 0;
+    virtual Rating consultarAvaliacao(Code) = 0;
+    virtual list<string> listarHospedagens() = 0;
     virtual ~ISHospedagem(){}
 };
 

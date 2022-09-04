@@ -42,12 +42,15 @@ class StubServicoHospedagem:public ISHospedagem {
         static const string NOTA_INVALIDA;
     public:
         bool cadastrarHospedagem(Accommodation);
+        bool descadastrarHospedagem(Code);
+        bool editarHospedagem(Accommodation);
         Accommodation consultarHospedagem(Code);
-        bool consultarAvaliacao(Code);
         bool cadastrarAvaliacao(Rating);
         bool descadastrarAvaliacao(Code);
+        bool editarAvaliacao(Rating);
         User acessarDadosAnfitriaoHospedagem(Code);
-        std::map<string, Accommodation> listarHospedagens();
+        list<string> listarHospedagens();
+        Rating consultarAvaliacao(Code);
 };
 
 

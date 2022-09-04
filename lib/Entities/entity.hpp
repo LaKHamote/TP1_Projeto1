@@ -119,7 +119,7 @@ class Rating {
         void setGrade(const Grade& grade) { this->grade = grade; };
         void setDescription(const Description& description) { this->description = description; };
         void setEmail(const Email& email) {this->email = email; };
-        void setAccommodationCode(const Code& accommodtion_code) {this->accommodation_code = accommodation_code; };
+        void setAccommodationCode(const Code& accommodation_code) {this->accommodation_code = accommodation_code; };
 };
 
 #endif

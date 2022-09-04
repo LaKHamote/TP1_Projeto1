@@ -5,6 +5,7 @@
 #include "lib/Entities/entity.hpp"
 
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -39,6 +40,7 @@ class ContainerAvaliacao{
         bool pesquisar_usuario(Rating*, Email);
         bool pesquisar_hospedagem(Rating*, Code);
         bool atualizar(Rating);
+        list<string> getKeys();                               // retorna uma lista com os códigos de todas as avaliacoes
 };
 
 class ContainerHospedagem{
@@ -53,7 +55,7 @@ class ContainerHospedagem{
         bool pesquisar(Accommodation*);
         bool pesquisar_anfitriao(Accommodation*, Email);
         bool atualizar(Accommodation);
-        map<string, Accommodation> getContainer();
+        list<string> getKeys();                               // retorna uma lista com os códigos de todas as hospedagens
 };
 
 #endif // CONTAINERS_HPP_INCLUDED

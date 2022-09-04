@@ -2,6 +2,7 @@
 #define CONTROLADORASSERVICO_H_INCLUDED
 
 #include <string>
+#include <list>
 #include "../lib/Domains/domain.hpp"
 #include "../lib/Entities/entity.hpp"
 #include "../interfaces.hpp"
@@ -39,8 +40,9 @@ class CntrSHospedagem:public ISHospedagem{
         bool cadastrarAvaliacao(Rating);
         bool descadastrarAvaliacao(Code);
         bool editarAvaliacao(Rating);
-        map<string, Accommodation> listarHospedagens();
-        User acessarDadosAnfitriaoHospedagem(Code); //////////////falta
+        Rating consultarAvaliacao(Code);
+        User acessarDadosAnfitriaoHospedagem(Code);
+        list<string> listarHospedagens();
 };
 
 

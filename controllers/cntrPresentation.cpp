@@ -1,5 +1,8 @@
 #include "cntrPresentation.hpp"
 #include <string>
+#include <list>
+
+using namespace std;
 
 //--------------------------------------------------------------------------------------------
 // Implementações dos métodos de classes controladoras.
@@ -574,7 +577,6 @@ void CntrAUsuario::editarConta(Email email){
     return;
 }
 
-
 bool CntrAUsuario::descadastrarConta(Email email){
 
     // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
@@ -656,28 +658,48 @@ bool CntrAUsuario::descadastrarConta(Email email){
 
 void CntrAHospedagem::executar(){
     // Mensagens a serem apresentadas na tela simplificada de produtos financeiros.
-    char texto1[]="Selecione um dos serviços : ";
-    char texto2[]="1 - Consultar produto de investimento.";
-    char texto3[]="2 - Retornar.";
+    char texto1[]="Selecione um dos servicos : ";
+    char texto2[]="1 - Listar hospedagens disponiveis.";
+    char texto3[]="2 - Consultar hospedagem.";
+    char texto4[]="3 - Acessar dados de anfitroes de hospedagens.";
+    char texto5[]="4 - Retornar.";
+
     int campo;                                                                                  // Campo de entrada.
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
     echo();                                                                                     // Habilita eco.
     bool apresentar = true;                                                                     // Controle de laço.
     while(apresentar){
-        // Apresenta tela simplificada de produtos financeiros.
         clear();                                                                                // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
         mvprintw(linha/4,coluna/4,"%s",texto1);                                                 // Imprime nome do campo.
         mvprintw(linha/4 + 2,coluna/4,"%s",texto2);                                             // Imprime nome do campo.
         mvprintw(linha/4 + 4,coluna/4,"%s",texto3);                                             // Imprime nome do campo.
+        mvprintw(linha/4 + 6,coluna/4,"%s",texto4);
+        mvprintw(linha/4 + 8,coluna/4,"%s",texto5);
         noecho();
         campo = getch() - 48;                                                                   // Leitura do campo de entrada e conversão de ASCII.
         echo();
         switch(campo){
             case 1:
-                consultarHospedagem();
+                listarHospedagens();
                 break;
             case 2:
+                consultarHospedagem();
+                break;
+            case 3:
+                acessarDadosAnfitriaoHospedagem();
+                break;
+            case 4:
                 apresentar = false;
                 break;
         }
@@ -686,22 +708,24 @@ void CntrAHospedagem::executar(){
 
 void CntrAHospedagem::executar(Email email){
     char texto1[] ="Selecione um dos servicos:";
-    char texto2[] ="1 - Consultar hospedagem.";
-    char texto3[] ="2 - Cadastrar hospedagem.";
-    char texto4[] ="3 - Cadastrar avaliacao.";
-    char texto5[] ="4 - Descadastrar avaliacao.";
-    char texto6[] ="5 - Consultar avaliacao.";
-    char texto7[] ="6 - Acessar dados de hospedagens disponiveis.";
-    char texto8[] ="7 - Listar Hospedagens.";
-    char texto9[] ="8 - Retornar.";
+    char texto2[] ="0 - Listar hospedagens disponiveis.";
+    char texto3[] ="1 - Acessar dados de anfitrao de hospedagem.";
+    char texto4[] ="2 - Cadastrar hospedagem.";
+    char texto5[] ="3 - Cadastrar avaliacao.";
+    char texto6[] ="4 - Descadastrar hospedagem.";
+    char texto7[] ="5 - Descadastrar avaliacao.";
+    char texto8[] ="6 - Consultar hospedagem.";
+    char texto9[] ="7 - Consultar avaliacao.";
+    char texto10[] ="8 - Editar hospedagem.";
+    char texto11[] ="9 - Editar avaliacao.";
+    char texto12[] ="R - Retornar.";            // campo = 34 ou campo 66
+
     int campo;                                                                                  // Campo de entrada.
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
-    echo();                                                                                     // Habilita eco.
     bool apresentar = true;                                                                     // Controle de laço.
     echo();                                                                                     // Habilita eco.
     while(apresentar){
-        // Apresenta tela completa de produtos financeiros.
         clear();
         if (has_colors()){
             start_color();
@@ -713,49 +737,74 @@ void CntrAHospedagem::executar(Email email){
             }
         }
         box(stdscr, 0, 0);                                                                               // Limpa janela.
-        mvprintw(linha/4,coluna/4,"%s",texto1);                                                 // Imprime nome do campo.
-        mvprintw(linha/4 + 2,coluna/4,"%s",texto2);                                             // Imprime nome do campo.
-        mvprintw(linha/4 + 4,coluna/4,"%s",texto3);                                             // Imprime nome do campo.
-        mvprintw(linha/4 + 6,coluna/4,"%s",texto4);                                             // Imprime nome do campo.
-        mvprintw(linha/4 + 8,coluna/4,"%s",texto5);                                             // Imprime nome do campo.
-        mvprintw(linha/4 + 10,coluna/4,"%s",texto6);                                            // Imprime nome do campo.
-        mvprintw(linha/4 + 12,coluna/4,"%s",texto7);                                            // Imprime nome do campo.
-        mvprintw(linha/4 + 14,coluna/4,"%s",texto8);                                            // Imprime nome do campo.
-        mvprintw(linha/4 + 16,coluna/4,"%s",texto9);                                            // Imprime nome do campo.
+        mvprintw(linha/4,coluna/8,"%s",texto1);                                                 // Imprime nome do campo.
+        mvprintw(linha/4 + 2,coluna/8,"%s",texto2);                                             // Imprime nome do campo.
+        mvprintw(linha/4 + 4,coluna/8,"%s",texto3);                                             // Imprime nome do campo.
+        mvprintw(linha/4 + 6,coluna/8,"%s",texto4);                                             // Imprime nome do campo.
+        mvprintw(linha/4 + 8,coluna/8,"%s",texto5);                                             // Imprime nome do campo.
+        mvprintw(linha/4 + 10,coluna/8,"%s",texto6);
+        mvprintw(linha/4 + 2,coluna/2,"%s",texto7);
+        mvprintw(linha/4 + 4,coluna/2,"%s",texto8);                                            // Imprime nome do campo.
+        mvprintw(linha/4 + 6,coluna/2,"%s",texto9);                                            // Imprime nome do campo.
+        mvprintw(linha/4 + 8,coluna/2,"%s",texto10);                                            // Imprime nome do campo.
+        mvprintw(linha/4 + 10,coluna/2,"%s",texto11);                                            // Imprime nome do campo.
+        mvprintw(linha/4 + 14,coluna/8,"%s",texto12);
         noecho();
         campo = getch() - 48;                                                                   // Leitura do campo de entrada e conversão de ASCII.
         echo();
         switch(campo){
-            case 1:
-                consultarHospedagem();
-                break;
-            case 2:
-                cadastrarHospedagem();
-                break;
-            case 3:
-                cadastrarAvaliacao();
-                break;
-            case 4:
-                descadastrarAvaliacao();
-                break;
-            case 5:
-                consultarAvaliacao();
-                break;
-            case 6:
-                acessarDadosHospedagens();
-                break;
-            case 7:
+            case 0:
                 listarHospedagens();
                 break;
+            case 1:
+                acessarDadosAnfitriaoHospedagem();
+                break;
+            case 2:
+                cadastrarHospedagem(email);
+                break;
+            case 3:
+                cadastrarAvaliacao(email);
+                break;
+            case 4:
+                descadastrarHospedagem(email);
+                break;
+            case 5:
+                descadastrarAvaliacao(email);
+                break;
+            case 6:
+                consultarHospedagem();
+                break;
+            case 7:
+                consultarAvaliacao();
+                break;
             case 8:
+                editarHospedagem(email);
+                break;
+            case 9:
+                editarAvaliacao(email);
+                break;
+            case 34: // R
+                apresentar = false;
+                break;
+            case 66: // r
                 apresentar = false;
                 break;
         }
     }
 }
 
-string CntrAHospedagem::auxiliar(int linha, int coluna, char campo[], char texto[]) {
-    clear();    
+void CntrAHospedagem::listarHospedagens(){
+    char texto1[] ="Hospedagens disponiveis:";
+    char texto2[] ="Digite qualquer tecla para retornar.";
+
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
+
+    list<string> codigos;
+
+    codigos = cntr->listarHospedagens();
+
+    clear();                                                                                    // Limpa janela.
     if (has_colors()){
         start_color();
         init_color(COLOR_CYAN, 930, 910, 850);
@@ -765,89 +814,64 @@ string CntrAHospedagem::auxiliar(int linha, int coluna, char campo[], char texto
             mvhline(y, 0, ' ', coluna);
         }
     }
-    box(stdscr, 0, 0);                                                                                // Limpa janela.
-    mvprintw(linha/4,coluna/4,"%s",texto);   
-    mvprintw(linha/4 + 2,coluna/4,"%s","");   
-    getstr(campo);
-    return (string)campo;
-}
+    box(stdscr, 0, 0);
+    int limite_linha = 12;
+    int i = 2, j = 8;
+    int count = 0;
 
-void CntrAHospedagem::consultarHospedagem(){
-    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);
-    char texto1[] ="Digite o codigo da hospedagem a ser consultada.";
-    char erro1[] ="Formato de codigo invalido.";
-    char idHospedagem[80];
-    Code code;
-    try {
-        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
-    }
-    catch(invalid_argument &exp) {
-        clear();                                                                                    // Limpa janela.
-        if (has_colors()){
-            start_color();
-            init_color(COLOR_CYAN, 930, 910, 850);
-            init_pair(1, COLOR_BLACK, COLOR_CYAN);
-            attron(COLOR_PAIR(1));
-            for (int y = 0; y < linha; y++) {
-                mvhline(y, 0, ' ', coluna);
-            }
+    mvprintw(linha/8,coluna/8,"%s",texto1);
+    for(list<string>::iterator item = codigos.begin(); item != codigos.end(); item++){
+        i++;
+        count++;
+        mvprintw(linha/8 + i,coluna/j,"codigo %d: %s", count, (*item).c_str());
+        if (i >= limite_linha){
+            i = 2;
+            j = 2;
         }
-        box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
-        noecho();                                                                               // Desabilita eco.
-        getch();                                                                                // Leitura de caracter digitado.
-        echo();                                                                                 // Habilita eco.
-        return;
     }
-    cntr->consultarHospedagem(code);
+    mvprintw(linha/8 + 14,coluna/8,"%s",texto2);
+
     noecho();
     getch();
     echo();
 }
 
-void CntrAHospedagem::cadastrarHospedagem() {
-    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);
-    char textoCodigo[] ="Digite o codigo da hospedagem a ser cadastrada.";
-    char textoCidade[] ="Digite a cidade de origem.";
-    char textoPais[] ="Digite o pais de origem.";
-    char textoDescricao[] ="Digite uma descricao para a hospedagem.";
-    char textoEmail[] ="Digite o email do usuario.";
-    char campoCodigo[80];
-    char campoCidade[80];
-    char campoPais[80];
-    char campoDescricao[80];
-    char campoEmail[80];
-    char erroCodigo[] ="Formato de codigo invalido.";
-    char erroCidade[] ="Formato de cidade invalido.";
-    char erroPais[] ="Formato de pais invalido.";
-    char erroDescricao[] ="Formato de descricao invalido.";
-    char erroEmail[] ="Formato de email invalido.";
-    char *erros[5] = {
-        erroCodigo,
-        erroCidade,
-        erroPais,
-        erroDescricao,
-        erroEmail
-    };
+void CntrAHospedagem::acessarDadosAnfitriaoHospedagem(){
+    int linha,coluna;                                                                               // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);                                                                  // Armazena quantidade de linhas e colunas.
+
+    char texto1[] ="Informe o codigo da hospedagem a ser acessada.";                                  // Mensagem a ser apresentada.
+    char texto2[] ="Codigo: ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[] ="Nome            :";
+    char texto5[] ="Email           :";
+    char texto6[] ="Idioma          :";
+    char texto7[] ="Aniversario     :";
+    char texto8[] ="Descricao       :";
+    char texto9[] ="Digite algo para retornar.";
+    char texto10[]="Nao existe hospedagem com o codigo informado.";
+    char campo[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(campo);
+
     Code code;
-    City city;
-    Country country;
-    Description description;
-    Email email;
-    Accommodation hospedagem;
-    int index = 0;
+    User anfitriao;
+
     try {
-        code.setValue(auxiliar(linha, coluna, campoCodigo, textoCodigo));
-        ++index;
-        city.setValue(auxiliar(linha, coluna, campoCidade, textoCidade));
-        ++index;
-        country.setValue(auxiliar(linha, coluna, campoPais, textoPais));
-        ++index;
-        description.setValue(auxiliar(linha, coluna, campoDescricao, textoDescricao));
-        ++index;
-        email.setValue(auxiliar(linha, coluna, campoEmail, textoEmail));
+        code.setValue(string(campo));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -861,49 +885,98 @@ void CntrAHospedagem::cadastrarHospedagem() {
             }
         }
         box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erros[index]);                                           // Informa formato incorreto.
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
         noecho();                                                                               // Desabilita eco.
         getch();                                                                                // Leitura de caracter digitado.
         echo();                                                                                 // Habilita eco.
         return;
     }
-    hospedagem.setCode(code);
-    hospedagem.setCity(city);
-    hospedagem.setCountry(country);
-    hospedagem.setDescription(description);
-    hospedagem.setEmail(email);
-    cntr->cadastrarHospedagem(hospedagem);
+    anfitriao = cntr->acessarDadosAnfitriaoHospedagem(code);
+
+    if (anfitriao.getEmail().getValue() != ""){         // achou um anfitriao
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s %s",texto4, anfitriao.getName().getValue().c_str());                                                      // Imprime nome do campo.
+        mvprintw(linha/4 + 2,coluna/4,"%s %s",texto5, anfitriao.getEmail().getValue().c_str()); 
+        mvprintw(linha/4 + 4,coluna/4,"%s %s",texto6, anfitriao.getLanguage().getValue().c_str());
+        mvprintw(linha/4 + 6,coluna/4,"%s %s",texto7, anfitriao.getDate().getValue().c_str());
+        mvprintw(linha/4 + 8,coluna/4,"%s %s",texto8, anfitriao.getDescription().getValue().c_str());
+        mvprintw(linha/4 + 10,coluna/4,"%s",texto9);
+    }
+    else {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s",texto10);
+    }
+    noecho();
+    getch();
+    echo();
 }
 
-void CntrAHospedagem::cadastrarAvaliacao(){
+void CntrAHospedagem::cadastrarHospedagem(Email email) {
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
-    char texto1[] ="Digite o codigo da hospedagem para a qual a avaliacao sera cadastrada.";
-    char texto2[] ="Digite o codigo da avaliacao a ser cadastrada.";
-    char texto3[] ="Digite a avaliacao para a hospedagem que foi informada.";
-    char texto4[] ="Digite o email para a hospedagem que foi informada.";
-    char erro1[] ="Formato de codigo invalido.";
-    char erro2[] ="Formato de codigo invalido.";
-    char erro3[] ="Formato invalido de avaliacao.";
-    char erro4[] ="Formato invalido de email.";
-    char *erros[4] = {erro1, erro2, erro3, erro4};
-    char codigoHospedagem[80];
-    char codigoAvaliacao[80];
-    char avaliacaoHospedagem[80];
-    char emailHospedagem[80];
-    Code codeHospedagem;
-    Code codeAvaliacao;
-    Grade grade;
-    Email email;
-    int index = 0;
+    
+    char texto1[] ="Preencha os seguintes campos da hospedagem: ";
+    char texto2[] ="Codigo          :";
+    char texto3[] ="Cidade          :";
+    char texto4[] ="Pais            :";
+    char texto5[] ="Descricao       :";
+    char texto6[] ="Dados em formato incorreto. Digite algo.";
+    char texto7[] ="Sucesso no cadastramento. Digite algo.";
+    char texto8[]="Falha no cadastramento. Digite algo.";
+
+    char campo1[80], campo2[80], campo3[80], campo4[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);                                                     // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s ",texto2);                                                 // Imprime nome do campo.
+    getstr(campo1);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 4,coluna/4,"%s ",texto3);                                                 // Imprime nome do campo.
+    getstr(campo2);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 6,coluna/4,"%s ",texto4);                                                 // Imprime nome do campo.
+    getstr(campo3);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 8,coluna/4,"%s ",texto5);                                                 // Imprime nome do campo.
+    getstr(campo4);                                                                             // Lê valor do campo.
+
+    Code codigo;
+    City cidade;
+    Country pais;
+    Description descricao;
+
     try {
-        codeHospedagem.setValue(auxiliar(linha, coluna, codigoHospedagem, texto1));
-        ++index;
-        codeAvaliacao.setValue(auxiliar(linha, coluna, codigoAvaliacao, texto2));
-        ++index;
-        grade.setValue(auxiliar(linha, coluna, avaliacaoHospedagem, texto3));
-        ++index;
-        email.setValue(auxiliar(linha, coluna, emailHospedagem, texto4));
+        codigo.setValue(string(campo1));
+        cidade.setValue(string(campo2));
+        pais.setValue(string(campo3));
+        descricao.setValue(string(campo4));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -917,32 +990,210 @@ void CntrAHospedagem::cadastrarAvaliacao(){
             }
         }
         box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erros[index]);                                           // Informa formato incorreto.
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto6);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+    Accommodation hospedagem;
+
+    hospedagem.setCode(codigo);
+    hospedagem.setCity(cidade);
+    hospedagem.setCountry(pais);
+    hospedagem.setDescription(descricao);
+    hospedagem.setEmail(email);
+
+    // Cadastra hospedagem.
+    if(cntr->cadastrarHospedagem(hospedagem)){
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+            box(stdscr, 0, 0);
+        }
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto7);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                                       // Informa falha.
+    noecho();
+    getch();
+    echo();
+
+    return;
+}
+
+void CntrAHospedagem::cadastrarAvaliacao(Email email){
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);
+    
+    char texto1[] ="Preencha os seguintes campos: ";
+    char texto2[] ="Codigo da avaliacao                :";
+    char texto3[] ="Nota                               :";
+    char texto4[] ="Descricao                          :";
+    char texto5[] ="Codigo da hospedagem a ser avaliada:";
+    char texto6[] ="Dados em formato incorreto. Digite algo.";
+    char texto7[] ="Sucesso no cadastramento. Digite algo.";
+    char texto8[]="Falha no cadastramento. Digite algo.";
+
+    char campo1[80], campo2[80], campo3[80], campo4[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);                                                     // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s ",texto2);                                                 // Imprime nome do campo.
+    getstr(campo1);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 4,coluna/4,"%s ",texto3);                                                 // Imprime nome do campo.
+    getstr(campo2);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 6,coluna/4,"%s ",texto4);                                                 // Imprime nome do campo.
+    getstr(campo3);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 8,coluna/4,"%s ",texto5);                                                 // Imprime nome do campo.
+    getstr(campo4);                                                                             // Lê valor do campo.
+
+    Code codigo;
+    Grade nota;
+    Description descricao;
+    Code codigoHospedagemavaliada;
+
+    try {
+        codigo.setValue(string(campo1));
+        nota.setValue(string(campo2));
+        descricao.setValue(string(campo3));
+        codigoHospedagemavaliada.setValue(string(campo4));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto6);                                           // Informa formato incorreto.
         noecho();                                                                               // Desabilita eco.
         getch();                                                                                // Leitura de caracter digitado.
         echo();                                                                                 // Habilita eco.
         return;
     }
     Rating avaliacao;
-    avaliacao.setAccommodationCode(codeHospedagem);
-    avaliacao.setCode(codeAvaliacao);
-    avaliacao.setGrade(grade);
+
+    avaliacao.setCode(codigo);
+    avaliacao.setGrade(nota);
+    avaliacao.setDescription(descricao);
     avaliacao.setEmail(email);
-    cntr->cadastrarAvaliacao(avaliacao);
+    avaliacao.setAccommodationCode(codigoHospedagemavaliada);
+
+    // Cadastra avaliacao.
+    if(cntr->cadastrarAvaliacao(avaliacao)){
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+            box(stdscr, 0, 0);
+        }
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto7);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                                       // Informa falha.
     noecho();
     getch();
     echo();
+
+    return;
 }
 
-void CntrAHospedagem::descadastrarAvaliacao(){
+void CntrAHospedagem::consultarHospedagem(){
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
-    char texto[]="Informe o codigo da hospedagem cuja avaliacao sera descadastrada";            // Mensagem a ser apresentada.
-    char erro1[] ="Formato de codigo invalido.";
-    char idHospedagem[80];
+    getmaxyx(stdscr,linha,coluna);
+    
+    char texto1[] ="Informe o codigo da hospedagem que deseja consultar os dados.";                                  // Mensagem a ser apresentada.
+    char texto2[] ="Codigo: ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[] ="Codigo          :";
+    char texto5[] ="Cidade          :";
+    char texto6[] ="Pais            :";
+    char texto7[] ="Nota            :";
+    char texto8[] ="Descricao       :";
+    char texto9[] ="Email anfitriao :";
+    char texto10[] ="Digite algo para retornar.";
+    char texto11[] ="Nao existe hospedagem com o codigo informado.";
+
+    char campo[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(campo);
+
     Code code;
+
     try {
-        code.setValue(auxiliar(linha, coluna, idHospedagem, texto));
+        code.setValue(string(campo));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -956,13 +1207,51 @@ void CntrAHospedagem::descadastrarAvaliacao(){
             }
         }
         box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
         noecho();                                                                               // Desabilita eco.
         getch();                                                                                // Leitura de caracter digitado.
         echo();                                                                                 // Habilita eco.
         return;
     }
-    cntr->descadastrarAvaliacao(code);
+
+    Accommodation hospedagem;
+
+    hospedagem = cntr->consultarHospedagem(code);
+
+    if (hospedagem.getEmail().getValue() != ""){         // achou hospedagem
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s %s",texto4, hospedagem.getCode().getValue().c_str());                                                      // Imprime nome do campo.
+        mvprintw(linha/4 + 2,coluna/4,"%s %s",texto5, hospedagem.getCity().getValue().c_str()); 
+        mvprintw(linha/4 + 4,coluna/4,"%s %s",texto6, hospedagem.getCountry().getValue().c_str());
+        mvprintw(linha/4 + 6,coluna/4,"%s %s",texto7, hospedagem.getGrade().getValue().c_str());
+        mvprintw(linha/4 + 8,coluna/4,"%s %s",texto8, hospedagem.getDescription().getValue().c_str());
+        mvprintw(linha/4 + 10,coluna/4,"%s %s",texto9, hospedagem.getEmail().getValue().c_str());
+        mvprintw(linha/4 + 12,coluna/4,"%s",texto10);
+    }
+    else {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s",texto11);
+    }
     noecho();
     getch();
     echo();
@@ -971,46 +1260,39 @@ void CntrAHospedagem::descadastrarAvaliacao(){
 void CntrAHospedagem::consultarAvaliacao(){
     int linha,coluna;                                                                           // Dados sobre tamanho da tela.
     getmaxyx(stdscr,linha,coluna);
-    char texto1[] ="Digite o codigo da hospedagem cuja avaliacao sera consultada.";
-    char erro1[] ="Formato de codigo invalido.";
-    char idHospedagem[80];
-    Code code;
-    try {
-        code.setValue(auxiliar(linha, coluna, idHospedagem, texto1));
-    }
-    catch(invalid_argument &exp) {
-        clear();                                                                                    // Limpa janela.
-        if (has_colors()){
-            start_color();
-            init_color(COLOR_CYAN, 930, 910, 850);
-            init_pair(1, COLOR_BLACK, COLOR_CYAN);
-            attron(COLOR_PAIR(1));
-            for (int y = 0; y < linha; y++) {
-                mvhline(y, 0, ' ', coluna);
-            }
-        }
-        box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro1);                                           // Informa formato incorreto.
-        noecho();                                                                               // Desabilita eco.
-        getch();                                                                                // Leitura de caracter digitado.
-        echo();                                                                                 // Habilita eco.
-        return;
-    }
-    cntr->consultarHospedagem(code);
-    noecho();
-    getch();
-    echo();
-}
+    
+    char texto1[] ="Informe o codigo da avaliacao que deseja consultar os dados.";                                  // Mensagem a ser apresentada.
+    char texto2[] ="Codigo: ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[] ="Codigo                     :";
+    char texto5[] ="Nota                       :";
+    char texto6[] ="Descricao                  :";
+    char texto7[] ="Email avaliador            :";
+    char texto8[] ="Codigo hospedagem avaliada :";
+    char texto9[] ="Digite algo para retornar.";
+    char texto10[] ="Nao existe avaliacao com o codigo informado.";
 
-void CntrAHospedagem::acessarDadosHospedagens(){
-    int linha,coluna;                                                                               // Dados sobre tamanho da tela.
-    getmaxyx(stdscr,linha,coluna);                                                                  // Armazena quantidade de linhas e colunas.
-    char texto[]="Informe o codigo da hospedagem a ser acessada.";                                  // Mensagem a ser apresentada.
-    char erro[]="Formato de codigo invalido";
     char campo[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(campo);
+
     Code code;
+
     try {
-        code.setValue(auxiliar(linha, coluna, campo, texto));
+        code.setValue(string(campo));
     }
     catch(invalid_argument &exp) {
         clear();                                                                                    // Limpa janela.
@@ -1024,21 +1306,633 @@ void CntrAHospedagem::acessarDadosHospedagens(){
             }
         }
         box(stdscr, 0, 0);
-        mvprintw(linha/4 + 2,coluna/4,"%s",erro);                                               // Informa formato incorreto.
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
         noecho();                                                                               // Desabilita eco.
         getch();                                                                                // Leitura de caracter digitado.
         echo();                                                                                 // Habilita eco.
         return;
     }
-    cntr->acessarDadosAnfitriaoHospedagem(code);
+
+    Rating avaliacao;
+
+    avaliacao = cntr->consultarAvaliacao(code);
+
+    if (avaliacao.getEmail().getValue() != ""){         // achou avaliacao
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s %s",texto4, avaliacao.getCode().getValue().c_str());                                                      // Imprime nome do campo.
+        mvprintw(linha/4 + 2,coluna/4,"%s %s",texto5, avaliacao.getGrade().getValue().c_str()); 
+        mvprintw(linha/4 + 4,coluna/4,"%s %s",texto6, avaliacao.getDescription().getValue().c_str());
+        mvprintw(linha/4 + 6,coluna/4,"%s %s",texto7, avaliacao.getEmail().getValue().c_str());
+        mvprintw(linha/4 + 8,coluna/4,"%s %s",texto8, avaliacao.getAccommodationCode().getValue().c_str());
+        mvprintw(linha/4 + 12,coluna/4,"%s",texto9);
+    }
+    else {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/4,"%s",texto10);
+    }
     noecho();
     getch();
     echo();
 }
 
-void CntrAHospedagem::listarHospedagens(){
-    cntr->listarHospedagens();
+void CntrAHospedagem::descadastrarHospedagem(Email email){
+    // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
+
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
+
+    char texto1[]="Digite o codigo da hospedagem que deseja descadastrar.";
+    char texto2[]="Codigo : ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[]="Ao descadastrar uma hospedagem avaliacoes atreladas a ela serao descadastradas.";
+    char texto5[]="Voce tem certeza que deseja descadastrar esta hospedagem?";                         // Mensagem a ser apresentada.
+    char texto6[]="1 - Descadastrar.";
+    char texto7[]="2 - Retornar.";
+    char texto8[]="Sucesso, hospedagem descadastrada.";
+    char texto9[]="Falha no descadastramento.";
+    char texto10[]="Voce nao e o anfitriao desta hospedagem, nao pode descadastra-la.";
+    char texto11[]="Digite algo para retornar.";
+
+    int campo;
+    char codigoDigitado[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(codigoDigitado);
+
+    Code code;
+
+    try {
+        code.setValue(string(codigoDigitado));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    Accommodation hospedagem;
+    hospedagem = cntr->consultarHospedagem(code);
+    if (hospedagem.getEmail().getValue().compare(email.getValue()) != 0){               // não é o anfitriao
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/8,"%s",texto10);
+        mvprintw(linha/4 + 2,coluna/8,"%s",texto11);
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/8,"%s",texto4);                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/8,"%s",texto5);
+    mvprintw(linha/4 + 4,coluna/4,"%s",texto6);
+    mvprintw(linha/4 + 6,coluna/4,"%s",texto7);
+    noecho();
+    campo = getch() - 48;
+    echo();
+
+    // Descadastra hospedagem
+    if (campo == 1){
+        if(cntr->descadastrarHospedagem(code)){
+            clear();
+            if (has_colors()){
+                start_color();
+                init_color(COLOR_CYAN, 930, 910, 850);
+                init_pair(1, COLOR_BLACK, COLOR_CYAN);
+                attron(COLOR_PAIR(1));
+                for (int y = 0; y < linha; y++) {
+                    mvhline(y, 0, ' ', coluna);
+                }
+            }
+            box(stdscr, 0, 0);
+            mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                               // Informa sucesso.
+            noecho();
+            getch();
+            echo();
+            return;
+        }
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto9);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+    return;
+}
+
+void CntrAHospedagem::descadastrarAvaliacao(Email email){
+    // Mensagens a serem apresentadas na tela de apresentação de dados pessoais.
+
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);                                                              // Armazena quantidade de linhas e colunas.
+
+    char texto1[]="Digite o codigo da avaliacao que deseja descadastrar.";
+    char texto2[]="Codigo : ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[]="Voce tem certeza que deseja descadastrar esta avaliacao?";                         // Mensagem a ser apresentada.
+    char texto5[]="1 - Descadastrar.";
+    char texto6[]="2 - Retornar.";
+    char texto7[]="Sucesso, avaliacao descadastrada.";
+    char texto8[]="Falha no descadastramento.";
+    char texto9[]="Voce nao e o avaliador desta avaliacao, nao pode descadastra-la.";
+    char texto10[]="Digite algo para retornar.";
+
+    int campo;
+    char codigoDigitado[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(codigoDigitado);
+
+    Code code;
+
+    try {
+        code.setValue(string(codigoDigitado));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    Rating avaliacao;
+    avaliacao = cntr->consultarAvaliacao(code);
+    if (avaliacao.getEmail().getValue().compare(email.getValue()) != 0){               // não é o anfitriao
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4,coluna/8,"%s",texto9);
+        mvprintw(linha/4 + 2,coluna/8,"%s",texto10);
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/8,"%s",texto4);                                                      // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/8,"%s",texto5);
+    mvprintw(linha/4 + 4,coluna/8,"%s",texto6);
+    noecho();
+    campo = getch() - 48;
+    echo();
+
+    // Descadastra hospedagem
+    if (campo == 1){
+        if(cntr->descadastrarAvaliacao(code)){
+            clear();
+            if (has_colors()){
+                start_color();
+                init_color(COLOR_CYAN, 930, 910, 850);
+                init_pair(1, COLOR_BLACK, COLOR_CYAN);
+                attron(COLOR_PAIR(1));
+                for (int y = 0; y < linha; y++) {
+                    mvhline(y, 0, ' ', coluna);
+                }
+            }
+            box(stdscr, 0, 0);
+            mvprintw(linha/4 + 2,coluna/4,"%s",texto7);                                               // Informa sucesso.
+            noecho();
+            getch();
+            echo();
+            return;
+        }
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+    return;
+}
+
+void CntrAHospedagem::editarHospedagem(Email email){
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);
+    
+    char texto1[] ="Digite o codigo da hospedagem que deseja editar.";
+    char texto2[] ="Codigo : ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[] ="Preencha os seguintes campos da hospedagem: (deixe em branco caso nao deseje alterar)";
+    char texto5[] ="Cidade          :";
+    char texto6[] ="Pais            :";
+    char texto7[] ="Descricao       :";
+    char texto8[] ="Dados em formato incorreto. Digite algo.";
+    char texto9[] ="Sucesso na edicao. Digite algo.";
+    char texto10[]="Falha na edicao. Digite algo.";
+
+    char campo1[80], campo2[80], campo3[80], codigoDigitado[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(codigoDigitado);
+
+    Code code;
+
+    try {
+        code.setValue(string(codigoDigitado));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto4);                                                     // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s ",texto5);                                                 // Imprime nome do campo.
+    getstr(campo1);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 4,coluna/4,"%s ",texto6);                                                 // Imprime nome do campo.
+    getstr(campo2);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 6,coluna/4,"%s ",texto7);                                                 // Imprime nome do campo.
+    getstr(campo3);                                                                             // Lê valor do campo.
+
+    City cidade;
+    Country pais;
+    Description descricao;
+
+    try {
+        if (string(campo1) != "")
+            cidade.setValue(string(campo1));
+        if (string(campo2) != "")
+            pais.setValue(string(campo2));
+        if (string(campo3) != "")
+            descricao.setValue(string(campo3));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+    Accommodation hospedagem;
+
+    hospedagem.setCode(code);
+    hospedagem.setCity(cidade);
+    hospedagem.setCountry(pais);
+    hospedagem.setDescription(descricao);
+    hospedagem.setEmail(email);
+
+    // edita hospedagem.
+    if(cntr->editarHospedagem(hospedagem)){
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+            box(stdscr, 0, 0);
+        }
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto9);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto10);                                                       // Informa falha.
     noecho();
     getch();
     echo();
+
+    return;
+}
+
+void CntrAHospedagem::editarAvaliacao(Email email){
+    int linha,coluna;                                                                           // Dados sobre tamanho da tela.
+    getmaxyx(stdscr,linha,coluna);
+    
+    char texto1[] ="Digite o codigo da avaliacao que deseja editar.";
+    char texto2[] ="Codigo : ";
+    char texto3[] ="Formato de codigo invalido";
+    char texto4[] ="Preencha os seguintes campos da avaliacao: (deixe em branco caso nao deseje alterar)";
+    char texto5[] ="Nota            :";
+    char texto6[] ="Descricao       :";
+    char texto7[] ="Dados em formato incorreto. Digite algo.";
+    char texto8[] ="Sucesso na edicao. Digite algo.";
+    char texto9[]="Falha na edicao. Digite algo.";
+
+    char campo1[80], campo2[80], codigoDigitado[80];
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto1);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto2);
+    getstr(codigoDigitado);
+
+    Code code;
+
+    try {
+        code.setValue(string(codigoDigitado));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto3);                                               // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+
+    clear();                                                                                    // Limpa janela.
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4,coluna/4,"%s",texto4);                                                     // Imprime nome do campo.
+    mvprintw(linha/4 + 2,coluna/4,"%s ",texto5);                                                 // Imprime nome do campo.
+    getstr(campo1);                                                                             // Lê valor do campo.
+    mvprintw(linha/4 + 4,coluna/4,"%s ",texto6);                                                 // Imprime nome do campo.
+    getstr(campo2);                                                                             // Lê valor do campo.                                                                             // Lê valor do campo.
+
+    Grade nota;
+    Description descricao;
+
+    try {
+        if (string(campo1) != "")
+            nota.setValue(string(campo1));
+        if (string(campo2) != "")
+            descricao.setValue(string(campo2));
+    }
+    catch(invalid_argument &exp) {
+        clear();                                                                                    // Limpa janela.
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+        }
+        box(stdscr, 0, 0);
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto7);                                           // Informa formato incorreto.
+        noecho();                                                                               // Desabilita eco.
+        getch();                                                                                // Leitura de caracter digitado.
+        echo();                                                                                 // Habilita eco.
+        return;
+    }
+    Rating avaliacao;
+    Code accommodationCode;
+
+    avaliacao.setCode(code);
+    avaliacao.setGrade(nota);
+    avaliacao.setDescription(descricao);
+    avaliacao.setEmail(email);
+    avaliacao.setAccommodationCode(accommodationCode);
+
+    // edita avaliacao.
+    if(cntr->editarAvaliacao(avaliacao)){
+        clear();
+        if (has_colors()){
+            start_color();
+            init_color(COLOR_CYAN, 930, 910, 850);
+            init_pair(1, COLOR_BLACK, COLOR_CYAN);
+            attron(COLOR_PAIR(1));
+            for (int y = 0; y < linha; y++) {
+                mvhline(y, 0, ' ', coluna);
+            }
+            box(stdscr, 0, 0);
+        }
+        mvprintw(linha/4 + 2,coluna/4,"%s",texto8);                                               // Informa sucesso.
+        noecho();
+        getch();
+        echo();
+        return;
+    }
+
+
+    clear();
+    if (has_colors()){
+        start_color();
+        init_color(COLOR_CYAN, 930, 910, 850);
+        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        attron(COLOR_PAIR(1));
+        for (int y = 0; y < linha; y++) {
+            mvhline(y, 0, ' ', coluna);
+        }
+    }
+    box(stdscr, 0, 0);
+    mvprintw(linha/4 + 2,coluna/4,"%s",texto9);                                                       // Informa falha.
+    noecho();
+    getch();
+    echo();
+
+    return;
 }
