@@ -27,6 +27,8 @@ bool CntrSAutenticacao::autenticar(Email email, Password senha){
             return false; // falha na autenticação
         
     } 
+
+    
     return false;
 }
 
